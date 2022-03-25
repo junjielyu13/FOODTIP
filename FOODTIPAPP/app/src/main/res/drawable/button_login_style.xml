@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--background Color-->
+    <solid android:color="@android:color/transparent"/>
+
+    <!--Border width and color-->
+    <stroke android:width="0.5px" android:color="@android:color/holo_blue_dark" />
+
+    <!--change angle to arc angle-->
+    <corners android:radius="10dp"/>
+</shape>

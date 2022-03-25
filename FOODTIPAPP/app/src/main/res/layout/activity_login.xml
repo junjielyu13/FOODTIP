@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background">
+
+    <LinearLayout
+        android:id="@+id/LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.245"
+        tools:layout_editor_absoluteX="0dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="149dp"
+            android:layout_height="187dp"
+            android:layout_marginHorizontal="100dp"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="0dp"
+            android:contentDescription="@string/user_login_DescriptionContent"
+            android:scaleType="center"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/user_login" />
+
+        <EditText
+            android:id="@+id/UserName"
+            android:layout_width="264dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="49dp"
+            android:ems="12"
+            android:hint="USERNAME"
+            android:inputType="text"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="264dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="40dp"
+            android:ems="16"
+            android:hint="PASSWORD"
+            android:inputType="textPassword"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/button_login_style"
+            android:onClick="Login"
+            android:text="LOG IN"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

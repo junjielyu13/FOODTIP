@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FOODTIP</string>
+    <string name="user_login_DescriptionContent">User Log in</string>
 </resources>
