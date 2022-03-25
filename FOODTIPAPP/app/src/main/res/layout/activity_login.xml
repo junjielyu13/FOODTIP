@@ -35,36 +35,39 @@
             android:id="@+id/UserName"
             android:layout_width="264dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="49dp"
             android:ems="12"
-            android:hint="USERNAME"
+            android:hint="@string/Username"
             android:inputType="text"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:autofillHints="username" />
+
 
         <EditText
             android:id="@+id/Password"
             android:layout_width="264dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="40dp"
             android:ems="16"
-            android:hint="PASSWORD"
+            android:hint="@string/Password"
             android:inputType="textPassword"
             android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white" />
+            android:textColorHint="@android:color/white"
+            android:autofillHints="password" />
 
         <Button
             android:id="@+id/loginButton"
             android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="100dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="100dp"
             android:layout_marginTop="60dp"
             android:background="@drawable/button_login_style"
             android:onClick="Login"
-            android:text="LOG IN"
+            android:text="@string/Login"
             android:textColor="@android:color/white" />
 
     </LinearLayout>
