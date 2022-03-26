@@ -58,16 +58,48 @@
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
             android:autofillHints="password" />
-
+        <Button
+            android:id="@+id/forgotPasswordButton"
+            android:layout_width="150dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="195dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_login_style"
+            android:onClick="ForgotPassword"
+            android:text="@string/forgotPassword"
+            android:textColor="@android:color/holo_purple" />
         <Button
             android:id="@+id/loginButton"
             android:layout_width="200dp"
             android:layout_height="48dp"
             android:layout_marginStart="100dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/button_login_style"
             android:onClick="Login"
             android:text="@string/Login"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/forgotPasswordTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/noRegisterTextView"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:shadowColor="@color/black"
+            tools:layout_editor_absoluteX="166dp"
+            tools:layout_editor_absoluteY="599dp" />
+        <Button
+            android:id="@+id/RegisterButton"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_login_style"
+            android:onClick="Register"
+            android:text="@string/RegisterButtonText"
             android:textColor="@android:color/white" />
 
     </LinearLayout>

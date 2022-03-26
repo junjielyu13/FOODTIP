@@ -4,4 +4,7 @@
     <string name="Username">USERNAME</string>
     <string name="Password">PASSWORD</string>
     <string name="Login">LOG IN</string>
+    <string name="noRegisterTextView">No register yet?</string>
+    <string name="RegisterButtonText">REGISTER</string>
+    <string name="forgotPassword">FORGOT PASSWORD</string>
 </resources>
