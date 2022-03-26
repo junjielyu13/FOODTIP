@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FOODTIP</string>
+    <string name="user_login_DescriptionContent">User Log in</string>
+    <string name="Username">USERNAME</string>
+    <string name="Password">PASSWORD</string>
+    <string name="Login">LOG IN</string>
+    <string name="noRegisterTextView">No register yet?</string>
+    <string name="RegisterButtonText">REGISTER</string>
+    <string name="forgotPassword">FORGOT PASSWORD</string>
 </resources>
