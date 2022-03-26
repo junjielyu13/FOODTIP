@@ -7,4 +7,8 @@
     <string name="noRegisterTextView">No register yet?</string>
     <string name="RegisterButtonText">REGISTER</string>
     <string name="forgotPassword">FORGOT PASSWORD</string>
+    <string name="RepeatPassword">REPEAT PASSWORD</string>
+
+    <!--register Interface-->
+    <string name="RegisterTextView">REGISTER</string>
 </resources>
