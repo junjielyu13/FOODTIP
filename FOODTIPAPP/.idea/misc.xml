@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/button_homepage_selector.xml" value="0.1485" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/button_login_style.xml" value="0.2265" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/button_perfil_selector.xml" value="0.1485" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_login.xml" value="0.2819843342036554" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_main.xml" value="0.1921875" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_register.xml" value="0.1921875" />

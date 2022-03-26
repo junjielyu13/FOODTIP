@@ -11,4 +11,6 @@
 
     <!--register Interface-->
     <string name="RegisterTextView">REGISTER</string>
+
+    <string name="MostPopularDishesTextView"><u>Most Popular</u></string>
 </resources>

@@ -6,13 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.095">
+
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="79dp" >
+
+        </SearchView>
+
+        <TextView
+            android:id="@+id/mostPopularDishesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:shadowColor="@color/black"
+            android:text="@string/MostPopularDishesTextView"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            tools:layout_editor_absoluteX="166dp"
+            tools:layout_editor_absoluteY="599dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/DishesHorizontalLayout"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="196dp">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ButtonBarHorizontalLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DishesHorizontalLayout"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp">
+
+
+        <ImageButton
+            android:id="@+id/HomePageImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_homepage_selector" />
+
+        <ImageButton
+            android:id="@+id/UserImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_perfil_selector"/>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
