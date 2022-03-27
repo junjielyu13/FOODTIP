@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recepta_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/colorSecondaryLight"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/recepta_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="@string/recepta_title"
+        android:textSize="20sp" />
+
+    <ImageButton
+        android:id="@+id/recepta_button"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:contentDescription="@string/recepta_enter_button"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/empty_img"
+        tools:ignore="RedundantDescriptionCheck" />
+
+    <LinearLayout
+        android:id="@+id/like_comment_Layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorSecondaryLight"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/like_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="225dp"
+            android:background="@color/colorSecondaryLight"
+            android:contentDescription="@string/like_button"
+            android:scaleType="fitXY"
+            android:src="@mipmap/heart1"/>
+
+        <ImageButton
+            android:id="@+id/comment_buttton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:background="@color/colorSecondaryLight"
+            android:contentDescription="@string/comment_button"
+            android:scaleType="fitXY"
+            android:src="@mipmap/comment"/>
+    </LinearLayout>
+</LinearLayout>
