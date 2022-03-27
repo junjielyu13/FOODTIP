@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">FOODTIP</string>
+    <string name="recepta_enter_button">Recepta enter button</string>
+    <string name="recepta_title">Recepta Title</string>
+    <string name="like_button">like_button</string>
+    <string name="comment_button">comment_button</string>
+    <string name="mis_favoritos">Mis Favoritos</string>
+    <!-- Test -->
+    <string name="add_description_msg">Note description</string>
+    <string name="save_note">Save note</string>
+    <string name="new_note">New note</string>
+    <string name="new_note_description">Add new note</string>
+    <!-- Test -->
 </resources>
