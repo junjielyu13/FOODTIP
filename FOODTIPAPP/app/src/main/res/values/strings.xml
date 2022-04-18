@@ -19,7 +19,8 @@
     <string name="RegisterButtonText">REGISTER</string>
     <string name="forgotPassword">FORGOT PASSWORD</string>
     <string name="RepeatPassword">REPEAT PASSWORD</string>
-
+    <string name="title_home">Home</string>
+    <string name="title_user">User</string>
     <!--register Interface-->
     <string name="RegisterTextView">REGISTER</string>
 

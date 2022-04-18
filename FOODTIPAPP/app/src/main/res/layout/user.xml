@@ -10,7 +10,8 @@
         android:layout_height="729dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,6 +27,7 @@
                     android:id="@+id/Avatar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    tools:ignore="SpeakableTextPresentCheck"
                     tools:srcCompat="@tools:sample/avatars" />
             </LinearLayout>
 
@@ -127,42 +129,13 @@
         <View
             android:id="@+id/divider8"
             android:layout_width="match_parent"
-            android:layout_height="133dp"
+            android:layout_height="208dp"
             android:background="?android:attr/listDivider" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="205dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/HomePage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Home Page"
-                    android:textColor="@color/material_on_surface_emphasis_medium"
-                    android:backgroundTint="@color/material_dynamic_secondary70"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/User"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="User"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/cardview_dark_background"/>
-            </LinearLayout>
-        </LinearLayout>
+            android:orientation="horizontal"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
