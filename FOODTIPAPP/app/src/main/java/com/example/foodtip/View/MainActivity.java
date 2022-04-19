@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         userName = findViewById(R.id.UserNameEditTextLogIn);
         password = findViewById(R.id.PasswordEditTextLogIn);
+        ld = new Login_dades();
         //settingButtonsOnClickListeners();
     }
 
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             if(pwd.equals(user.getPassword())){
 
                 Toast.makeText(context,"Log In sucessful", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(context, HomePageActivity.class));
+                startActivity(new Intent(this, HomePageActivity.class));
             }else{
                 userName.getText().clear();
                 password.getText().clear();
