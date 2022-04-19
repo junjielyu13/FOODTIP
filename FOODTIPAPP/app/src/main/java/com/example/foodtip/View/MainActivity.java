@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         if (user != null){
             if(pwd.equals(user.getPassword())){
 
-                Toast.makeText(context,"Log In sucessful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Log In sucessful", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, HomePageActivity.class));
             }else{
                 userName.getText().clear();

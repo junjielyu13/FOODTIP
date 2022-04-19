@@ -13,7 +13,7 @@ public class Login_dades {
     Map<String, User> UsersMap;
 
     public Login_dades() {
-        UsersMap = new HashMap<String,User>();
+        UsersMap = new HashMap<>();
         creatDates();
     }
 
