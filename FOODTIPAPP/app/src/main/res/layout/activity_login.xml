@@ -31,7 +31,7 @@
             app:srcCompat="@drawable/user_login" />
 
         <EditText
-            android:id="@+id/UserName"
+            android:id="@+id/UserNameEditTextLogIn"
             android:layout_width="264dp"
             android:layout_height="50dp"
             android:layout_marginStart="80dp"
@@ -46,7 +46,7 @@
 
 
         <EditText
-            android:id="@+id/Password"
+            android:id="@+id/PasswordEditTextLogIn"
             android:layout_width="264dp"
             android:layout_height="50dp"
             android:layout_marginStart="80dp"
@@ -75,6 +75,7 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/button_login_style"
             android:text="@string/Login"
+            android:onClick="onClickLoginButton"
             android:textColor="@android:color/white" />
 
         <TextView

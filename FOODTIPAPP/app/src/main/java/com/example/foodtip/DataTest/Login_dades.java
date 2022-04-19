@@ -5,13 +5,19 @@ import com.example.foodtip.Model.User;
 import com.example.foodtip.*;
 import com.example.foodtip.View.MainActivity;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Login_dades {
 
     Map<String, User> UsersMap;
 
-    private void CreatDates(){
+    public Login_dades() {
+        UsersMap = new HashMap<String,User>();
+        creatDates();
+    }
+
+    public void creatDates(){
 
         addUsers("a","1");
         addUsers("b","2");
@@ -27,7 +33,7 @@ public class Login_dades {
     }
 
     public void addUsers(String username, String password){
-        UsersMap.put(username,new User(username,password);
+        UsersMap.put(username,new User(username,password));
     }
 }
 

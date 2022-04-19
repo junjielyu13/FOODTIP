@@ -1,5 +1,6 @@
 package com.example.foodtip.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -29,40 +30,50 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        userName = findViewById(R.id.UserNameEditText);
-        password = findViewById(R.id.PasswordEditText);
-        settingButtonsOnClickListeners();
+        userName = findViewById(R.id.UserNameEditTextLogIn);
+        password = findViewById(R.id.PasswordEditTextLogIn);
+        //settingButtonsOnClickListeners();
     }
 
-    private void settingButtonsOnClickListeners() {
-        login_but = (Button) findViewById(R.id.loginButton);
+//    private void settingButtonsOnClickListeners() {
+//        login_but = findViewById(R.id.loginButton);
+//
+//        login_but.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String username = userName.getText().toString();
+//                String pwd = password.getText().toString();
+//
+//                User user =  ld.getUsersMap().getOrDefault(username,null);
+//                Context context = getApplicationContext();
+//                if (user != null){
+//                    if(pwd.equals(user.getPassword())){
+//
+//                        Toast.makeText(context,"Log In sucessful", Toast.LENGTH_SHORT).show();
+//                        startActivity(new Intent(context, HomePageActivity.class));
+//                    }else{
+//                        userName.getText().clear();
+//                        password.getText().clear();
+//                        AlertDialog alertDialog = new AlertDialog.Builder(context)
+//                                .setTitle("Error!")
+//                                .setMessage("Wrong password")
+//                                .setIcon(R.mipmap.empty_img)
+//                                .create();
+//                        alertDialog.show();
+//                    }
+//                }
+//            }
+//        });
 
-        login_but.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String username = userName.getText().toString();
-                String pwd = password.getText().toString();
-
-                User user =  ld.getUsersMap().getOrDefault(username,null);
-                if (user != null){
-                    if(password.equals(user.getPassword())){
-                        Context context = getApplicationContext();
-                        Toast.makeText(context,"Log In sucessful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(this, HomePageActivity.class));
-                    }
-                }
-            }
-        });
-
-        login_but.setOnClickListener((view) -> {
-            openMainPage();
-        });
-
-        regi_but = (Button) findViewById(R.id.RegisterButton);
-        regi_but.setOnClickListener((v) -> {
-            openRegisterPage();
-        });
-    }
+//        login_but.setOnClickListener((view) -> {
+//            openMainPage();
+//        });
+//
+//        regi_but = (Button) findViewById(R.id.RegisterButton);
+//        regi_but.setOnClickListener((v) -> {
+//            openRegisterPage();
+//        });
+//    }
 
     private void openMainPage() {
         Intent intent = new Intent(this, Main_View.class);
@@ -72,6 +83,31 @@ public class MainActivity extends AppCompatActivity {
     private void openRegisterPage() {
         Intent intent = new Intent(this, Main_View.class);
         startActivity(intent);
+    }
+
+
+    public void onClickLoginButton(View view) {
+        String username = userName.getText().toString();
+        String pwd = password.getText().toString();
+
+        User user =  ld.getUsersMap().getOrDefault(username,null);
+        Context context = getApplicationContext();
+        if (user != null){
+            if(pwd.equals(user.getPassword())){
+
+                Toast.makeText(context,"Log In sucessful", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(context, HomePageActivity.class));
+            }else{
+                userName.getText().clear();
+                password.getText().clear();
+//                AlertDialog alertDialog = new AlertDialog.Builder(context)
+//                        .setTitle("Error!")
+//                        .setMessage("Wrong password")
+//                        .setIcon(R.mipmap.empty_img)
+//                        .create();
+//                alertDialog.show();
+            }
+        }
     }
 }
 
