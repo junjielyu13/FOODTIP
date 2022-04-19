@@ -17,8 +17,9 @@ import com.example.foodtip.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Context context;
     public static FoodTip foodTip;
-    public static Login_dades ld = new Login_dades();
+    public static Login_dades ld;
     private EditText userName;
     private EditText password;
     private Button login_but;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getBaseContext();
+        ld = new Login_dades();
         setContentView(R.layout.activity_login);
 
         userName = findViewById(R.id.UserNameEditTextLogIn);
@@ -43,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
         regi_but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                userName.getText().clear();
+                password.getText().clear();
+                startActivity(new Intent(context, RegisterActivity.class));
             }
         });
     }
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 String username = userName.getText().toString();
                 String pwd = password.getText().toString();
                 User user = ld.getUsersMap().getOrDefault(username, null);
-                Context context = getApplicationContext();
+
                 if (user != null) {
                     if (pwd.equals(user.getPassword())) {
                         Toast.makeText(context, "Log In sucessful", Toast.LENGTH_SHORT).show();
@@ -83,8 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
+
 }

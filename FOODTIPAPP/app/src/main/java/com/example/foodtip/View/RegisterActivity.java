@@ -29,18 +29,21 @@ public class RegisterActivity extends AppCompatActivity {
         username = findViewById(R.id.UserNameREGISTER);
         password = findViewById(R.id.PasswordREGISTER);
         repeatPassword = findViewById(R.id.RepeatPasswordREGISTER);
-        //registerBtn = findViewById(R.id.registerButtonREGISTER);
+        registerBtn = findViewById(R.id.registerButtonREGISTER);
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String user_name = username.getText().toString();
+                String pwd = password.getText().toString();
+                String rePwd = repeatPassword.getText().toString();
+
+                if((!MainActivity.ld.getUsersMap().containsKey(user_name)) && pwd.equals(rePwd)){
+                    MainActivity.ld.addUsers(user_name,pwd);
+                    Toast.makeText(getApplicationContext(), "Register Sucessful!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+        });
     }
 
-    public void onClickRegisterButtonREGISTER(View view) {
-        String user_name = username.getText().toString();
-        String pwd = password.getText().toString();
-        String rePwd = repeatPassword.getText().toString();
-
-        if((MainActivity.ld.getUsersMap().containsKey(user_name)) && pwd.equals(rePwd)){
-            MainActivity.ld.addUsers(user_name,pwd);
-            Toast.makeText(this, "Register Sucessful!", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-    }
 }
