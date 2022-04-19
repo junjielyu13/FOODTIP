@@ -1,7 +1,10 @@
 package com.example.foodtip.Controller;
 
+import java.util.Vector;
+
 public class MisReceptas extends Receptas{
-    public MisReceptas(String description, String title, CollectionImages images, Ingredients ingredients, Steps steps, Likes num_like, Comentaris comentaris) {
-        super(description, title, images, ingredients, steps, num_like, comentaris);
+
+    public MisReceptas(Vector<Recepta> receptas) {
+        super(receptas);
     }
 }
