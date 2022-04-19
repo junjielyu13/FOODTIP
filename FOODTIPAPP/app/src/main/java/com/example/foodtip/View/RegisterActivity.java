@@ -29,10 +29,10 @@ public class RegisterActivity extends AppCompatActivity {
         username = findViewById(R.id.UserNameREGISTER);
         password = findViewById(R.id.PasswordREGISTER);
         repeatPassword = findViewById(R.id.RepeatPasswordREGISTER);
-        registerBtn = findViewById(R.id.registerButtonREGISTER);
+        //registerBtn = findViewById(R.id.registerButtonREGISTER);
     }
 
-    public void onClickLoginButtonREGISTER(View view) {
+    public void onClickRegisterButtonREGISTER(View view) {
         String user_name = username.getText().toString();
         String pwd = password.getText().toString();
         String rePwd = repeatPassword.getText().toString();

@@ -97,7 +97,7 @@
             android:layout_marginStart="150dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/button_login_style"
-            android:onClick="Register"
+            android:onClick="OnClickRegisterButton"
             android:text="@string/RegisterButtonText"
             android:textColor="@android:color/white" />
 

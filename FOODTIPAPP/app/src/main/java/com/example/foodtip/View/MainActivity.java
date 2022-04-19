@@ -18,7 +18,7 @@ import com.example.foodtip.R;
 public class MainActivity extends AppCompatActivity {
 
     public static FoodTip foodTip;
-    public static Login_dades ld;
+    public static Login_dades ld= new Login_dades();
     private EditText userName;
     private EditText password;
     private Button login_but;
@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         userName = findViewById(R.id.UserNameEditTextLogIn);
         password = findViewById(R.id.PasswordEditTextLogIn);
-        ld = new Login_dades();
         //settingButtonsOnClickListeners();
     }
 
@@ -76,42 +75,42 @@ public class MainActivity extends AppCompatActivity {
 //        });
 //    }
 
-    private void openMainPage() {
-        Intent intent = new Intent(this, Main_View.class);
-        startActivity(intent);
-    }
-
-    private void openRegisterPage() {
-        Intent intent = new Intent(this, Main_View.class);
-        startActivity(intent);
-    }
-
 
     public void onClickLoginButton(View view) {
         String username = userName.getText().toString();
         String pwd = password.getText().toString();
-
-        User user =  ld.getUsersMap().getOrDefault(username,null);
-        Context context = getApplicationContext();
-        if (user != null){
-            if(pwd.equals(user.getPassword())){
-
-                Toast.makeText(this,"Log In sucessful", Toast.LENGTH_SHORT).show();
+        User user = ld.getUsersMap().getOrDefault(username, null);
+        if (user != null) {
+            if (pwd.equals(user.getPassword())) {
+                Toast.makeText(this, "Log In sucessful", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, HomePageActivity.class));
-            }else{
+            } else {
                 userName.getText().clear();
                 password.getText().clear();
-//                AlertDialog alertDialog = new AlertDialog.Builder(context)
-//                        .setTitle("Error!")
-//                        .setMessage("Wrong password")
-//                        .setIcon(R.mipmap.empty_img)
-//                        .create();
-//                alertDialog.show();
+                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                        .setTitle("Error!")
+                        .setMessage("Wrong password")
+                        .setIcon(R.mipmap.empty_img)
+                        .create();
+                alertDialog.show();
             }
         }
     }
-}
 
+
+    /**
+     * Register button Click Listener
+     *
+     * @param view Log in View
+     */
+
+    public void OnClickRegisterButton(View view) {
+        userName.getText().clear();
+        password.getText().clear();
+        startActivity(new Intent(this, RegisterActivity.class));
+    }
+
+}
 /*
 
 public class MainActivity extends AppCompatActivity {

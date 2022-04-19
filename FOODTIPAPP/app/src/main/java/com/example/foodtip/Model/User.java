@@ -32,6 +32,11 @@ public class User {
         this.id = uuid.toString();
         this.user_name = username;
         this.password = password;
+        this.name = "";
+        this.avatar = null;
+        this.receptas = null;
+        this.historias = null;
+        this.favoritos = null;
     }
 
 

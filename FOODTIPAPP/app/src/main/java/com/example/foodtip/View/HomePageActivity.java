@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodtip.R;
 import com.example.foodtip.Test.MainActivityViewModel;
@@ -18,6 +20,7 @@ import com.example.foodtip.View.UI_ZP.CustomAdapter;
 import java.util.ArrayList;
 
 public class HomePageActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
