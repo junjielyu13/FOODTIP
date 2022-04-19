@@ -3,12 +3,14 @@ package com.example.foodtip.DataTest;
 import com.example.foodtip.Model.FoodTip;
 import com.example.foodtip.Model.User;
 import com.example.foodtip.*;
+import com.example.foodtip.View.MainActivity;
+
 import java.util.Map;
 
 public class Login_dades {
 
     private void CreatDates(){
-        FoodTip. = new FoodTip();
+        MainActivity.foodTip = new FoodTip();
         foodTip.addUsers("a","1");
         foodTip.addUsers("b","2");
     }
