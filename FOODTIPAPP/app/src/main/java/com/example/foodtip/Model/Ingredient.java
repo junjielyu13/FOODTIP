@@ -1,4 +1,4 @@
-package com.example.foodtip.Controller;
+package com.example.foodtip.Model;
 
 import java.util.UUID;
 

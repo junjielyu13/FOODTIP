@@ -1,8 +1,8 @@
-package com.example.foodtip.Controller;
+package com.example.foodtip.Model;
 
 import java.util.UUID;
 
-public class Receptas {
+public class Recepta {
     private final String id;
     private String description;
     private String title;
@@ -12,7 +12,7 @@ public class Receptas {
     private Likes num_like;
     private Comentaris comentaris;
 
-    public Receptas(String description, String title, CollectionImages images, Ingredients ingredients, Steps steps, Likes num_like, Comentaris comentaris) {
+    public Recepta(String description, String title, CollectionImages images, Ingredients ingredients, Steps steps, Likes num_like, Comentaris comentaris) {
         UUID uuid = UUID.randomUUID();
         this.id = uuid.toString();
         this.description = description;
