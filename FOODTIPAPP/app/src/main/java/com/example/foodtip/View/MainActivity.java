@@ -120,9 +120,7 @@ public void onClickLoginButton(View view) {
     }
 
     public void testLogIn(){
-        foodTip = new FoodTip();
-        foodTip.addUsers("a","1");
-        foodTip.addUsers("b","2");
+
     }
 
 
