@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "544553609147",
+    "project_id": "foodtip-db4e9",
+    "storage_bucket": "foodtip-db4e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544553609147:android:e75f0360c88c0355b8069e",
+        "android_client_info": {
+          "package_name": "com.example.foodtip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544553609147-utthj78eqhnacm3v12tc22bhbqiv955f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOWlnTnjdermSG-Wx0eHyhf4dHqpCTJ-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544553609147-utthj78eqhnacm3v12tc22bhbqiv955f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
