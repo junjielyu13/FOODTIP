@@ -9,12 +9,14 @@ import java.util.Map;
 
 public class Login_dades {
 
-    private void CreatDates(){
-        MainActivity.foodTip = new FoodTip();
-        foodTip.addUsers("a","1");
-        foodTip.addUsers("b","2");
-    }
     Map<String, User> UsersMap;
+
+    private void CreatDates(){
+
+        addUsers("a","1");
+        addUsers("b","2");
+    }
+
 
     public Map<String, User> getUsersMap() {
         return UsersMap;
@@ -25,7 +27,7 @@ public class Login_dades {
     }
 
     public void addUsers(String username, String password){
-        UsersMap.put(username,new User(username,password));
+        UsersMap.put(username,new User(username,password);
     }
 }
 

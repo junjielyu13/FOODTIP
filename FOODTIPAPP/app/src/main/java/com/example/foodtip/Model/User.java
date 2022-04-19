@@ -27,6 +27,14 @@ public class User {
         this.favoritos = favoritos;
     }
 
+    public User(String username, String password){
+        UUID uuid = UUID.randomUUID();
+        this.id = uuid.toString();
+        this.user_name = username;
+        this.password = password;
+    }
+
+
     //Setter
     public void setName(String name) {
         this.name = name;
@@ -44,8 +52,8 @@ public class User {
         this.avatar = avatar;
     }
 
-    public void setRecptas(MisReceptas recptas) {
-        this.recptas = recptas;
+    public void setRecptas(MisReceptas receptas) {
+        this.receptas = receptas;
     }
 
     public void setHistorias(MisHistoria historias) {
@@ -78,7 +86,7 @@ public class User {
     }
 
     public MisReceptas getRecptas() {
-        return recptas;
+        return receptas;
     }
 
     public MisHistoria getHistorias() {

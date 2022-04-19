@@ -2,6 +2,7 @@ package com.example.foodtip.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.foodtip.DataTest.Login_dades;
 import com.example.foodtip.Model.*;
 import com.example.foodtip.R;
 
 public class MainActivity extends AppCompatActivity {
 
     public static FoodTip foodTip;
+    public static Login_dades ld;
     private EditText userName;
     private EditText password;
     private Button login_but;
@@ -40,10 +43,11 @@ public class MainActivity extends AppCompatActivity {
                 String username = userName.getText().toString();
                 String pwd = password.getText().toString();
 
-                User user =  foodTip.getUser().getOrDefault(username,null);
+                User user =  ld.getUsersMap().getOrDefault(username,null);
                 if (user != null){
                     if(password.equals(user.getPassword())){
-                        Toast.makeText(this, "Log In sucessful", Toast.LENGTH_SHORT).show();
+                        Context context = getApplicationContext();
+                        Toast.makeText(context,"Log In sucessful", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(this, HomePageActivity.class));
                     }
                 }
