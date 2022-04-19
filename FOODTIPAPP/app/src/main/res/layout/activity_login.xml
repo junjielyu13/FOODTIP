@@ -64,7 +64,7 @@
             android:layout_marginStart="195dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/button_login_style"
-            android:onClick="ForgotPassword"
+
             android:text="@string/forgotPassword"
             android:textColor="@android:color/holo_purple" />
         <Button
@@ -74,7 +74,6 @@
             android:layout_marginStart="100dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/button_login_style"
-            android:onClick="Login"
             android:text="@string/Login"
             android:textColor="@android:color/white" />
 

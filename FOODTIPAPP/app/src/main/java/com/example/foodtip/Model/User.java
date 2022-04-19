@@ -11,18 +11,18 @@ public class User {
     private String password;
     private String user_name;
     private Image avatar; //not sure
-    private MisReceptas recptas;
+    private MisReceptas receptas;
     private MisHistoria historias;
     private MisFavoritos favoritos;
 
-    public User(String name, String password, String user_name, Image avatar, MisReceptas recptas, MisHistoria historias, MisFavoritos favoritos) {
+    public User(String name, String password, String user_name, Image avatar, MisReceptas receptas, MisHistoria historias, MisFavoritos favoritos) {
         UUID uuid = UUID.randomUUID();
         this.id = uuid.toString();
         this.name = name;
         this.password = password;
         this.user_name = user_name;
         this.avatar = avatar;
-        this.recptas = recptas;
+        this.receptas = receptas;
         this.historias = historias;
         this.favoritos = favoritos;
     }
