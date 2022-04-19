@@ -1,4 +1,4 @@
-package com.example.foodtip.Controller;
+package com.example.foodtip.Model;
 
 import android.media.Image;
 
@@ -14,7 +14,6 @@ public class User {
     private MisReceptas recptas;
     private MisHistoria historias;
     private MisFavoritos favoritos;
-
 
     public User(String name, String password, String user_name, Image avatar, MisReceptas recptas, MisHistoria historias, MisFavoritos favoritos) {
         UUID uuid = UUID.randomUUID();
