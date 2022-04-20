@@ -73,7 +73,7 @@
             android:autofillHints="password" />
 
         <Button
-            android:id="@+id/loginButton"
+            android:id="@+id/RegisterButton"
             android:layout_width="200dp"
             android:layout_height="48dp"
             android:layout_marginStart="100dp"

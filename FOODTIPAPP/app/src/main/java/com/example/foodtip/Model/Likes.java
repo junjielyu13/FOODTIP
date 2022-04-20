@@ -3,19 +3,19 @@ package com.example.foodtip.Model;
 import java.util.Vector;
 
 public class Likes {
-    private Vector<User> liked; //User who liked the post
+    private Vector<String> liked; //User who liked the post, using user id
 
-    public Likes(Vector<User> liked) {
+    public Likes(Vector<String> liked) {
         if(liked != null)this.liked = liked;
         else this.liked = new Vector<>();
     }
 
     //Getter and Setter
-    public Vector<User> getLiked() {
+    public Vector<String> getLiked() {
         return liked;
     }
 
-    public void setLiked(Vector<User> liked) {
+    public void setLiked(Vector<String> liked) {
         this.liked = liked;
     }
 }

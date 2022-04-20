@@ -1,21 +1,23 @@
 package com.example.foodtip.Model;
 
 public class Comentari {
-    private User autor;
+    private final String autor; //id autor
+    private final String recepta;//id Recepta
     private String comment;
 
-    public Comentari(User autor, String comment) {
+    public Comentari(String autor, String recepta, String comment) {
         this.autor = autor;
+        this.recepta = recepta;
         this.comment = comment;
     }
 
     //Getter and Setter
-    public User getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(User autor) {
-        this.autor = autor;
+    public String getRecepta() {
+        return recepta;
     }
 
     public String getComment() {

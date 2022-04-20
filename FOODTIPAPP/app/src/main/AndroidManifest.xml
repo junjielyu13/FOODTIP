@@ -25,6 +25,7 @@
         <activity android:name=".View.User.MyHistory" />
         <activity android:name=".View.User.MySetting" />
         <activity android:name=".View.Search_View" />
+        <activity android:name=".View.Register_View" />
     </application>
 
 </manifest>
