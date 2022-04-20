@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.foodtip.R;
 import com.example.foodtip.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Main_View extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class Main_View extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
         //setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());

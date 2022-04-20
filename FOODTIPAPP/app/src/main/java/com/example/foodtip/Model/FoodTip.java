@@ -1,29 +1,23 @@
 package com.example.foodtip.Model;
 
-import android.media.Image;
-import android.net.Uri;
-import android.util.Log;
-import android.widget.Toast;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.foodtip.R;
-import com.example.foodtip.View.Register_View;
+import com.example.foodtip.View.MainActivity;
+import com.example.foodtip.View.Main_View;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +49,17 @@ public class FoodTip {
             }
         });
         return FirebaseAuth.getInstance().getCurrentUser();
+    }
+    public static void login_event(@NonNull MainActivity activity, String email, String password){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener((task)->{
+           if(task.isSuccessful()){
+               activity.openMainPage();
+           }
+           else{
+               Toast.makeText(activity,"login fail",Toast.LENGTH_SHORT).show();
+           }
+        });
     }
     private static Map<String,Object> getDocument_User(User user){
         Map<String, Object> entrada = new HashMap<>();

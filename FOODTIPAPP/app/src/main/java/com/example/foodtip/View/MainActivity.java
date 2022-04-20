@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.foodtip.Model.FoodTip;
 import com.example.foodtip.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         login_but = (Button) findViewById(R.id.loginButton);
         login_but.setOnClickListener((view) -> {
-            openMainPage();
+            FoodTip.login_event(this,acc_name.getText().toString(),password.getText().toString());
         });
 
         regi_but = (Button) findViewById(R.id.RegisterButton);
@@ -54,23 +55,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void openMainPage(){
+    public void openMainPage(){
         Intent intent = new Intent(this,Main_View.class);
         startActivity(intent);
     }
 
-    private void openRegisterPage(){
+    public void openRegisterPage(){
         Intent intent = new Intent(this,Register_View.class);
         startActivity(intent);
-    }
-    private void login_event(){
-        firebaseAuth.createUserWithEmailAndPassword(acc_name.getText().toString(),password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                }
-            }
-        });
     }
 
 }
