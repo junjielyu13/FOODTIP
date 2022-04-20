@@ -75,6 +75,7 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/button_login_style"
             android:text="@string/Login"
+            android:onClick="LogInButtonOnClickListener"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -97,6 +98,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/button_login_style"
             android:text="@string/RegisterButtonText"
+            android:onClick="RegisterButtonOnClickListener"
             android:textColor="@android:color/white" />
 
     </LinearLayout>
