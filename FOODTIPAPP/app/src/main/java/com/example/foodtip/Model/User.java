@@ -1,7 +1,8 @@
 package com.example.foodtip.Model;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.media.Image;
-
+import android.os.Bundle;
 import java.util.UUID;
 
 
@@ -88,4 +89,5 @@ public class User {
     public MisFavoritos getFavoritos() {
         return favoritos;
     }
+
 }
