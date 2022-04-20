@@ -37,12 +37,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * set Register Button click listener to go to register Page
+     * @param view
+     */
     public void RegisterButtonOnClickListener(View view) {
         userName.getText().clear();
         password.getText().clear();
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
+    /**
+     * set Log in Button Click listener
+     * @param view
+     */
     public void LogInButtonOnClickListener(View view) {
         final int minim_pwd_length = 8;
         final int max_pwd_length = 16;
@@ -66,6 +74,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    /**
+     * Forgot Password
+     * @param view
+     */
+    /*
+    public void forgotPasswordOnClickListener(View view) {
+        userName.getText().clear();
+        password.getText().clear();
+        startActivity(new Intent(this, ForgotPasswordActivity.class));
+    }*/
+
+    /**
+     * support function to show AlertDialog
+     * @param title title of alertDialog
+     * @param message message of alertDialog
+     * @param icon icon of alertDialog
+     */
     private void showAlertDialog(String title, String message, int icon){
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(title)
@@ -82,4 +108,5 @@ public class MainActivity extends AppCompatActivity {
                 .create();
         alertDialog.show();
     }
+
 }

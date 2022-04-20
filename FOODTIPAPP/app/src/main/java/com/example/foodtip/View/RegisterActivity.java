@@ -33,6 +33,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * set register button click listener to register
+     * @param view
+     */
     public void RegisterButtonOnClickListenerRegister(View view) {
         final int minim_pwd_length = 8;
         final int max_pwd_length = 16;
@@ -58,6 +62,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * support function to show AlertDialog
+     * @param title title of alertDialog
+     * @param message message of alertDialog
+     * @param icon icon of alertDialog
+     */
     private void showAlertDialog(String title, String message, int icon) {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(title)
