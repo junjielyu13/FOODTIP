@@ -1,19 +1,18 @@
 package com.example.foodtip.View;
 
 
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.foodtip.DataTest.Login_dades;
-import com.example.foodtip.View.MainActivity;
+import com.example.foodtip.Model.FoodTip;
 import com.example.foodtip.R;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -21,6 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
     private EditText repeatPassword;
+    private final short MIN_PWD_LEN = 8, MAX_PWD_LEN = 16;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,7 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
         username = findViewById(R.id.UserNameREGISTER);
         password = findViewById(R.id.PasswordREGISTER);
         repeatPassword = findViewById(R.id.RepeatPasswordREGISTER);
-
     }
 
     /**
@@ -38,28 +37,24 @@ public class RegisterActivity extends AppCompatActivity {
      * @param view
      */
     public void RegisterButtonOnClickListenerRegister(View view) {
-        final int minim_pwd_length = 8;
-        final int max_pwd_length = 16;
         String user_name = username.getText().toString();
         String pwd = password.getText().toString();
         String rePwd = repeatPassword.getText().toString();
-        if (MainActivity.ld.getUsersMap().containsKey(user_name)) {
-            showAlertDialog("Error!,", "Username exist!", R.mipmap.empty_img);
-        } else {
-            if (pwd.length() > max_pwd_length && pwd.length() < minim_pwd_length) {
-                showAlertDialog("Error!", "Password length must be more than 8 characters or less equal than 16 characters", R.mipmap.ic_launcher);
-            } else {
-                if (pwd.equals(rePwd)) {
-                    MainActivity.ld.addUsers(user_name, pwd);
-                    Toast.makeText(getApplicationContext(), "Register Sucessful!", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    showAlertDialog("Error!", "The repeat password is not the same as the previous one", R.mipmap.empty_img);
-                }
-            }
+
+        if(cheackPwd(pwd,rePwd)){
+            FoodTip.CreatNewUser(this,user_name,pwd,user_name);
         }
-
-
+    }
+    private boolean cheackPwd(@NonNull String password, String repPwd){
+        if(!password.equals(repPwd)){
+            showAlertDialog("Error","The repeat password is not the same as the previous one",R.drawable.ic_error);
+            return false;
+        }
+        if(password.length() < MIN_PWD_LEN && password.length() > MAX_PWD_LEN ){
+            showAlertDialog("Error","Password length must be more than 8 characters or less equal than 16 characters",R.drawable.ic_error);
+            return false;
+        }
+        return true;
     }
 
     /**

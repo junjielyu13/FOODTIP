@@ -24,11 +24,13 @@ import java.util.Map;
 
 public class FoodTip {
     /**
-     * register 1 user
-     * @return True if created successfully otherwise False
+     *  Crear un nou usuari
+     * @param activity
+     * @param name email
+     * @param password contrasenya
+     * @param user_name user name
      */
-    public static FirebaseUser CreatNewUser(@NonNull AppCompatActivity activity, String name, String password, String repeat_password, String user_name){
-        if(!password.equals(repeat_password)) return null;
+    public static void CreatNewUser(@NonNull AppCompatActivity activity, String name, String password, String user_name){
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(name,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -44,17 +46,16 @@ public class FoodTip {
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                     databaseReference.child("users").child(user.getId()).setValue(getDocument_User(user));
                 }else{
-                    Toast.makeText(activity,"Authentication failed.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity,"User already exist",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        return FirebaseAuth.getInstance().getCurrentUser();
     }
     public static void login_event(@NonNull MainActivity activity, String email, String password){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener((task)->{
            if(task.isSuccessful()){
-               activity.openMainPage();
+               activity.openHomePage();
            }
            else{
                Toast.makeText(activity,"login fail",Toast.LENGTH_SHORT).show();
