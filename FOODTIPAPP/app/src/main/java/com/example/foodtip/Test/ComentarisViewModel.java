@@ -26,11 +26,6 @@ public class ComentarisViewModel extends AndroidViewModel {
     public Comentari getComentari(int idx){ return mComentaris.getValue().get(idx);}
 
     public void addComentari(User autor, String comment){
-        Comentari com = new Comentari(autor, comment);
-        if(com != null){
-            mComentaris.getValue().add(com);
-            mComentaris.setValue(mComentaris.getValue());
-        }
     }
 
     public void setCollection(ArrayList<Comentari> com){mComentaris.setValue(com);}

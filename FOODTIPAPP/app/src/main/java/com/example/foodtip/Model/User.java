@@ -42,7 +42,7 @@ public class User {
         this.user_name = user_name;
     }
 
-    public void setAvatar(Image avatar) {
+    public void setAvatar(Bitmap avatar) {
         this.avatar = avatar;
     }
 
