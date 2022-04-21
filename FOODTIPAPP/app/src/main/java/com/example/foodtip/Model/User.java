@@ -1,8 +1,9 @@
 package com.example.foodtip.Model;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.graphics.Bitmap;
 import android.media.Image;
-import android.os.Bundle;
+
+import java.io.ByteArrayOutputStream;
 import java.util.UUID;
 
 
@@ -11,24 +12,24 @@ public class User {
     private String name;
     private String password;
     private String user_name;
-    private Image avatar; //not sure
+    private Bitmap avatar; //not sure
     private MisReceptas recptas;
     private MisHistoria historias;
     private MisFavoritos favoritos;
 
-    public User(String name, String password, String user_name, Image avatar, MisReceptas recptas, MisHistoria historias, MisFavoritos favoritos) {
-        UUID uuid = UUID.randomUUID();
-        this.id = uuid.toString();
+    public User(String id, String name, String password, String user_name, Bitmap avatar) {
+        //UUID uuid = UUID.randomUUID();
+        //this.id = uuid.toString();
+        this.id = id;
         this.name = name;
         this.password = password;
         this.user_name = user_name;
         this.avatar = avatar;
-        this.recptas = recptas;
-        this.historias = historias;
-        this.favoritos = favoritos;
     }
 
     //Setter
+
+
     public void setName(String name) {
         this.name = name;
     }
@@ -74,7 +75,7 @@ public class User {
         return user_name;
     }
 
-    public Image getAvatar() {
+    public Bitmap getAvatar() {
         return avatar;
     }
 
@@ -90,4 +91,10 @@ public class User {
         return favoritos;
     }
 
+    public byte[] BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        return b;
+    }
 }

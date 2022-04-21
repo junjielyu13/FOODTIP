@@ -32,7 +32,7 @@
             tools:layout_editor_absoluteY="599dp" />
 
         <EditText
-            android:id="@+id/UserName"
+            android:id="@+id/UserNameREGISTER"
             android:layout_width="264dp"
             android:layout_height="50dp"
             android:layout_marginStart="80dp"
@@ -47,7 +47,7 @@
 
 
         <EditText
-            android:id="@+id/Password"
+            android:id="@+id/PasswordREGISTER"
             android:layout_width="264dp"
             android:layout_height="50dp"
             android:layout_marginStart="80dp"
@@ -60,7 +60,7 @@
             android:autofillHints="password" />
 
         <EditText
-            android:id="@+id/RepeatPassword"
+            android:id="@+id/RepeatPasswordREGISTER"
             android:layout_width="264dp"
             android:layout_height="50dp"
             android:layout_marginStart="80dp"
@@ -73,14 +73,14 @@
             android:autofillHints="password" />
 
         <Button
-            android:id="@+id/loginButton"
+            android:id="@+id/registerButtonREGISTER"
             android:layout_width="200dp"
             android:layout_height="48dp"
             android:layout_marginStart="100dp"
             android:layout_marginTop="40dp"
             android:background="@drawable/button_login_style"
-            android:onClick="Register"
             android:text="@string/RegisterTextView"
+            android:onClick="RegisterButtonOnClickListenerRegister"
             android:textColor="@android:color/white" />
 
     </LinearLayout>
