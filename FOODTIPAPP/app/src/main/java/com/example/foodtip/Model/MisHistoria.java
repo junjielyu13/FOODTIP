@@ -1,10 +1,10 @@
 package com.example.foodtip.Model;
 
-import java.util.Vector;
+import java.util.Map;
 
 public class MisHistoria extends Receptas {
 
-    public MisHistoria(Vector<Recepta> receptas) {
+    public MisHistoria(Map<String,Recepta> receptas) {
         super(receptas);
     }
 }

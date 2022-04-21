@@ -3,34 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.Home.HomeFragment">
-    
+
     <TextView
+        android:id="@+id/title_home_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recomanació"
+        android:textSize="34sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recy_home_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_home_page"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_but"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/empty_string"
-        android:text="No hi ha resultat"
-        android:textSize="20sp"
-        android:visibility="gone"
-        android:layout_centerInParent="true"/>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginRight="16dp"
+        app:srcCompat="@drawable/ic_baseline_post_add_24" />
 
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
-
-        <TextView
-            android:id="@+id/title_home_page"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Recomanació"
-            android:textSize="34sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recy_home_page"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
 </RelativeLayout>

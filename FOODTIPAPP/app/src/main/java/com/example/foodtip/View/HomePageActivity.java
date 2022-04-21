@@ -15,24 +15,33 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.foodtip.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 
 public class HomePageActivity extends AppCompatActivity {
-
+    private BottomNavigationView navView;
+    private FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        setting();
+
+    }
+
+    private void setting(){
+        navView = (BottomNavigationView) findViewById(R.id.nav_view);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.floating_but);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder
                 (R.id.navigation_home, R.id.navigation_user).build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_menu,menu);
@@ -54,11 +63,5 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        System.out.println(item.getActionView());
-        return super.onOptionsItemSelected(item);
     }
 }

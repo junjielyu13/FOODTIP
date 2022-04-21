@@ -1,18 +1,12 @@
 package com.example.foodtip.Model;
 
+import java.util.Map;
 import java.util.Vector;
 
 public class Receptas {
-    private Vector<Recepta> receptas;
+    private Map<String,Recepta> receptas;
 
-    public Receptas(Vector<Recepta> receptas){
-        this.receptas = receptas;
-    }
-    public Vector<Recepta> getReceptas() {
-        return receptas;
-    }
-
-    public void setReceptas(Vector<Recepta> receptas) {
+    public Receptas(Map<String, Recepta> receptas) {
         this.receptas = receptas;
     }
 }
