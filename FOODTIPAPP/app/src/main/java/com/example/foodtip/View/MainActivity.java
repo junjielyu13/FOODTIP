@@ -1,68 +1,112 @@
 package com.example.foodtip.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.example.foodtip.Model.FoodTip;
+import com.example.foodtip.DataTest.Login_dades;
+import com.example.foodtip.Model.*;
 import com.example.foodtip.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseDatabase firebaseDatabase;
-    private FirebaseFirestore firebaseFirestore;
-    private FirebaseStorage firebaseStorage;
-    private FirebaseAuth firebaseAuth;
-
-    private Button login_but, regi_but;
-    private EditText acc_name, password;
+    public static FoodTip foodTip;
+    public static Login_dades ld;
+    private EditText userName;
+    private EditText password;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ld = new Login_dades();
         setContentView(R.layout.activity_login);
-        setting(savedInstanceState);
-    }
-    private void setting(Bundle savedInstanceState){
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseStorage = FirebaseStorage.getInstance();
-        firebaseAuth = FirebaseAuth.getInstance();
 
-        acc_name = findViewById(R.id.UserName);
-        password = findViewById(R.id.Password);
+        userName = findViewById(R.id.UserNameEditTextLogIn);
+        password = findViewById(R.id.PasswordEditTextLogIn);
 
-        login_but = (Button) findViewById(R.id.loginButton);
-        login_but.setOnClickListener((view) -> {
-            FoodTip.login_event(this,acc_name.getText().toString(),password.getText().toString());
-        });
-
-        regi_but = (Button) findViewById(R.id.RegisterButton);
-        regi_but.setOnClickListener((v)->{
-            openRegisterPage();
-        });
     }
 
-    public void openMainPage(){
-        Intent intent = new Intent(this,Main_View.class);
-        startActivity(intent);
+    /**
+     * set Register Button click listener to go to register Page
+     * @param view
+     */
+    public void RegisterButtonOnClickListener(View view) {
+        userName.getText().clear();
+        password.getText().clear();
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 
-    public void openRegisterPage(){
-        Intent intent = new Intent(this,Register_View.class);
-        startActivity(intent);
+    /**
+     * set Log in Button Click listener
+     * @param view
+     */
+    public void LogInButtonOnClickListener(View view) {
+        final int minim_pwd_length = 8;
+        final int max_pwd_length = 16;
+        String username = userName.getText().toString();
+        String pwd = password.getText().toString();
+        User user = ld.getUsersMap().getOrDefault(username, null);
+        if (user != null) {
+            if (pwd.length() > max_pwd_length && pwd.length() < minim_pwd_length) {
+                showAlertDialog("Error!","Password length must be more than 8 characters or less equal than 16 characters",R.mipmap.ic_launcher);
+            } else {
+                if (pwd.equals(user.getPassword())) {
+                    Toast.makeText(this, "Log In sucessful", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, HomePageActivity.class));
+                } else {
+                    showAlertDialog("Error!","Wrong password",R.mipmap.empty_img);
+                }
+            }
+        } else {
+            showAlertDialog("Error","Username does not exist",R.mipmap.empty_img);
+
+        }
+    }
+
+
+    /**
+     * Forgot Password
+     * @param view
+     */
+    /*
+    public void forgotPasswordOnClickListener(View view) {
+        userName.getText().clear();
+        password.getText().clear();
+        startActivity(new Intent(this, ForgotPasswordActivity.class));
+    }*/
+
+    /**
+     * support function to show AlertDialog
+     * @param title title of alertDialog
+     * @param message message of alertDialog
+     * @param icon icon of alertDialog
+     */
+    private void showAlertDialog(String title, String message, int icon){
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setIcon(icon)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        userName.getText().clear();
+                        password.getText().clear();
+                    }
+                })
+                .create();
+        alertDialog.show();
     }
 
 }
