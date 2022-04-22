@@ -1,5 +1,6 @@
 package com.example.foodtip.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.foodtip.R;
+import com.example.foodtip.View.Home.UpdateCusineActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
@@ -33,6 +35,10 @@ public class HomePageActivity extends AppCompatActivity {
     private void setting(){
         navView = (BottomNavigationView) findViewById(R.id.nav_view);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floating_but);
+
+        floatingActionButton.setOnClickListener((v)->{
+            startActivity(new Intent(this, UpdateCusineActivity.class));
+        });
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder

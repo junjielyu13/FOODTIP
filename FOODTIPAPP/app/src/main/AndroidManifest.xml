@@ -25,6 +25,7 @@
         <activity android:name=".View.Search_View" />
         <activity android:name=".View.RegisterActivity" />
         <activity android:name=".View.HomePageActivity" />
+        <activity android:name=".View.Home.UpdateCusineActivity" />
     </application>
 
 </manifest>
