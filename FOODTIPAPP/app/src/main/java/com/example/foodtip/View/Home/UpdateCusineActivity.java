@@ -1,7 +1,6 @@
 package com.example.foodtip.View.Home;
 
-import android.app.Activity;
-import android.content.Intent;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -9,45 +8,46 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.foodtip.R;
 import com.example.foodtip.View.ViewHolder.SliderAdapter;
 import com.example.foodtip.View.ViewHolder.SliderData;
+import com.example.foodtip.ViewModel.UpdateCusineActivityViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 public class UpdateCusineActivity extends AppCompatActivity {
+
+    private UpdateCusineActivityViewModel viewModel;
 
     private final int MAX_IMG_UP = 10;
     private EditText title;
     private ImageButton add_picture;
     private Button afegir_ingredient, afegir_steps, publicar;
     private SliderView sliderView;
-    private ArrayList<SliderData> images;
-    private ActivityResultLauncher<SliderData> getImg;
+    //private ArrayList<SliderData> images;
+    private ActivityResultLauncher<String> getImg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_new_cousine);
-        images = new ArrayList<>();
-        String url1 = "https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200-1.png";
-        String url2 = "https://qphs.fs.quoracdn.net/main-qimg-8e203d34a6a56345f86f1a92570557ba.webp";
-        String url3 = "https://bizzbucket.co/wp-content/uploads/2020/08/Life-in-The-Metro-Blog-Title-22.png";
-        images.add(new SliderData(url1));
-        images.add(new SliderData(url2));
-        images.add(new SliderData(url3));
-
+        //images = new ArrayList<>();
         setting();
     }
 
@@ -60,19 +60,22 @@ public class UpdateCusineActivity extends AppCompatActivity {
         publicar = findViewById(R.id.new_cusine_publicar);
         sliderView = findViewById(R.id.imageSlider);
 
-        sliderAdapt();
+        setLiveDataObservers();
 
-        /*getImg = registerForActivityResult(
+        //sliderAdapt();
+
+        getImg = registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
                 new ActivityResultCallback<Uri>() {
                     @Override
                     public void onActivityResult(Uri result) {
                         if(result != null){
+                            if(viewModel != null) System.out.println("12345");
+                            viewModel.add_picture(result);
                         }
                     }
                 }
-        );*/
-
+        );
         add_picture.setOnClickListener((v)->{
             afegir_picture();
         });
@@ -86,13 +89,13 @@ public class UpdateCusineActivity extends AppCompatActivity {
             publicar_recepta();
         });
     }
-    private void sliderAdapt(){
+    /*private void sliderAdapt(){
         SliderAdapter sliderAdapter = new SliderAdapter(images);
         sliderView.setSliderAdapter(sliderAdapter);
         sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
         sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
         sliderView.startAutoCycle();
-    }
+    }*/
     private void publicar_recepta() {
     }
 
@@ -110,6 +113,7 @@ public class UpdateCusineActivity extends AppCompatActivity {
         Button mAlbum = (Button) dialog.findViewById(R.id.album);
         Button mCamera = (Button) dialog.findViewById(R.id.camera);
         mAlbum.setOnClickListener(view -> {
+            getImg.launch("image/*");
         });
         mCamera.setOnClickListener(view -> {
             openCamera();
@@ -123,8 +127,24 @@ public class UpdateCusineActivity extends AppCompatActivity {
     private void openCamera() {
     }
 
-    private void openAlbum() {
+    public void setLiveDataObservers(){
+        viewModel = new ViewModelProvider(this).get(UpdateCusineActivityViewModel.class);
+        final Observer<ArrayList<SliderData>> observer = new Observer<ArrayList<SliderData>>(){
+
+            @Override
+            public void onChanged(ArrayList<SliderData> sliderDataArrayList) {
+                SliderAdapter sliderAdapter = new SliderAdapter(sliderDataArrayList);
+                sliderView.setSliderAdapter(sliderAdapter,false);
+                sliderView.setSliderAdapter(sliderAdapter);
+                sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+                sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
+                sliderView.startAutoCycle();
+                sliderAdapter.notifyDataSetChanged();
+            }
+        };
+        viewModel.getmImages().observe(this,observer);
     }
+
 
 
 }
