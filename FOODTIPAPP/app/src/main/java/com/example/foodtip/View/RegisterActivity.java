@@ -21,12 +21,13 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText password;
     private EditText repeatPassword;
     private final short MIN_PWD_LEN = 8, MAX_PWD_LEN = 16;
+    private FoodTip foodTip;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        foodTip = FoodTip.getInstance();
         username = findViewById(R.id.UserNameREGISTER);
         password = findViewById(R.id.PasswordREGISTER);
         repeatPassword = findViewById(R.id.RepeatPasswordREGISTER);
@@ -42,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         String rePwd = repeatPassword.getText().toString();
 
         if(cheackPwd(pwd,rePwd)){
-            FoodTip.CreatNewUser(this,user_name,pwd,user_name);
+            foodTip.CreatNewUser(this,user_name,pwd,user_name);
         }
     }
     private boolean cheackPwd(@NonNull String password, String repPwd){

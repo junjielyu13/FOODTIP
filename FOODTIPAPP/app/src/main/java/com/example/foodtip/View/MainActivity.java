@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText userName;
     private EditText password;
-
+    private FoodTip foodTip;
 
 
     @Override
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        foodTip = FoodTip.getInstance();
         userName = findViewById(R.id.UserNameEditTextLogIn);
         password = findViewById(R.id.PasswordEditTextLogIn);
     }
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         //String pwd = password.getText().toString();
         String email = "zhipeng139@gmail.com";
         String pwd = "123456";
-        FoodTip.login_event(this,email,pwd);
+        foodTip.login_event(this,email,pwd);
     }
 
     /**

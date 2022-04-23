@@ -19,6 +19,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FoodTip {
+    private static FoodTip foodTip;
+    private FoodTip(){}
+
+
+    public static FoodTip getInstance(){
+        if(foodTip == null){
+            foodTip = new FoodTip();
+        }
+        return foodTip;
+    }
+
     /**
      *  Crear un nou usuari
      * @param activity
@@ -26,7 +37,7 @@ public class FoodTip {
      * @param password contrasenya
      * @param user_name user name
      */
-    public static void CreatNewUser(@NonNull AppCompatActivity activity, String name, String password, String user_name){
+    public void CreatNewUser(@NonNull AppCompatActivity activity, String name, String password, String user_name){
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(name,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -47,7 +58,7 @@ public class FoodTip {
             }
         });
     }
-    public static void login_event(@NonNull MainActivity activity, String email, String password){
+    public void login_event(@NonNull MainActivity activity, String email, String password){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener((task)->{
            if(task.isSuccessful()){
@@ -58,7 +69,7 @@ public class FoodTip {
            }
         });
     }
-    private static Map<String,Object> getDocument_User(User user){
+    private Map<String,Object> getDocument_User(User user){
         Map<String, Object> entrada = new HashMap<>();
         entrada.put("id",user.getId());
         entrada.put("acc_name",user.getName());

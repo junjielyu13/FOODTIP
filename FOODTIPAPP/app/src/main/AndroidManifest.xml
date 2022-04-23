@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.foodtip" >
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,6 +27,7 @@
         <activity android:name=".View.RegisterActivity" />
         <activity android:name=".View.HomePageActivity" />
         <activity android:name=".View.Home.UpdateCusineActivity" />
+        <activity android:name=".View.Home.BottomDialog" />
     </application>
 
 </manifest>
