@@ -26,8 +26,8 @@ public class StepsViewModel extends AndroidViewModel {
 
     public Step getStep(int idx){ return mSteps.getValue().get(idx);}
 
-    public void addStep(String text, Bitmap image){
-        Step sp = new Step(text, image);
+    public void addStep(String title, String text, Bitmap image){
+        Step sp = new Step(title,text, image);
         if(sp != null){
             mSteps.getValue().add(sp);
             mSteps.setValue(mSteps.getValue());

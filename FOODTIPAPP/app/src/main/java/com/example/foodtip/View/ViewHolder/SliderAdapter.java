@@ -1,12 +1,12 @@
 package com.example.foodtip.View.ViewHolder;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodtip.Model.SliderData;
 import com.example.foodtip.R;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 

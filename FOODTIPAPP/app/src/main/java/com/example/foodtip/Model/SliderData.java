@@ -1,4 +1,4 @@
-package com.example.foodtip.View.ViewHolder;
+package com.example.foodtip.Model;
 
 public class SliderData {
     private String imgUri;

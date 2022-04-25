@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
     public void LogInButtonOnClickListener(View view) {
         //String email = userName.getText().toString();
         //String pwd = password.getText().toString();
-        String email = "zhipeng139@gmail.com";
-        String pwd = "123456";
+        String email = "zhipeng111@gmail.com";
+        String pwd = "zhipeng139";
         foodTip.login_event(this,email,pwd);
     }
 

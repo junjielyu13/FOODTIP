@@ -3,10 +3,12 @@ package com.example.foodtip.Model;
 import android.graphics.Bitmap;
 
 public class Step {
+    private String title;
     private String text;
     private Bitmap images;
 
-    public Step(String text, Bitmap images) {
+    public Step(String title, String text, Bitmap images) {
+        this.title = title;
         this.text = text;
         this.images = images;
     }
@@ -20,11 +22,19 @@ public class Step {
         this.text = text;
     }
 
-    public Bitmap getCollectionImages() {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Bitmap getImages() {
         return images;
     }
 
-    public void setCollectionImages(Bitmap images) {
+    public void setImages(Bitmap images) {
         this.images = images;
     }
 }

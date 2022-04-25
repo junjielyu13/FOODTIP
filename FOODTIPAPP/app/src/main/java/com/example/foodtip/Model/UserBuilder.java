@@ -18,6 +18,9 @@ public class UserBuilder {
         bitmap = BitmapFactory.decodeResource(activity.getResources(),R.drawable.user_login);
     };
 
+    public UserBuilder() {
+    }
+
     public User buildUser(){
         return new User(uid,acc_name,password,user_name,bitmap);
     }
@@ -25,10 +28,10 @@ public class UserBuilder {
         this.uid = uid;
         return this;
     }
-    /*public UserBuilder bitmap(Bitmap bitmap){
+    public UserBuilder bitmap(Bitmap bitmap){
         this.bitmap = bitmap;
         return this;
-    }*/
+    }
     public UserBuilder acc_name(String name){
         this.acc_name = name;
         return this;

@@ -1,27 +1,50 @@
 package com.example.foodtip.ViewModel;
 
+import android.app.Activity;
 import android.app.Application;
+import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.foodtip.Model.DadaBaseAdpter;
+import com.example.foodtip.Model.FoodTip;
 import com.example.foodtip.Model.Ingredient;
+import com.example.foodtip.Model.Recepta;
+import com.example.foodtip.Model.ReceptaBuilder;
 import com.example.foodtip.Model.Step;
-import com.example.foodtip.View.ViewHolder.SliderData;
+import com.example.foodtip.Model.SliderData;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class UpdateCusineActivityViewModel extends AndroidViewModel {
     private final MutableLiveData<ArrayList<SliderData>> mImages;
     private final MutableLiveData<ArrayList<Ingredient>> mIngredients;
     private final MutableLiveData<ArrayList<Step>> mSteps;
+    private final MutableLiveData<Bitmap> bitmapMutableLiveData;
+    /*----------------------------------------------------------------*/
+    private FoodTip foodTip;
+
     public UpdateCusineActivityViewModel(@NonNull Application application) {
         super(application);
         mImages = new MutableLiveData<>();
         mIngredients = new MutableLiveData<>();
         mSteps = new MutableLiveData<>();
+        bitmapMutableLiveData = new MutableLiveData<>();
+        foodTip = FoodTip.getInstance();
     }
 
     public MutableLiveData<ArrayList<Ingredient>> getmIngredients() {
@@ -44,6 +67,14 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
         mImages.setValue(mImages.getValue());
     }
 
+    public void change_picture_of_step(Bitmap bitmap){
+        bitmapMutableLiveData.setValue(bitmap);
+        bitmapMutableLiveData.setValue(bitmapMutableLiveData.getValue());
+    }
+    public Bitmap get_current_step_picture(){
+        return bitmapMutableLiveData.getValue();
+    }
+
     public void add_ingredient(String nom){
         if(mIngredients.getValue() == null){
             mIngredients.setValue(new ArrayList<>());
@@ -53,9 +84,10 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
     }
 
     public void add_steps(Step step){
-        if(mSteps == null){
+        if(mSteps.getValue() == null){
             mSteps.setValue(new ArrayList<>());
         }
+        step.setImages(bitmapMutableLiveData.getValue());
         mSteps.getValue().add(step);
         mSteps.setValue(mSteps.getValue());
     }
@@ -68,5 +100,96 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
         mSteps.setValue(mSteps.getValue());
     }
 
+    public void update_new_cusine(Activity activity,String title, String description){
+
+        /**                         Recepta
+         * -------------------------------------------------
+         *"recepta"
+         *      ->  ReceptaID
+         *             -> BitMap reference: Array
+         *                          -> Reference:Uri
+         *             -> Ingredient : ArrayList
+         *                      -> Ingredients ID
+         *             -> Steps:
+         *                  -> BitMap reference; Uri
+         *                  ->Text: String
+         *                  -> Title: String
+         */
+
+        /**
+         *                  Foto de recepta
+         * --------------------------------------------------
+         * "recepta"
+         *      -> ReceptaID: Carpeta
+         *              -> Images: Carpeta
+         *                      -> UniqID in Carpeta
+         */
+
+        Recepta recepta = new ReceptaBuilder()
+                .title(title)
+                .description(description)
+                .images(mImages.getValue())
+                .ingredients(mIngredients.getValue())
+                .steps(mSteps.getValue())
+                .buildRecepta();
+        //Update ingredient
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        StorageReference storageReference = FirebaseStorage.getInstance()
+                .getReference("recepta")
+                .child(recepta.getId());
+
+        //Guarda ID de ingredient
+        ArrayList<String> ingredient_id = new ArrayList<>();
+
+        for(Ingredient ingredient:recepta.getIngredients()){
+            Map<String,Object> map = new HashMap<>();
+            map.put(recepta.getId(),FirebaseAuth.getInstance().getUid());
+            firestore.collection("ingredient")
+                    .document(ingredient.getNom())
+                    .update(map);
+            ingredient_id.add(ingredient.getNom());
+            map.clear();
+        }
+
+        ArrayList<String> pictures = new ArrayList<>();
+        for(SliderData sliderData:recepta.getImages()){
+            ImageDecoder.Source source = ImageDecoder.createSource(activity.getContentResolver(),Uri.parse(sliderData.getImgUri()));
+            try {
+                String picture_id = UUID.randomUUID().toString();
+
+                StorageReference storageRef = storageReference.child("images")
+                        .child(picture_id);
+                storageRef.putBytes(foodTip.BitMapToString(ImageDecoder.decodeBitmap(source)));
+
+                pictures.add(storageRef.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        ArrayList<Map<String,String>> steps = new ArrayList<>();
+        for (Step step:recepta.getSteps()){
+            Map<String,String> step_map = new HashMap<>();
+            step_map.put("title",step.getTitle());
+            step_map.put("text",step.getText());
+
+            String picture_id = UUID.randomUUID().toString();
+            StorageReference storageRef = storageReference.child("images")
+                    .child(picture_id);
+            storageRef.putBytes(foodTip.BitMapToString(step.getImages()));
+
+            step_map.put("bitmapID",storageRef.toString());
+            steps.add(step_map);
+        }
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("title",recepta.getTitle());
+        map.put("bitmaps",pictures);
+        map.put("ingredient",ingredient_id);
+        map.put("steps",steps);
+
+        firestore.collection("recepta")
+                .document(recepta.getId()).set(map);
+    }
 
 }

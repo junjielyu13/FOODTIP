@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.foodtip.Model.Step;
 import com.example.foodtip.R;
 import com.example.foodtip.ViewModel.UpdateCusineActivityViewModel;
@@ -44,8 +45,9 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsHolder> {
         ImageButton imageButton = holder.getBut();
         ImageView imageView = holder.getFoto();
 
-
+        title.setText(step.getTitle());
         text.setText(step.getText());
+        imageView.setImageBitmap(step.getImages());
         imageButton.setOnClickListener((v)->{
             this.updateCusineActivityViewModel.remove_steps(step);
         });

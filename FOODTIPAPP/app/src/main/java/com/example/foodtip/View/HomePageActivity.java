@@ -14,20 +14,26 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.foodtip.Model.FoodTip;
 import com.example.foodtip.R;
 import com.example.foodtip.View.Home.UpdateCusineActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class HomePageActivity extends AppCompatActivity {
     private BottomNavigationView navView;
     private FloatingActionButton floatingActionButton;
+    private FoodTip foodTip;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        foodTip = FoodTip.getInstance();
+        foodTip.getUser();
         setting();
 
     }

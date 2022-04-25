@@ -91,13 +91,33 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/new_cusine_descrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textSize="24dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_cusine_rela"
+                android:layout_margin="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+            <EditText
+                android:id="@+id/new_cusine_descrip_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/new_cusine_descrip"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_margin = "10dp"/>
+
+            <TextView
                 android:id="@+id/new_cusine_ing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ingredients"
                 android:textSize="24dp"
-                app:layout_constraintTop_toBottomOf="@+id/new_cusine_rela"
+                app:layout_constraintTop_toBottomOf="@+id/new_cusine_descrip_txt"
                 app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/new_cusine_recycle_ingredient"

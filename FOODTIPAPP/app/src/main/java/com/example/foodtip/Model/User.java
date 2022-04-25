@@ -91,10 +91,4 @@ public class User {
         return favoritos;
     }
 
-    public byte[] BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        return b;
-    }
 }
