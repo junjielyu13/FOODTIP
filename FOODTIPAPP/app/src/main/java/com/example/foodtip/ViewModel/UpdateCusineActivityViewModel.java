@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.foodtip.Model.Ingredient;
+import com.example.foodtip.Model.Step;
 import com.example.foodtip.View.ViewHolder.SliderData;
 
 import java.util.ArrayList;
@@ -15,20 +16,20 @@ import java.util.ArrayList;
 public class UpdateCusineActivityViewModel extends AndroidViewModel {
     private final MutableLiveData<ArrayList<SliderData>> mImages;
     private final MutableLiveData<ArrayList<Ingredient>> mIngredients;
-
+    private final MutableLiveData<ArrayList<Step>> mSteps;
     public UpdateCusineActivityViewModel(@NonNull Application application) {
         super(application);
         mImages = new MutableLiveData<>();
         mIngredients = new MutableLiveData<>();
-        ArrayList<Ingredient> random = new ArrayList<>();
-        for(int i = 0; i <= 10; i++){
-            random.add(new Ingredient(Integer.toString(i)));
-        }
-        mIngredients.setValue(random);
+        mSteps = new MutableLiveData<>();
     }
 
     public MutableLiveData<ArrayList<Ingredient>> getmIngredients() {
         return mIngredients;
+    }
+
+    public MutableLiveData<ArrayList<Step>> getmSteps() {
+        return mSteps;
     }
 
     public MutableLiveData<ArrayList<SliderData>> getmImages() {
@@ -51,8 +52,21 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
         mIngredients.setValue(mIngredients.getValue());
     }
 
+    public void add_steps(Step step){
+        if(mSteps == null){
+            mSteps.setValue(new ArrayList<>());
+        }
+        mSteps.getValue().add(step);
+        mSteps.setValue(mSteps.getValue());
+    }
     public void remove_ingredient(Ingredient ingredient){
         mIngredients.getValue().remove(ingredient);
         mIngredients.setValue(mIngredients.getValue());
     }
+    public void remove_steps(Step step){
+        mSteps.getValue().remove(step);
+        mSteps.setValue(mSteps.getValue());
+    }
+
+
 }

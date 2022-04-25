@@ -1,6 +1,8 @@
 package com.example.foodtip.Test;
 
 import android.app.Application;
+import android.graphics.Bitmap;
+
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -24,8 +26,8 @@ public class StepsViewModel extends AndroidViewModel {
 
     public Step getStep(int idx){ return mSteps.getValue().get(idx);}
 
-    public void addStep(String text, CollectionImages collectionImages){
-        Step sp = new Step(text, collectionImages);
+    public void addStep(String text, Bitmap image){
+        Step sp = new Step(text, image);
         if(sp != null){
             mSteps.getValue().add(sp);
             mSteps.setValue(mSteps.getValue());

@@ -1,12 +1,14 @@
 package com.example.foodtip.Model;
 
+import android.graphics.Bitmap;
+
 public class Step {
     private String text;
-    private CollectionImages collectionImages;
+    private Bitmap images;
 
-    public Step(String text, CollectionImages collectionImages) {
+    public Step(String text, Bitmap images) {
         this.text = text;
-        this.collectionImages = collectionImages;
+        this.images = images;
     }
 
     //Setter and Getter
@@ -18,11 +20,11 @@ public class Step {
         this.text = text;
     }
 
-    public CollectionImages getCollectionImages() {
-        return collectionImages;
+    public Bitmap getCollectionImages() {
+        return images;
     }
 
-    public void setCollectionImages(CollectionImages collectionImages) {
-        this.collectionImages = collectionImages;
+    public void setCollectionImages(Bitmap images) {
+        this.images = images;
     }
 }
