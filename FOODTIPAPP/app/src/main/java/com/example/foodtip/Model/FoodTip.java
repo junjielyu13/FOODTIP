@@ -102,20 +102,20 @@ public class FoodTip {
     /**
      *  Crear un nou usuari
      * @param activity
-     * @param name email
+     * @param username email to log in
      * @param password contrasenya
-     * @param user_name user name
+     * @param nickname name of user after log in
      */
-    public void CreatNewUser(@NonNull AppCompatActivity activity, String name, String password, String user_name){
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(name,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    public void CreatNewUser(@NonNull AppCompatActivity activity, String username, String password, String nickname){
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     User user = new UserBuilder(activity)
                             .uid(uid)
-                            .user_name(user_name)
-                            .acc_name(name)
+                            .user_name(nickname)
+                            .acc_name(username)
                             .password(password)
                             .buildUser();
 
@@ -133,6 +133,7 @@ public class FoodTip {
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener((task)->{
            if(task.isSuccessful()){
                activity.openHomePage();
+               Toast.makeText(activity,"login successful",Toast.LENGTH_SHORT).show();
            }
            else{
                Toast.makeText(activity,"login fail",Toast.LENGTH_SHORT).show();

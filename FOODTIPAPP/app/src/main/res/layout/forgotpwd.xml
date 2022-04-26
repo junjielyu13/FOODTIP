@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/ForgotPwdTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="60dp"
+        android:text="Forgot Password"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/EmailEditTextForgotPassword"
+        android:layout_width="264dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/ForgotPwdTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="100dp"
+        android:hint="@string/EmailEditTextView"
+        android:inputType="text"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black" />
+
+    <EditText
+        android:id="@+id/CheckNumberEditText"
+        android:layout_width="264dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/EmailEditTextForgotPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="10dp"
+        android:hint="@string/CheckNumberEditView"
+        android:inputType="text"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send check number to Email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@id/CheckNumberEditText"
+        android:layout_marginVertical="50dp"
+        android:visibility="visible"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@id/CheckNumberEditText"
+        android:layout_marginVertical="50dp"
+        android:visibility="gone"
+        />
+
+
+
+
+</RelativeLayout>

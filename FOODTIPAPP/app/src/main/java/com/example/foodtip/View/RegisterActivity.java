@@ -42,11 +42,12 @@ public class RegisterActivity extends AppCompatActivity {
         String pwd = password.getText().toString();
         String rePwd = repeatPassword.getText().toString();
 
-        if(cheackPwd(pwd,rePwd)){
+
+        if(checkPwd(pwd,rePwd)){
             foodTip.CreatNewUser(this,user_name,pwd,user_name);
         }
     }
-    private boolean cheackPwd(@NonNull String password, String repPwd){
+    private boolean checkPwd(@NonNull String password, String repPwd){
         if(!password.equals(repPwd)){
             showAlertDialog("Error","The repeat password is not the same as the previous one",R.drawable.ic_error);
             return false;

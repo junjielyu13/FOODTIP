@@ -24,5 +24,9 @@
     <!--register Interface-->
     <string name="RegisterTextView">REGISTER</string>
 
+    <!--forgot Password interface-->
+    <string name="EmailEditTextView">Email</string>
+    <string name="CheckNumberEditView">Check Number</string>
+
     <string name="MostPopularDishesTextView"><u>Most Popular</u></string>
 </resources>
