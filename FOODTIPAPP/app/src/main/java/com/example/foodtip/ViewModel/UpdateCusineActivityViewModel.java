@@ -5,6 +5,7 @@ import android.app.Application;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -101,7 +102,6 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
     }
 
     public void update_new_cusine(Activity activity,String title, String description){
-
         /**                         Recepta
          * -------------------------------------------------
          *"recepta"
@@ -124,7 +124,11 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
          *              -> Images: Carpeta
          *                      -> UniqID in Carpeta
          */
-
+        /**
+         * ingreeint->
+         *        IngredientID
+         *                  -> ReceptaID:UserID
+         */
         Recepta recepta = new ReceptaBuilder()
                 .title(title)
                 .description(description)
@@ -148,7 +152,6 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
                     .document(ingredient.getNom())
                     .update(map);
             ingredient_id.add(ingredient.getNom());
-            map.clear();
         }
 
         ArrayList<String> pictures = new ArrayList<>();
@@ -173,12 +176,16 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
             step_map.put("title",step.getTitle());
             step_map.put("text",step.getText());
 
-            String picture_id = UUID.randomUUID().toString();
-            StorageReference storageRef = storageReference.child("images")
-                    .child(picture_id);
-            storageRef.putBytes(foodTip.BitMapToString(step.getImages()));
+            if(step.getImages() == null) {
+                step_map.put("bitmapID",null);
+            }else{
+                String picture_id = UUID.randomUUID().toString();
+                StorageReference storageRef = storageReference.child("images")
+                        .child(picture_id);
+                storageRef.putBytes(foodTip.BitMapToString(step.getImages()));
 
-            step_map.put("bitmapID",storageRef.toString());
+                step_map.put("bitmapID",storageRef.toString());
+            }
             steps.add(step_map);
         }
 
@@ -191,5 +198,7 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
         firestore.collection("recepta")
                 .document(recepta.getId()).set(map);
     }
+
+
 
 }

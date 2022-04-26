@@ -28,6 +28,7 @@ public class HomePageActivity extends AppCompatActivity {
     private BottomNavigationView navView;
     private FloatingActionButton floatingActionButton;
     private FoodTip foodTip;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,6 @@ public class HomePageActivity extends AppCompatActivity {
         foodTip = FoodTip.getInstance();
         foodTip.getUser();
         setting();
-
     }
 
     private void setting(){

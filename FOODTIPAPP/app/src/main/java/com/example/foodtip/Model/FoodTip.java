@@ -120,8 +120,13 @@ public class FoodTip {
                             .buildUser();
 
                     //DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                    FirebaseFirestore.getInstance().collection("user").document(user.getId()).set(getDocument_User(user));
+                    FirebaseFirestore.getInstance()
+                            .collection("user")
+                            .document(user.getId())
+                            .set(getDocument_User(user));
                     //databaseReference.child("users").child(user.getId()).setValue(getDocument_User(user));
+                    Toast.makeText(activity,"User Created",Toast.LENGTH_SHORT).show();
+                    activity.finish();
                 }else{
                     Toast.makeText(activity,"User already exist",Toast.LENGTH_SHORT).show();
                 }
