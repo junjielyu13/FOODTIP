@@ -124,9 +124,27 @@ public class UpdateCusineActivity extends AppCompatActivity {
     }
 
     private void publicar_recepta() {
-        viewModel.update_new_cusine(this,title.getText().toString(),description.getText().toString());
-        Toast.makeText(this,"Cuisine Updated",Toast.LENGTH_SHORT).show();
-        finish();
+        if(check_element()){
+            viewModel.update_new_cusine(this,title.getText().toString(),description.getText().toString());
+            Toast.makeText(this,"Cuisine Updated",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+    private boolean check_element(){
+        if(viewModel.getmSteps().getValue() == null){
+            Toast.makeText(this,"REQUIRE AT LEAST 1 IMAGES FOR RECIPE",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(viewModel.getmIngredients().getValue() == null){
+            Toast.makeText(this,"REQUIRE AT LEAST 1 INGREDIENT FOR RECIPE",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(viewModel.getmSteps().getValue() == null) {
+            Toast.makeText(this, "REQUIRE AT LEAST 1 STEP FOR RECIPE", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     private void afegir_step(View anchorView) {
@@ -246,7 +264,4 @@ public class UpdateCusineActivity extends AppCompatActivity {
         viewModel.getmIngredients().observe(this,observer_ingredient);
         viewModel.getmSteps().observe(this,observer_step);
     }
-
-
-
 }

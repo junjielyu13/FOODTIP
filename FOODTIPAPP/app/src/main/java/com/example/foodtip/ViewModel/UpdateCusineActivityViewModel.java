@@ -5,6 +5,7 @@ import android.app.Application;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -101,7 +102,6 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
     }
 
     public void update_new_cusine(Activity activity,String title, String description){
-
         /**                         Recepta
          * -------------------------------------------------
          *"recepta"
@@ -124,63 +124,18 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
          *              -> Images: Carpeta
          *                      -> UniqID in Carpeta
          */
+        /**
+         * ingreeint->
+         *        IngredientID
+         *                  -> ReceptaID:UserID
+         */
+        Recepta recepta = foodTip.createRecepta(title,description,mImages.getValue(),mIngredients.getValue(),mSteps.getValue());
 
-        Recepta recepta = new ReceptaBuilder()
-                .title(title)
-                .description(description)
-                .images(mImages.getValue())
-                .ingredients(mIngredients.getValue())
-                .steps(mSteps.getValue())
-                .buildRecepta();
-        //Update ingredient
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        StorageReference storageReference = FirebaseStorage.getInstance()
-                .getReference("recepta")
-                .child(recepta.getId());
+        ArrayList<String> ingredient_id = foodTip.UpdateIngredients(recepta,FirebaseAuth.getInstance().getUid());
 
-        //Guarda ID de ingredient
-        ArrayList<String> ingredient_id = new ArrayList<>();
+        ArrayList<String> pictures = foodTip.UpdatePictures(activity,recepta,FirebaseAuth.getInstance().getUid());
 
-        for(Ingredient ingredient:recepta.getIngredients()){
-            Map<String,Object> map = new HashMap<>();
-            map.put(recepta.getId(),FirebaseAuth.getInstance().getUid());
-            firestore.collection("ingredient")
-                    .document(ingredient.getNom())
-                    .update(map);
-            ingredient_id.add(ingredient.getNom());
-            map.clear();
-        }
-
-        ArrayList<String> pictures = new ArrayList<>();
-        for(SliderData sliderData:recepta.getImages()){
-            ImageDecoder.Source source = ImageDecoder.createSource(activity.getContentResolver(),Uri.parse(sliderData.getImgUri()));
-            try {
-                String picture_id = UUID.randomUUID().toString();
-
-                StorageReference storageRef = storageReference.child("images")
-                        .child(picture_id);
-                storageRef.putBytes(foodTip.BitMapToString(ImageDecoder.decodeBitmap(source)));
-
-                pictures.add(storageRef.toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        ArrayList<Map<String,String>> steps = new ArrayList<>();
-        for (Step step:recepta.getSteps()){
-            Map<String,String> step_map = new HashMap<>();
-            step_map.put("title",step.getTitle());
-            step_map.put("text",step.getText());
-
-            String picture_id = UUID.randomUUID().toString();
-            StorageReference storageRef = storageReference.child("images")
-                    .child(picture_id);
-            storageRef.putBytes(foodTip.BitMapToString(step.getImages()));
-
-            step_map.put("bitmapID",storageRef.toString());
-            steps.add(step_map);
-        }
+        ArrayList<Map<String,String>> steps = foodTip.UpdateSteps(recepta);
 
         Map<String,Object> map = new HashMap<>();
         map.put("title",recepta.getTitle());
@@ -188,8 +143,9 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
         map.put("ingredient",ingredient_id);
         map.put("steps",steps);
 
-        firestore.collection("recepta")
-                .document(recepta.getId()).set(map);
+        foodTip.GuardarRecepta(recepta,map);
     }
+
+
 
 }
