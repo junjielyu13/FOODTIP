@@ -31,6 +31,7 @@ import com.example.foodtip.View.ViewHolder.IngredientAdapter;
 import com.example.foodtip.View.ViewHolder.SliderAdapter;
 import com.example.foodtip.Model.SliderData;
 import com.example.foodtip.View.ViewHolder.StepsAdapter;
+import com.example.foodtip.ViewModel.StepViewModel;
 import com.example.foodtip.ViewModel.UpdateCusineActivityViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
@@ -53,6 +54,7 @@ public class UpdateCusineActivity extends AppCompatActivity {
     private final int MAX_IMG_UP = 10;
     private EditText title, description;
     private ImageButton add_picture;
+    private ImageView popup_imageview;
     private Button afegir_ingredient, afegir_steps, publicar;
     private SliderView sliderView;
     private RecyclerView ingredients_View, steps_View;
@@ -61,7 +63,6 @@ public class UpdateCusineActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_new_cousine);
-        //images = new ArrayList<>();
         setting();
     }
 
@@ -79,7 +80,6 @@ public class UpdateCusineActivity extends AppCompatActivity {
 
         setLiveDataObservers();
 
-        //sliderAdapt();
         getImg_food_img = registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
                 new ActivityResultCallback<Uri>() {
@@ -101,6 +101,7 @@ public class UpdateCusineActivity extends AppCompatActivity {
                             try {
                                 ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(),result);
                                 viewModel.change_picture_of_step(ImageDecoder.decodeBitmap(source));
+                                popup_imageview.setImageBitmap(ImageDecoder.decodeBitmap(source));
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -122,7 +123,6 @@ public class UpdateCusineActivity extends AppCompatActivity {
             publicar_recepta();
         });
     }
-
 
     private void publicar_recepta() {
         if(check_element()){
@@ -160,6 +160,7 @@ public class UpdateCusineActivity extends AppCompatActivity {
         TextInputLayout inputLayout_text = popupView.findViewById(R.id.popup_steps_txt);
         ImageView imageView = popupView.findViewById(R.id.popup_steps_img_view);
         Button saveButton = popupView.findViewById(R.id.steps_save_but);
+        this.popup_imageview = imageView;
 
 
         imageView.setOnClickListener((v)->{

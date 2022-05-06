@@ -52,7 +52,7 @@ public class HomePageActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recy_home_page);
         recyclerView.setLayoutManager(new LinearLayoutManager(HomePageActivity.this));
 
-        //setLiveDataObservers();
+        setLiveDataObservers();
         floatingActionButton.setOnClickListener((v)->{
             startActivity(new Intent(this, UpdateCusineActivity.class));
         });
