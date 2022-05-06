@@ -30,6 +30,16 @@ public class Recepta {
         this.comentaris = comentaris;
     }
 
+    public Recepta(String id, String description, String title, ArrayList<SliderData> images, ArrayList<Ingredient> ingredients, ArrayList<Step> steps, ArrayList<String> likes, Map<String, Comentari> comentaris) {
+        this.id = id;
+        this.description = description;
+        this.title = title;
+        this.images = images;
+        this.ingredients = ingredients;
+        this.steps = steps;
+        this.likes = likes;
+        this.comentaris = comentaris;
+    }
 
     //Getter i Setter
     public String getId() {

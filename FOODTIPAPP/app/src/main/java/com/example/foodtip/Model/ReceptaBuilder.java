@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class ReceptaBuilder {
+    private String id;
     private String description;
     private String title;
     private ArrayList<SliderData> images;
@@ -15,10 +16,19 @@ public class ReceptaBuilder {
     private Map<String, Comentari> comentaris;
 
     public ReceptaBuilder(){
+        id = null;
         likes = null;
         comentaris = null;
+        description = null;
+        title = null;
+        images = null;
+        ingredients = null;
+        steps = null;
     }
     public Recepta buildRecepta(){
+        if(id != null){
+            return new Recepta(id,description,title,images,ingredients,steps,likes,comentaris);
+        }
         return new Recepta(description,title,images,ingredients,steps,likes,comentaris);
     }
     public ReceptaBuilder description(String description){
@@ -41,6 +51,10 @@ public class ReceptaBuilder {
 
     public ReceptaBuilder steps(ArrayList<Step> steps){
         this.steps = steps;
+        return this;
+    }
+    public ReceptaBuilder id(String id){
+        this.id = id;
         return this;
     }
 }

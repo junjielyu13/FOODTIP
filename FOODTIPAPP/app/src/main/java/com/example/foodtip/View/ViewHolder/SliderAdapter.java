@@ -40,6 +40,9 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.Holder> {
 
     @Override
     public int getCount() {
+        if(images == null){
+            return 0;
+        }
         return images.size();
     }
 

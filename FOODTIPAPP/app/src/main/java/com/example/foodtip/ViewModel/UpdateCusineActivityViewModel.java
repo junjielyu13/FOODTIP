@@ -139,6 +139,7 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
 
         Map<String,Object> map = new HashMap<>();
         map.put("title",recepta.getTitle());
+        map.put("description",recepta.getDescription());
         map.put("bitmaps",pictures);
         map.put("ingredient",ingredient_id);
         map.put("steps",steps);

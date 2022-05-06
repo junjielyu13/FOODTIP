@@ -123,6 +123,7 @@ public class UpdateCusineActivity extends AppCompatActivity {
         });
     }
 
+
     private void publicar_recepta() {
         if(check_element()){
             viewModel.update_new_cusine(this,title.getText().toString(),description.getText().toString());

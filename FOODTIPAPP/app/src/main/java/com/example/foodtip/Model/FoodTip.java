@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodtip.View.MainActivity;
+import com.example.foodtip.ViewModel.HomePageViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,6 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -41,7 +43,7 @@ public class FoodTip {
     private User user;
     private final static String TAG = "FOODTIP";
     final static long ONE_MEGABYTE = 1024 * 1024;
-
+    public static vmInterface listener;
 
     public static FoodTip getInstance(){
         if(foodTip == null){
@@ -253,4 +255,72 @@ public class FoodTip {
         }
         return steps;
     }
+
+    /**
+     * .addOnSuccessListener(documentSnapshot -> {
+     *                                 documentSnapshot.get("bitmaps")
+     *                                 for(String str:(ArrayList<String>)documentSnapshot.get("bitmaps")){
+     *                                     StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(str);
+     *                                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+     *                                         @Override
+     *                                         public void onSuccess(Uri uri) {
+     *                                             viewModel.save_uri(uri);
+     *                                         }
+     *                                     });
+     *                                 }
+     *                                 System.out.println("creat");
+     *                                 Recepta recepta = new ReceptaBuilder().id(document.getId())
+     *                                         .description((String)documentSnapshot.get("description"))
+     *                                         .title((String) documentSnapshot.get("title"))
+     *                                         .images(viewModel.getSliderData().getValue())
+     *                                         .buildRecepta();
+     *                                 if(recepta.getImages() == null){
+     *                                     System.out.println("error");
+     *                                 }
+     *                                 viewModel.add_recepta(recepta);
+     * });
+     * @param viewModel
+     */
+    public void getReceptaInformation(HomePageViewModel viewModel){
+        CollectionReference db = FirebaseFirestore.getInstance().collection("recepta");
+        db.get().addOnCompleteListener(task->{
+            if (task.isSuccessful()){
+                for(QueryDocumentSnapshot document : task.getResult()){
+                    db.document(document.getId())
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                                    if (task.isSuccessful()){
+                                        ArrayList<SliderData> images = new ArrayList<SliderData>();
+                                        for (String str : (ArrayList<String>)task.getResult().get("bitmaps")){
+                                            FirebaseStorage.getInstance().getReferenceFromUrl(str).getDownloadUrl().addOnCompleteListener(v ->{
+                                                System.out.println(v.getResult());
+                                            });
+                                        }
+                                        Recepta recepta = new ReceptaBuilder()
+                                                .id(document.getId())
+                                                .description((String)task.getResult().get("description"))
+                                                .title((String)task.getResult().getString("title"))
+                                                .buildRecepta();
+                                        viewModel.add_recepta(recepta);
+                                    }
+                                    //.images(StringArray_To_SliderDataArray((ArrayList<String>) task.getResult().get("bitmaps")))
+
+                                }
+                            });
+                }
+            }
+        });
+
+    }
+    private ArrayList<SliderData> StringArray_To_SliderDataArray(ArrayList<String> input){
+        ArrayList<SliderData> output = new ArrayList<>();
+        for(String str:input){
+            output.add(new SliderData(str));
+        }
+        return output;
+    }
+
 }
