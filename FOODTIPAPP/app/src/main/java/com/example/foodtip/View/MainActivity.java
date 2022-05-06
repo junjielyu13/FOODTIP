@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.foodtip.Model.*;
 import com.example.foodtip.R;
@@ -44,11 +45,12 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void LogInButtonOnClickListener(View view) {
-        //String email = userName.getText().toString();
-        //String pwd = password.getText().toString();
-        String email = "111@111.com";
-        String pwd = "11111111";
-        foodTip.login_event(this,email,pwd);
+        String email = userName.getText().toString();
+        String pwd = password.getText().toString();
+        if(!email.equals("") && !pwd.equals("")){
+            foodTip.login_event(this,email,pwd);
+        }
+        Toast.makeText(this,"Empty Field",Toast.LENGTH_SHORT).show();
     }
 
     /**
