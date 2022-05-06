@@ -1,19 +1,16 @@
 package com.example.foodtip.View.ViewHolder;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodtip.Model.Recepta;
-import com.example.foodtip.Model.SliderData;
 import com.example.foodtip.R;
-import com.example.foodtip.ViewModel.HomePageViewModel;
+import com.example.foodtip.View.Home.HomePageViewModel;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;

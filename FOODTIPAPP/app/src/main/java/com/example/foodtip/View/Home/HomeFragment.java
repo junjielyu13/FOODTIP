@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodtip.Model.Recepta;
 import com.example.foodtip.R;
-import com.example.foodtip.View.HomePageActivity;
 import com.example.foodtip.View.ViewHolder.ReceptaAdapter;
-import com.example.foodtip.ViewModel.HomePageViewModel;
 import com.example.foodtip.databinding.HomePageBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,6 +44,7 @@ public class HomeFragment extends Fragment {
         floatingActionButton.setOnClickListener((v)->{
             startActivity(new Intent(binding.getRoot().getContext(), UpdateCusineActivity.class));
         });
+        setLiveDataObservers();
     }
 
     public void setLiveDataObservers(){
@@ -53,16 +52,12 @@ public class HomeFragment extends Fragment {
         final Observer<ArrayList<Recepta>> observer_recepta = new Observer<ArrayList<Recepta>>() {
             @Override
             public void onChanged(ArrayList<Recepta> receptas) {
-                System.out.println(receptas.size());
-                if(receptas.size() == 1){
-                    //System.out.println(receptas.get(0).getImages().get(0).getImgUri());
-                }
                 ReceptaAdapter receptaAdapter = new ReceptaAdapter(receptas,viewModel);
                 recyclerView.swapAdapter(receptaAdapter,false);
                 receptaAdapter.notifyDataSetChanged();
             }
         };
-        viewModel.getReceptas().observe(this,observer_recepta);
+        viewModel.getReceptas().observe(getViewLifecycleOwner(),observer_recepta);
     }
 
     @Override

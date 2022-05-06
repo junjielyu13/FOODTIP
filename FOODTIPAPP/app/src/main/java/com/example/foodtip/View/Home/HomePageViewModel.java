@@ -1,4 +1,4 @@
-package com.example.foodtip.ViewModel;
+package com.example.foodtip.View.Home;
 
 import android.app.Application;
 import android.net.Uri;
@@ -31,7 +31,7 @@ public class HomePageViewModel extends AndroidViewModel {
         receptas = new MutableLiveData<>();
         sliderData = new MutableLiveData<>();
         foodTip = FoodTip.getInstance();
-        //foodTip.getReceptaInformation(this);
+        foodTip.getReceptaInformation(this);
     }
 
     public MutableLiveData<ArrayList<Recepta>> getReceptas() {
@@ -56,35 +56,6 @@ public class HomePageViewModel extends AndroidViewModel {
         }
         receptas.getValue().add(recepta);
         receptas.setValue(receptas.getValue());
-    }
-    private void getDades(){
-        CollectionReference db = FirebaseFirestore.getInstance().collection("recepta");
-        db.get().addOnCompleteListener(task->{
-            if (task.isSuccessful()){
-                for(QueryDocumentSnapshot document : task.getResult()){
-                    db.document(document.getId())
-                            .get()
-                            .addOnSuccessListener(documentSnapshot -> {
-                                for(String str:(ArrayList<String>)documentSnapshot.get("bitmaps")){
-                                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(str);
-                                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            save_uri(uri);
-                                        }
-                                    });
-                                }
-                                Recepta recepta = new ReceptaBuilder().id(document.getId())
-                                        .description((String)documentSnapshot.get("description"))
-                                        .title((String) documentSnapshot.get("title"))
-                                        .images(sliderData.getValue())
-                                        .buildRecepta();
-
-                                add_recepta(recepta);
-                            });
-                }
-            }
-        });
     }
 
 }

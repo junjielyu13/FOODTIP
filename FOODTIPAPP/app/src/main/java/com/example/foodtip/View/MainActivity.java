@@ -49,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
         String pwd = password.getText().toString();
         if(!email.equals("") && !pwd.equals("")){
             foodTip.login_event(this,email,pwd);
+        }else{
+            Toast.makeText(this,"Empty Field",Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this,"Empty Field",Toast.LENGTH_SHORT).show();
     }
 
     /**

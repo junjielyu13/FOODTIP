@@ -6,28 +6,24 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
-import android.transition.Slide;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodtip.View.MainActivity;
-import com.example.foodtip.ViewModel.HomePageViewModel;
+import com.example.foodtip.View.Home.HomePageViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -291,7 +287,11 @@ public class FoodTip {
                             .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
+                                    Recepta recepta = new ReceptaBuilder()
+                                            .id(document.getId())
+                                            .description((String)task.getResult().get("description"))
+                                            .title((String)task.getResult().getString("title"))
+                                            .buildRecepta();
                                     if (task.isSuccessful()){
                                         ArrayList<SliderData> images = new ArrayList<SliderData>();
                                         for (String str : (ArrayList<String>)task.getResult().get("bitmaps")){
@@ -299,11 +299,6 @@ public class FoodTip {
                                                 System.out.println(v.getResult());
                                             });
                                         }
-                                        Recepta recepta = new ReceptaBuilder()
-                                                .id(document.getId())
-                                                .description((String)task.getResult().get("description"))
-                                                .title((String)task.getResult().getString("title"))
-                                                .buildRecepta();
                                         viewModel.add_recepta(recepta);
                                     }
                                     //.images(StringArray_To_SliderDataArray((ArrayList<String>) task.getResult().get("bitmaps")))
