@@ -1,5 +1,6 @@
 package com.example.foodtip.View.Home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +8,26 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.foodtip.Model.Recepta;
+import com.example.foodtip.R;
+import com.example.foodtip.View.HomePageActivity;
+import com.example.foodtip.View.ViewHolder.ReceptaAdapter;
+import com.example.foodtip.ViewModel.HomePageViewModel;
 import com.example.foodtip.databinding.HomePageBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+
 public class HomeFragment extends Fragment {
     private HomePageBinding binding;
+    private HomePageViewModel viewModel;
+    private RecyclerView recyclerView;
+    private FloatingActionButton floatingActionButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -19,8 +36,33 @@ public class HomeFragment extends Fragment {
 
         binding = HomePageBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        setting();
         return root;
+    }
+    private void setting(){
+        this.recyclerView = binding.getRoot().findViewById(R.id.recy_home_page);
+        this.floatingActionButton = binding.getRoot().findViewById(R.id.floating_but);
+        recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
+        floatingActionButton.setOnClickListener((v)->{
+            startActivity(new Intent(binding.getRoot().getContext(), UpdateCusineActivity.class));
+        });
+    }
+
+    public void setLiveDataObservers(){
+        viewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
+        final Observer<ArrayList<Recepta>> observer_recepta = new Observer<ArrayList<Recepta>>() {
+            @Override
+            public void onChanged(ArrayList<Recepta> receptas) {
+                System.out.println(receptas.size());
+                if(receptas.size() == 1){
+                    //System.out.println(receptas.get(0).getImages().get(0).getImgUri());
+                }
+                ReceptaAdapter receptaAdapter = new ReceptaAdapter(receptas,viewModel);
+                recyclerView.swapAdapter(receptaAdapter,false);
+                receptaAdapter.notifyDataSetChanged();
+            }
+        };
+        viewModel.getReceptas().observe(this,observer_recepta);
     }
 
     @Override

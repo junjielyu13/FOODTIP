@@ -133,7 +133,7 @@ public class UpdateCusineActivity extends AppCompatActivity {
     }
 
     private boolean check_element(){
-        if(viewModel.getmSteps().getValue() == null){
+        if(viewModel.getmImages().getValue() == null){
             Toast.makeText(this,"REQUIRE AT LEAST 1 IMAGES FOR RECIPE",Toast.LENGTH_SHORT).show();
             return false;
         }
