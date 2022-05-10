@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodtip.Model.Recepta;
 import com.example.foodtip.R;
-import com.example.foodtip.View.ViewHolder.ReceptaAdapter;
+import com.example.foodtip.View.ViewHolder.CardReceptaAdapter;
+import com.example.foodtip.ViewModel.HomePageViewModel;
 import com.example.foodtip.databinding.HomePageBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -53,7 +54,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<Recepta> receptas) {
                 System.out.println("111111111111111111111111111111");
-                ReceptaAdapter receptaAdapter = new ReceptaAdapter(receptas,viewModel);
+                CardReceptaAdapter receptaAdapter = new CardReceptaAdapter(receptas,viewModel);
                 recyclerView.swapAdapter(receptaAdapter,false);
                 receptaAdapter.notifyDataSetChanged();
 

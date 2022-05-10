@@ -14,7 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.foodtip.Model.FoodTip;
 import com.example.foodtip.R;
-import com.example.foodtip.View.Home.HomePageViewModel;
+import com.example.foodtip.ViewModel.HomePageViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 

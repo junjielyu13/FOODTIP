@@ -10,17 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodtip.Model.Recepta;
 import com.example.foodtip.R;
-import com.example.foodtip.View.Home.HomePageViewModel;
+import com.example.foodtip.ViewModel.HomePageViewModel;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 
-public class ReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> {
+public class CardReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> {
     private final ArrayList<Recepta> receptas;
     private final HomePageViewModel viewModel;
-    public ReceptaAdapter(ArrayList<Recepta> receptas, HomePageViewModel viewModel) {
+    public CardReceptaAdapter(ArrayList<Recepta> receptas, HomePageViewModel viewModel) {
         this.receptas = receptas;
         this.viewModel = viewModel;
     }

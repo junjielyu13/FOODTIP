@@ -1,4 +1,4 @@
-package com.example.foodtip.View.Home;
+package com.example.foodtip.ViewModel;
 
 import android.app.Application;
 import android.net.Uri;
@@ -24,12 +24,10 @@ import java.util.ArrayList;
 
 public class HomePageViewModel extends AndroidViewModel {
     private final MutableLiveData<ArrayList<Recepta>> receptas;
-    private final MutableLiveData<ArrayList<SliderData>> sliderData;
     private FoodTip foodTip;
     public HomePageViewModel(@NonNull Application application) {
         super(application);
         receptas = new MutableLiveData<>();
-        sliderData = new MutableLiveData<>();
         foodTip = FoodTip.getInstance();
         foodTip.getReceptaInformation(this);
     }
@@ -38,18 +36,7 @@ public class HomePageViewModel extends AndroidViewModel {
         return receptas;
     }
 
-    public MutableLiveData<ArrayList<SliderData>> getSliderData() {
-        return sliderData;
-    }
 
-    public void save_uri(Uri uri){
-        if(sliderData.getValue() == null){
-            sliderData.setValue(new ArrayList<>());
-        }
-        sliderData.getValue().add(new SliderData(uri.toString()));
-        System.out.println("Add slider Information");
-        sliderData.setValue(sliderData.getValue());
-    }
     public void add_recepta(Recepta recepta){
         if(receptas.getValue() == null) {
             receptas.setValue(new ArrayList<>());
