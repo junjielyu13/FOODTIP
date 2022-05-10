@@ -133,18 +133,16 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
 
         ArrayList<String> ingredient_id = foodTip.UpdateIngredients(recepta,FirebaseAuth.getInstance().getUid());
 
-        ArrayList<String> pictures = foodTip.UpdatePictures(activity,recepta,FirebaseAuth.getInstance().getUid());
-
-        ArrayList<Map<String,String>> steps = foodTip.UpdateSteps(recepta);
-
         Map<String,Object> map = new HashMap<>();
         map.put("title",recepta.getTitle());
         map.put("description",recepta.getDescription());
-        map.put("bitmaps",pictures);
+        map.put("bitmaps",new ArrayList<>());
         map.put("ingredient",ingredient_id);
-        map.put("steps",steps);
+        map.put("steps",new ArrayList<>());
 
-        foodTip.GuardarRecepta(recepta,map);
+        String firestoreRef = foodTip.GuardarRecepta(recepta,map);
+        foodTip.UpdatePictures(activity,recepta, firestoreRef);
+        foodTip.UpdateSteps(recepta, firestoreRef);
     }
 
 

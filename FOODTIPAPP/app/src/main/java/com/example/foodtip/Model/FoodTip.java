@@ -22,10 +22,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -183,11 +185,14 @@ public class FoodTip {
                 .getReference("recepta")
                 .child(recepta.getId());
     }
-    public void GuardarRecepta(Recepta recepta, Map<String,Object> map){
-        FirebaseFirestore.getInstance()
+    public String GuardarRecepta(Recepta recepta, Map<String,Object> map){
+        DocumentReference docuRef = FirebaseFirestore.getInstance()
                 .collection("recepta")
-                .document(recepta.getId())
-                .set(map);
+                .document(recepta.getId());
+
+        docuRef.set(map);
+
+        return docuRef.getPath();
     }
     public ArrayList<String> UpdateIngredients(Recepta recepta, String uid){
         //Update ingredient
@@ -212,26 +217,35 @@ public class FoodTip {
         }
         return ingredient_id;
     }
-    public ArrayList<String> UpdatePictures(Activity activity, Recepta recepta, String uid){
-        ArrayList<String> pictures = new ArrayList<>();
-        for(SliderData sliderData:recepta.getImages()){
-            ImageDecoder.Source source = ImageDecoder.createSource(activity.getContentResolver(), Uri.parse(sliderData.getImgUri()));
-            try {
-                String picture_id = UUID.randomUUID().toString();
 
+    public void UpdatePictures(Activity activity, Recepta recepta, String documentRef){
+        DocumentReference docuRef = FirebaseFirestore.getInstance().document(documentRef);
+
+        for(SliderData sliderData: recepta.getImages()){
+            ImageDecoder.Source source = ImageDecoder.createSource(activity.getContentResolver(),Uri.parse(sliderData.getImgUri()));
+            try{
+                String pictureID = UUID.randomUUID().toString();
                 StorageReference storageRef = this.getIngredientStorageReference(recepta).child("images")
-                        .child(picture_id);
-                storageRef.putBytes(foodTip.BitMapToString(ImageDecoder.decodeBitmap(source)));
-
-                pictures.add(storageRef.toString());
-            } catch (IOException e) {
+                        .child(pictureID);
+                storageRef.putBytes(this.BitMapToString(ImageDecoder.decodeBitmap(source)))
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        docuRef.update("bitmaps", FieldValue.arrayUnion(uri.toString()));
+                                    }
+                                });
+                            }
+                        });
+            }catch (IOException e){
                 e.printStackTrace();
             }
         }
-        return pictures;
     }
-    public ArrayList<Map<String,String>> UpdateSteps(Recepta recepta){
-        ArrayList<Map<String,String>> steps = new ArrayList<>();
+    public void UpdateSteps(Recepta recepta, String documentRef){
+        /*ArrayList<Map<String,String>> steps = new ArrayList<>();
         for (Step step:recepta.getSteps()){
             Map<String,String> step_map = new HashMap<>();
             step_map.put("title",step.getTitle());
@@ -249,7 +263,37 @@ public class FoodTip {
             }
             steps.add(step_map);
         }
-        return steps;
+        return steps;*/
+        DocumentReference documentReference = FirebaseFirestore.getInstance().document(documentRef);
+        for(Step step:recepta.getSteps()){
+            if(step.getImages() != null){
+                String picture_id = UUID.randomUUID().toString();
+                StorageReference storageRef = this.getIngredientStorageReference(recepta).child("images")
+                        .child(picture_id);
+                storageRef.putBytes(this.BitMapToString(step.getImages())).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Map<String,String> step_map = new HashMap<>();
+                                step_map.put("title",step.getTitle());
+                                step_map.put("text",step.getText());
+                                step_map.put("uri",uri.toString());
+                                documentReference.update("steps",step_map);
+                            }
+                        });
+                    }
+                });
+
+            }else{
+                Map<String,String> step_map = new HashMap<>();
+                step_map.put("title",step.getTitle());
+                step_map.put("text",step.getText());
+                step_map.put("uri",null);
+                documentReference.update("steps",step_map);
+            }
+        }
     }
 
     /**
@@ -287,22 +331,14 @@ public class FoodTip {
                             .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    System.out.println(task.getResult().get("bitmaps"));
                                     Recepta recepta = new ReceptaBuilder()
                                             .id(document.getId())
                                             .description((String)task.getResult().get("description"))
                                             .title((String)task.getResult().getString("title"))
+                                            .images(foodTip.StringArray_To_SliderDataArray((ArrayList<String>) task.getResult().get("bitmaps")))
                                             .buildRecepta();
-                                    if (task.isSuccessful()){
-                                        ArrayList<SliderData> images = new ArrayList<SliderData>();
-                                        for (String str : (ArrayList<String>)task.getResult().get("bitmaps")){
-                                            FirebaseStorage.getInstance().getReferenceFromUrl(str).getDownloadUrl().addOnCompleteListener(v ->{
-                                                System.out.println(v.getResult());
-                                            });
-                                        }
-                                        viewModel.add_recepta(recepta);
-                                    }
-                                    //.images(StringArray_To_SliderDataArray((ArrayList<String>) task.getResult().get("bitmaps")))
-
+                                    viewModel.add_recepta(recepta);
                                 }
                             });
                 }

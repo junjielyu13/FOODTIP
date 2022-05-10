@@ -52,9 +52,11 @@ public class HomeFragment extends Fragment {
         final Observer<ArrayList<Recepta>> observer_recepta = new Observer<ArrayList<Recepta>>() {
             @Override
             public void onChanged(ArrayList<Recepta> receptas) {
+                System.out.println("111111111111111111111111111111");
                 ReceptaAdapter receptaAdapter = new ReceptaAdapter(receptas,viewModel);
                 recyclerView.swapAdapter(receptaAdapter,false);
                 receptaAdapter.notifyDataSetChanged();
+
             }
         };
         viewModel.getReceptas().observe(getViewLifecycleOwner(),observer_recepta);
