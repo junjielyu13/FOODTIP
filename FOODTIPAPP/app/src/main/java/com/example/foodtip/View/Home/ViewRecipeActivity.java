@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -24,16 +25,13 @@ public class ViewRecipeActivity extends AppCompatActivity {
     private SeeRecipeActivityViewModel seeViewModel;
     private final String TAG = "ViewRecipe";
     private final int MAX_IMG_UP = 10;
-    private EditText title, description;
+    private TextView title, description;
     private SliderView sliderView;
     private RecyclerView ingredients_View, steps_View, comentarisView;
-    private ActivityResultLauncher<String> getImg_food_img, getImg_step;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_new_cousine);
-        //images = new ArrayList<>();
         initView();
     }
 
@@ -44,7 +42,6 @@ public class ViewRecipeActivity extends AppCompatActivity {
         ingredients_View = findViewById(R.id.recepta_recycle_ingredient);
         steps_View = findViewById(R.id.recepta_recycle_steps);
         comentarisView = findViewById(R.id.recepta_recycle_comentaris);
-        //sliderAdapt();
 
 
     }
