@@ -10,7 +10,7 @@ public class CollectionImages {
     public CollectionImages(Vector<Image> imatges) {
         if(imatges != null) this.imatges = imatges;
         else this.imatges = new Vector<Image>();
-    }
+    }   
 
     public Vector<Image> getImatges() {
         return imatges;
