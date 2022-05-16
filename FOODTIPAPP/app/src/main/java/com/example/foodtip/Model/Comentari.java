@@ -1,6 +1,8 @@
 package com.example.foodtip.Model;
 
-public class Comentari {
+import java.io.Serializable;
+
+public class Comentari implements Serializable {
     private final String autor; //id autor
     private final String recepta;//id Recepta
     private String comment;

@@ -1,6 +1,8 @@
 package com.example.foodtip.Model;
 
-public class Ingredient {
+import java.io.Serializable;
+
+public class Ingredient implements Serializable {
 
     /**
      * Ingredient Name => His ID

@@ -28,6 +28,7 @@
         <activity android:name=".View.HomePageActivity" />
         <activity android:name=".View.Home.UpdateCusineActivity" />
         <activity android:name=".View.Home.BottomDialog" />
+        <activity android:name=".View.Home.ViewRecipeActivity"/>
     </application>
 
 </manifest>

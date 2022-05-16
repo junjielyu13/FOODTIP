@@ -39,18 +39,31 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull StepsHolder holder, int position) {
-        Step step = steps.get(position);
-        TextView title = holder.getTitle();
-        TextView text = holder.getText();
-        ImageButton imageButton = holder.getBut();
-        ImageView imageView = holder.getFoto();
+        if(updateCusineActivityViewModel != null){
+            Step step = steps.get(position);
+            TextView title = holder.getTitle();
+            TextView text = holder.getText();
+            ImageButton imageButton = holder.getBut();
+            ImageView imageView = holder.getFoto();
 
-        title.setText(step.getTitle());
-        text.setText(step.getText());
-        imageView.setImageBitmap(step.getImages());
-        imageButton.setOnClickListener((v)->{
-            this.updateCusineActivityViewModel.remove_steps(step);
-        });
+            title.setText(step.getTitle());
+            text.setText(step.getText());
+            imageView.setImageBitmap(step.getImages());
+            imageButton.setOnClickListener((v)->{
+                this.updateCusineActivityViewModel.remove_steps(step);
+            });
+        }else{
+            Step step = steps.get(position);
+            TextView title = holder.getTitle();
+            TextView text = holder.getText();
+            ImageButton imageButton = holder.getBut();
+            ImageView imageView = holder.getFoto();
+
+            title.setText(step.getTitle());
+            text.setText(step.getText());
+            imageView.setImageBitmap(step.getImages());
+            imageButton.setVisibility(View.GONE);
+        }
     }
 
     @Override

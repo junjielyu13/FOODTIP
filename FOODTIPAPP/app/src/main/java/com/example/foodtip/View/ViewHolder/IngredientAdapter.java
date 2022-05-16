@@ -36,13 +36,23 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull IngredientHolder holder, int position) {
-        Ingredient ingredient = ingredients.get(position);
-        ImageButton imageButton = holder.getDelete_but();
-        TextView textView = (TextView) holder.getTextView();
-        textView.setText(ingredient.getNom());
-        imageButton.setOnClickListener((v)->{
-            this.updateCusineActivityViewModel.remove_ingredient(ingredient);
-        });
+        if(updateCusineActivityViewModel != null){
+            Ingredient ingredient = ingredients.get(position);
+            ImageButton imageButton = holder.getDelete_but();
+            TextView textView = (TextView) holder.getTextView();
+            textView.setText(ingredient.getNom());
+            imageButton.setOnClickListener((v)->{
+                this.updateCusineActivityViewModel.remove_ingredient(ingredient);
+            });
+        }else{
+            Ingredient ingredient = ingredients.get(position);
+            ImageButton imageButton = holder.getDelete_but();
+            TextView textView = (TextView) holder.getTextView();
+            textView.setText(ingredient.getNom());
+            imageButton.setVisibility(View.GONE);
+        }
+
+
     }
 
     @Override

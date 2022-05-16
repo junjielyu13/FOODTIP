@@ -2,6 +2,7 @@ package com.example.foodtip.View.ViewHolder;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodtip.Model.FoodTip;
+import com.example.foodtip.Model.Ingredient;
 import com.example.foodtip.Model.Recepta;
 import com.example.foodtip.R;
 import com.example.foodtip.View.Home.ViewRecipeActivity;
@@ -23,7 +26,9 @@ import java.util.ArrayList;
 public class CardReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> {
     private final ArrayList<Recepta> receptas;
     private final Activity activity;
+    private final FoodTip foodTip;
     public CardReceptaAdapter(ArrayList<Recepta> receptas, Activity activity) {
+        foodTip = FoodTip.getInstance();
         this.receptas = receptas;
         this.activity = activity;
     }
@@ -52,8 +57,13 @@ public class CardReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> 
         sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
 
         title.setOnClickListener(l ->{
-
+            receptaView(recepta);
         });
+
+        sliderView.setOnClickListener(l->{
+            receptaView(recepta);
+        });
+
     }
 
     @Override
@@ -64,6 +74,16 @@ public class CardReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> 
         return 0;
     }
     private void receptaView(Recepta recepta){
-        Intent intent = new Intent(this, ViewRecipeActivity.class);
+        Intent intent = new Intent(activity, ViewRecipeActivity.class);
+        intent.putExtra("id",recepta.getId());
+        intent.putExtra("title",recepta.getTitle());
+        intent.putExtra("description",recepta.getDescription());
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("picture",recepta.getImages());
+        bundle.putSerializable("ingredients",recepta.getIngredients());
+        bundle.putSerializable("steps",recepta.getSteps());
+        bundle.putSerializable("comentaris",recepta.getComentaris());
+        intent.putExtra("bundle",bundle);
+        activity.startActivity(intent);
     }
 }

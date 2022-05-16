@@ -1,5 +1,6 @@
 package com.example.foodtip.View.Home;
 
+import android.content.Intent;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,16 +14,29 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodtip.Model.FoodTip;
+import com.example.foodtip.Model.Ingredient;
+import com.example.foodtip.Model.SliderData;
+import com.example.foodtip.Model.Step;
 import com.example.foodtip.R;
+import com.example.foodtip.View.ViewHolder.IngredientAdapter;
+import com.example.foodtip.View.ViewHolder.SliderAdapter;
+import com.example.foodtip.View.ViewHolder.StepsAdapter;
 import com.example.foodtip.ViewModel.SeeRecipeActivityViewModel;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ViewRecipeActivity extends AppCompatActivity {
     private SeeRecipeActivityViewModel seeViewModel;
+    private FoodTip foodTip;
+    private Intent intent;
     private final String TAG = "ViewRecipe";
     private final int MAX_IMG_UP = 10;
     private TextView title, description;
@@ -31,18 +45,42 @@ public class ViewRecipeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.upload_new_cousine);
+        foodTip = FoodTip.getInstance();
+        intent = getIntent();
+        setContentView(R.layout.recepta_view);
+
+        Bundle bundle = intent.getBundleExtra("bundle");
+        seeViewModel = new SeeRecipeActivityViewModel(this.getApplication(),(ArrayList<SliderData>) bundle.getSerializable("picture"),(ArrayList<Ingredient>) bundle.getSerializable("ingredients"),(ArrayList<Step>) bundle.getSerializable("steps"));
         initView();
     }
 
     private void initView(){
-        title = findViewById(R.id.recepta_title_edi);
-        description = findViewById(R.id.recepta_txt);
-        sliderView = findViewById(R.id.imageSliderRecipe);
-        ingredients_View = findViewById(R.id.recepta_recycle_ingredient);
-        steps_View = findViewById(R.id.recepta_recycle_steps);
-        comentarisView = findViewById(R.id.recepta_recycle_comentaris);
+        title = findViewById(R.id.recepta_title);
+        description = findViewById(R.id.recepta_view_descrip);
+        sliderView = findViewById(R.id.imageSlider);
+        ingredients_View = findViewById(R.id.recepta_view_recycle_ingredient);
+        steps_View = findViewById(R.id.recepta_view_recycle_steps);
+        comentarisView = findViewById(R.id.recepta_view_recycle_comentaris);
 
+        title.setText(intent.getStringExtra("title"));
+        description.setText(intent.getStringExtra("description"));
 
+        Bundle bundle = intent.getBundleExtra("bundle");
+
+        SliderAdapter sliderAdapter = new SliderAdapter(seeViewModel.getmImages().getValue());
+        sliderView.setSliderAdapter(sliderAdapter);
+        sliderView.setSliderAdapter(sliderAdapter,false);
+        sliderView.setSliderAdapter(sliderAdapter);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
+
+        System.out.println(seeViewModel.getmIngredients().getValue());
+        IngredientAdapter ingredientAdapter = new IngredientAdapter(seeViewModel.getmIngredients().getValue(), null);
+        ingredients_View.setLayoutManager(new LinearLayoutManager(ViewRecipeActivity.this));
+        ingredients_View.swapAdapter(ingredientAdapter,false);
+
+        StepsAdapter stepsAdapter = new StepsAdapter(seeViewModel.getmSteps().getValue(),null);
+        steps_View.setLayoutManager(new LinearLayoutManager(ViewRecipeActivity.this));
+        steps_View.swapAdapter(stepsAdapter,false);
     }
 }

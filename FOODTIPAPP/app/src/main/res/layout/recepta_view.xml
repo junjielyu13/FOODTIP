@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Recepta"
         android:background="@color/colorSecondaryLight"
         android:textSize="30sp"/>
 
@@ -25,21 +24,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recepta_title_edi"
-                android:hint="Title"
-                android:textSize="24sp"
-                app:layout_constraintTop_toTopOf="parent"/>
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="275dp"
-                android:id="@+id/recepta_rela"
+                android:id="@+id/recepta_view_rela"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/recepta_title_edi"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent">
 
                 <androidx.cardview.widget.CardView
@@ -50,10 +41,11 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
+                    android:layout_centerInParent="true"
                     app:cardCornerRadius="6dp">
 
                     <com.smarteist.autoimageslider.SliderView
-                        android:id="@+id/imageSliderRecipe"
+                        android:id="@+id/imageSlider"
                         android:layout_width="250dp"
                         android:layout_height="250dp"
                         app:sliderAnimationDuration="600"
@@ -70,105 +62,90 @@
                         app:sliderScrollTimeInSec="3"
                         app:sliderStartAutoCycle="true" />
                 </androidx.cardview.widget.CardView>
-
             </RelativeLayout>
-
             <TextView
-                android:id="@+id/recepta_descrip"
+                android:id="@+id/recepta_view_des_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Description"
                 android:textSize="24dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recepta_rela"
+                app:layout_constraintTop_toBottomOf="@+id/recepta_view_rela"
                 android:layout_margin="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>
             <TextView
-                android:id="@+id/recepta_txt"
+                android:id="@+id/recepta_view_descrip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/recepta_descrip"
+                app:layout_constraintTop_toBottomOf="@+id/recepta_view_des_title"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_margin = "10dp"/>
-
+                android:layout_margin="10dp"/>
             <TextView
-                android:id="@+id/recepta_ing"
+                android:id="@+id/new_cusine_ing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ingredients"
                 android:textSize="24dp"
-                app:layout_constraintTop_toBottomOf="@+id/recepta_txt"
+                app:layout_constraintTop_toBottomOf="@+id/recepta_view_descrip"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"/>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recepta_recycle_ingredient"
+                android:id="@+id/recepta_view_recycle_ingredient"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/recepta_ing"
+                app:layout_constraintTop_toBottomOf="@id/new_cusine_ing"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp" />
-
             <TextView
-                android:id="@+id/recepta_steps"
+            android:id="@+id/recepta_view_steps_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Steps"
+            android:textSize="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/recepta_view_recycle_ingredient"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recepta_view_recycle_steps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/recepta_view_steps_title"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:id="@+id/recepta_view_comentaris_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Steps"
+                android:text="Comentaris"
                 android:textSize="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/recepta_view_recycle_steps"
                 app:layout_constraintLeft_toLeftOf="parent"
-                tools:layout_editor_absoluteY="740dp"
-                tools:ignore="MissingConstraints" />
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"/>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recepta_recycle_steps"
+                android:id="@+id/recepta_view_recycle_comentaris"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/recepta_steps"
+                app:layout_constraintTop_toBottomOf="@id/recepta_view_comentaris_title"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp" />
-
-            <!-- Per solucionar el problema de no apareixer el but de publicar-->
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="end"
                 android:textSize="40sp"
+                app:layout_constraintTop_toBottomOf="@id/recepta_view_recycle_comentaris"
                 tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="5dp"
-                tools:layout_editor_absoluteY="1193dp" />
-
-            <TextView
-                android:id="@+id/recepta_comentaris"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Comentaris"
-                android:textSize="24dp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="10dp"
-                tools:layout_editor_absoluteY="1010dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                tools:layout_editor_absoluteX="113dp"
-                tools:layout_editor_absoluteY="963dp"
-                android:id="@+id/recepta_recycle_comentaris"
-                app:layout_constraintTop_toBottomOf="@+id/recepta_comentaris"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp" />/>
-
+                tools:layout_editor_absoluteX="0dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </ScrollView>
-
-
-
-
+    <!-- Per solucionar el problema de no apareixer el but de publicar-->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,9 @@ package com.example.foodtip.Model;
 
 import android.graphics.Bitmap;
 
-public class Step {
+import java.io.Serializable;
+
+public class Step implements Serializable {
     private String title;
     private String text;
     private Bitmap images;

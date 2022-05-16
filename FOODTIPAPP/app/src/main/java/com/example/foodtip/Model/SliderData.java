@@ -1,6 +1,8 @@
 package com.example.foodtip.Model;
 
-public class SliderData {
+import java.io.Serializable;
+
+public class SliderData implements Serializable {
     private String imgUri;
 
     public SliderData(String uri){

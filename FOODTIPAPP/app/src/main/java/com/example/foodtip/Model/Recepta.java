@@ -15,10 +15,10 @@ public class Recepta {
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Step> steps;
     private ArrayList<String> likes;
-    private Map<String, Comentari> comentaris;
+    private ArrayList<Comentari> comentaris;
 
 
-    public Recepta(String description, String title, ArrayList<SliderData> images, ArrayList<Ingredient> ingredients, ArrayList<Step> steps, ArrayList<String> likes, Map<String, Comentari> comentaris) {
+    public Recepta(String description, String title, ArrayList<SliderData> images, ArrayList<Ingredient> ingredients, ArrayList<Step> steps, ArrayList<String> likes, ArrayList<Comentari> comentaris) {
         UUID uuid = UUID.randomUUID();
         this.id = uuid.toString();
         this.description = description;
@@ -30,7 +30,7 @@ public class Recepta {
         this.comentaris = comentaris;
     }
 
-    public Recepta(String id, String description, String title, ArrayList<SliderData> images, ArrayList<Ingredient> ingredients, ArrayList<Step> steps, ArrayList<String> likes, Map<String, Comentari> comentaris) {
+    public Recepta(String id, String description, String title, ArrayList<SliderData> images, ArrayList<Ingredient> ingredients, ArrayList<Step> steps, ArrayList<String> likes, ArrayList<Comentari> comentaris) {
         this.id = id;
         this.description = description;
         this.title = title;
@@ -94,11 +94,15 @@ public class Recepta {
         this.likes = likes;
     }
 
-    public Map<String, Comentari> getComentaris() {
+    public ArrayList<Comentari> getComentaris() {
         return comentaris;
     }
 
-    public void setComentaris(Map<String, Comentari> comentaris) {
+    public void setComentaris(ArrayList<Comentari> comentaris) {
         this.comentaris = comentaris;
+    }
+
+    public void addIngredient(String str){
+        this.ingredients.add(new Ingredient(str));
     }
 }

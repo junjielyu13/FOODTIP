@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
+import android.media.Image;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -31,6 +33,9 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -245,25 +250,6 @@ public class FoodTip {
         }
     }
     public void UpdateSteps(Recepta recepta, String documentRef){
-        /*ArrayList<Map<String,String>> steps = new ArrayList<>();
-        for (Step step:recepta.getSteps()){
-            Map<String,String> step_map = new HashMap<>();
-            step_map.put("title",step.getTitle());
-            step_map.put("text",step.getText());
-
-            if(step.getImages() == null) {
-                step_map.put("bitmapID",null);
-            }else{
-                String picture_id = UUID.randomUUID().toString();
-                StorageReference storageRef = this.getIngredientStorageReference(recepta).child("images")
-                        .child(picture_id);
-                storageRef.putBytes(this.BitMapToString(step.getImages()));
-
-                step_map.put("bitmapID",storageRef.toString());
-            }
-            steps.add(step_map);
-        }
-        return steps;*/
         DocumentReference documentReference = FirebaseFirestore.getInstance().document(documentRef);
         for(Step step:recepta.getSteps()){
             if(step.getImages() != null){
@@ -280,7 +266,7 @@ public class FoodTip {
                                 step_map.put("title",step.getTitle());
                                 step_map.put("text",step.getText());
                                 step_map.put("uri",uri.toString());
-                                documentReference.update("steps",step_map);
+                                documentReference.update("steps",FieldValue.arrayUnion(step_map));
                             }
                         });
                     }
@@ -291,7 +277,7 @@ public class FoodTip {
                 step_map.put("title",step.getTitle());
                 step_map.put("text",step.getText());
                 step_map.put("uri",null);
-                documentReference.update("steps",step_map);
+                documentReference.update("steps",FieldValue.arrayUnion(step_map));
             }
         }
     }
@@ -331,11 +317,12 @@ public class FoodTip {
                             .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    System.out.println(task.getResult().get("bitmaps"));
                                     Recepta recepta = new ReceptaBuilder()
                                             .id(document.getId())
                                             .description((String)task.getResult().get("description"))
                                             .title((String)task.getResult().getString("title"))
+                                            .ingredients(foodTip.StringArray_To_IngredientArray((ArrayList<String>) task.getResult().get("ingredient")))
+                                            .steps(foodTip.MapsArray_To_StepsArray((ArrayList<HashMap<String, Object>>) task.getResult().get("steps")))
                                             .images(foodTip.StringArray_To_SliderDataArray((ArrayList<String>) task.getResult().get("bitmaps")))
                                             .buildRecepta();
                                     viewModel.add_recepta(recepta);
@@ -354,4 +341,23 @@ public class FoodTip {
         return output;
     }
 
+    private ArrayList<Ingredient> StringArray_To_IngredientArray(ArrayList<String> input){
+        ArrayList<Ingredient> output = new ArrayList<>();
+        for(String str:input){
+            output.add(new Ingredient(str));
+        }
+        return output;
+    }
+
+    private ArrayList<Step> MapsArray_To_StepsArray(ArrayList<HashMap<String,Object>> input) {
+        ArrayList<Step> output = new ArrayList<>();
+        for (Map<String,Object> map:input){
+            Bitmap bitmap = null;
+            try{
+                bitmap = BitmapFactory.decodeStream((InputStream) new URL((String) map.get("uri")).getContent());
+            } catch (Exception e){}
+            output.add(new Step((String) map.get("title"),(String) map.get("text"), bitmap));
+        }
+        return output;
+    }
 }

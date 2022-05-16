@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.PluralsRes;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
@@ -26,22 +27,27 @@ public class SeeRecipeActivityViewModel extends AndroidViewModel {
     private final MutableLiveData<ArrayList<SliderData>> mImages;
     private final MutableLiveData<ArrayList<Ingredient>> mIngredients;
     private final MutableLiveData<ArrayList<Step>> mSteps;
-    private final MutableLiveData<Bitmap> bitmapMutableLiveData;
-    /*----------------------------------------------------------------*/
     private FoodTip foodTip;
-
-    public SeeRecipeActivityViewModel(@NonNull Application application) {
+    public SeeRecipeActivityViewModel(@NonNull Application application, ArrayList<SliderData> images, ArrayList<Ingredient> ingredients, ArrayList<Step> steps) {
         super(application);
-        mImages = new MutableLiveData<>();
-        mIngredients = new MutableLiveData<>();
-        mSteps = new MutableLiveData<>();
-        bitmapMutableLiveData = new MutableLiveData<>();
         foodTip = FoodTip.getInstance();
+        mImages = new MutableLiveData<>();
+        mImages.setValue(images);
+        mIngredients = new MutableLiveData<>();
+        mIngredients.setValue(ingredients);
+        mSteps = new MutableLiveData<>();
+        mSteps.setValue(steps);
     }
 
-    public void see_recipe(Recepta recepta){
-
+    public MutableLiveData<ArrayList<SliderData>> getmImages() {
+        return mImages;
     }
 
+    public MutableLiveData<ArrayList<Ingredient>> getmIngredients() {
+        return mIngredients;
+    }
 
+    public MutableLiveData<ArrayList<Step>> getmSteps() {
+        return mSteps;
+    }
 }

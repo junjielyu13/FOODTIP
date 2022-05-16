@@ -1,5 +1,6 @@
 package com.example.foodtip.View.Home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,7 +28,7 @@ public class HomeFragment extends Fragment {
     private HomePageViewModel viewModel;
     private RecyclerView recyclerView;
     private FloatingActionButton floatingActionButton;
-
+    private Activity parent;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -35,6 +36,7 @@ public class HomeFragment extends Fragment {
 
         binding = HomePageBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        parent = this.getActivity();
         setting();
         return root;
     }
@@ -53,8 +55,7 @@ public class HomeFragment extends Fragment {
         final Observer<ArrayList<Recepta>> observer_recepta = new Observer<ArrayList<Recepta>>() {
             @Override
             public void onChanged(ArrayList<Recepta> receptas) {
-                System.out.println("111111111111111111111111111111");
-                CardReceptaAdapter receptaAdapter = new CardReceptaAdapter(receptas,viewModel);
+                CardReceptaAdapter receptaAdapter = new CardReceptaAdapter(receptas,parent);
                 recyclerView.swapAdapter(receptaAdapter,false);
                 receptaAdapter.notifyDataSetChanged();
 

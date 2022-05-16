@@ -13,7 +13,7 @@ public class ReceptaBuilder {
     private ArrayList<Ingredient> ingredients;
     private ArrayList<Step> steps;
     private ArrayList<String> likes;
-    private Map<String, Comentari> comentaris;
+    private ArrayList<Comentari> comentaris;
 
     public ReceptaBuilder(){
         id = null;
