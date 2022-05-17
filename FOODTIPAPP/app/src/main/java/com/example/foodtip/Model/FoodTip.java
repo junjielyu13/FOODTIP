@@ -127,7 +127,6 @@ public class FoodTip {
                             .acc_name(username)
                             .password(password)
                             .buildUser();
-
                     //DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                     FirebaseFirestore.getInstance()
                             .collection("user")

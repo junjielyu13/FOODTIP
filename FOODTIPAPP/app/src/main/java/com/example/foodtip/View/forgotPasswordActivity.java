@@ -7,11 +7,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodtip.Model.FoodTip;
+import com.example.foodtip.Model.MailSender;
 import com.example.foodtip.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseUser;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class forgotPasswordActivity extends AppCompatActivity {
 
@@ -20,6 +31,7 @@ public class forgotPasswordActivity extends AppCompatActivity {
     private EditText checkNumberEditText;
     private Button sendCheckNumberBtn;
     private Button checkBtn;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,25 +42,29 @@ public class forgotPasswordActivity extends AppCompatActivity {
         checkNumberEditText = findViewById(R.id.CheckNumberEditText);
         this.sendCheckNumberBtn = findViewById(R.id.sendCheckNumberBtn);
         this.checkBtn = findViewById(R.id.checkBtn);
+        emailEditText.setText("zhihanlin29@gmail.com");
     }
 
-    public void SendCheckNumberOnClickListener(View view) {
+    public void SendCheckNumberOnClickListener(View view){
+        String title = "Title";
+        String htmlContent = "YCY";
+
         String emailText = emailEditText.getText().toString();
-        /*
-        Test Version
-         */
-        String checkNumberText = "123456";
-        checkNumberEditText.setText(checkNumberText);
-        Toast.makeText(this, "Send Check Number", Toast.LENGTH_SHORT).show();
+
+        List<String> receivers = new ArrayList<>();
+        receivers.add(emailText);
+        MailSender mailSender = new MailSender();
+        mailSender.sendMail(title,htmlContent,receivers);
         this.sendCheckNumberBtn.setVisibility(View.GONE);
         this.checkBtn.setVisibility(View.VISIBLE);
+        Toast.makeText(this, "Send Check Number", Toast.LENGTH_SHORT).show();
+
+
 
     }
 
     public void CheckButtonOnClickListener(View view) {
-        String checkNumberText = checkNumberEditText.getText().toString();
-        if (checkNumberText.equals("123456")){
-            startActivity(new Intent(this, ResetPasswordActivity.class));
-        }
+        //String checkNumberText = checkNumberEditText.getText().toString();
+
     }
 }
