@@ -65,6 +65,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/button_login_style"
             android:text="@string/forgotPassword"
+            android:onClick="forgotPasswordButtonOnClickListener"
             android:textColor="@android:color/holo_purple" />
         <Button
             android:id="@+id/loginButton"

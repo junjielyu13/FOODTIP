@@ -161,4 +161,5 @@ public class FoodTip {
         byte [] b=baos.toByteArray();
         return b;
     }
+
 }

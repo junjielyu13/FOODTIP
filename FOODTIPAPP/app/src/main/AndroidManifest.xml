@@ -28,6 +28,8 @@
         <activity android:name=".View.HomePageActivity" />
         <activity android:name=".View.Home.UpdateCusineActivity" />
         <activity android:name=".View.Home.BottomDialog" />
+        <activity android:name=".View.forgotPasswordActivity" />
+        <activity android:name=".View.ResetPasswordActivity" />
     </application>
 
 </manifest>

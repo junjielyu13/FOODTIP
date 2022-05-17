@@ -43,6 +43,7 @@
         android:textColorHint="@android:color/black" />
 
     <Button
+        android:id="@+id/sendCheckNumberBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Send check number to Email"
@@ -51,9 +52,11 @@
         android:layout_below="@id/CheckNumberEditText"
         android:layout_marginVertical="50dp"
         android:visibility="visible"
+        android:onClick="SendCheckNumberOnClickListener"
         />
 
     <Button
+        android:id="@+id/checkBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Check"
@@ -62,6 +65,7 @@
         android:layout_below="@id/CheckNumberEditText"
         android:layout_marginVertical="50dp"
         android:visibility="gone"
+        android:onClick="CheckButtonOnClickListener"
         />
 
 
