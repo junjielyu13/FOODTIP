@@ -14,9 +14,10 @@
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/layout_bg.xml" value="0.216" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_register.xml" value="0.5536458333333333" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/bottom_dialog.xml" value="0.33695652173913043" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/cousinenew.xml" value="0.25364583333333335" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/forgotpwd.xml" value="0.264" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/home_page.xml" value="0.1" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/ingredient.xml" value="0.39945652173913043" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/my_favorite_view.xml" value="0.27808988764044945" />
@@ -29,6 +30,7 @@
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/recepta_view_item.xml" value="0.4" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/search_view.xml" value="0.19972826086956522" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/serching_tags_view.xml" value="0.264" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/set_new_pwd.xml" value="0.16" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/settings.xml" value="0.12335359675785208" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/slider_item.xml" value="0.5536458333333333" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/sloder_item.xml" value="0.33695652173913043" />

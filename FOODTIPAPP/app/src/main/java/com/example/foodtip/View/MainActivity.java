@@ -61,4 +61,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, HomePageActivity.class));
     }
 
+    /**
+     * open the forgot password Page --> enter forgotPasswordActivity
+     * @param view
+     */
+    public void forgotPasswordButtonOnClickListener(View view) {
+        startActivity(new Intent(this, forgotPasswordActivity.class));
+    }
 }
