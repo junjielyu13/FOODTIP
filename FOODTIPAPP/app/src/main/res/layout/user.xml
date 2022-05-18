@@ -26,7 +26,7 @@
                 <ImageButton
                     android:id="@+id/Avatar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     tools:ignore="SpeakableTextPresentCheck"
                     tools:srcCompat="@tools:sample/avatars" />
             </LinearLayout>

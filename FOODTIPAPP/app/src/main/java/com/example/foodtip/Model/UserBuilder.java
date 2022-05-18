@@ -12,7 +12,7 @@ public class UserBuilder {
     private String acc_name;
     private String password;
     private String user_name;
-
+    private String avatar_uid = null;
 
     public UserBuilder(@NonNull Activity activity){
         bitmap = BitmapFactory.decodeResource(activity.getResources(),R.drawable.user_login);
@@ -22,7 +22,7 @@ public class UserBuilder {
     }
 
     public User buildUser(){
-        return new User(uid,acc_name,password,user_name,bitmap);
+        return new User(uid,acc_name,password,user_name,bitmap,avatar_uid);
     }
     public UserBuilder uid(String uid){
         this.uid = uid;
@@ -42,6 +42,11 @@ public class UserBuilder {
     }
     public UserBuilder password(String password){
         this.password = password;
+        return this;
+    }
+
+    public UserBuilder avatar_uri(String uri){
+        this.avatar_uid = uri;
         return this;
     }
 }
