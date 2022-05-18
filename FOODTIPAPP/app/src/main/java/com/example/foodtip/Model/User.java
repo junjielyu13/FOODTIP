@@ -13,11 +13,12 @@ public class User {
     private String password;
     private String user_name;
     private Bitmap avatar; //not sure
+    private String avatar_uri;
     private MisReceptas recptas;
     private MisHistoria historias;
     private MisFavoritos favoritos;
 
-    public User(String id, String name, String password, String user_name, Bitmap avatar) {
+    public User(String id, String name, String password, String user_name, Bitmap avatar,String avatar_uri) {
         //UUID uuid = UUID.randomUUID();
         //this.id = uuid.toString();
         this.id = id;
@@ -25,6 +26,7 @@ public class User {
         this.password = password;
         this.user_name = user_name;
         this.avatar = avatar;
+        this.avatar_uri = avatar_uri;
     }
 
     //Setter
@@ -56,6 +58,10 @@ public class User {
 
     public void setFavoritos(MisFavoritos favoritos) {
         this.favoritos = favoritos;
+    }
+
+    public void setAvatar_uri(String avatar_uri) {
+        this.avatar_uri = avatar_uri;
     }
 
     //Getter
@@ -91,4 +97,7 @@ public class User {
         return favoritos;
     }
 
+    public String getAvatar_uri() {
+        return avatar_uri;
+    }
 }

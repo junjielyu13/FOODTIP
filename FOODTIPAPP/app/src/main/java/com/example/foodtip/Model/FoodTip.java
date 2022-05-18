@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -65,47 +66,25 @@ public class FoodTip {
     /**
      *
      */
-    public void getCurrentUser(){
-        final Bitmap[] bitmap = new Bitmap[1];
-        DocumentReference docRef = FirebaseFirestore.getInstance().collection("user")
-                .document(FirebaseAuth.getInstance().getUid());
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference("avatar");
+    private void getCurrentUser(){
+        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
 
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot document = task.getResult();
-                    if(document.exists()){
-                        //Get Bitmap from reference
-                        StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(document.get("avatar").toString());
-                        storageReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                            @Override
-                            public void onSuccess(byte[] bytes) {
-                                bitmap[0] = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle any errors
-                            }
-                        });
-                        //Create user
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("user").document(user_id);
+
+        documentReference.get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        String avatar_uri = task.getResult().get("avatar").toString();
                         user = new UserBuilder()
-                                .acc_name(document.get("acc_name").toString())
-                                .user_name(document.get("user_name").toString())
-                                .password(document.get("password").toString())
-                                .uid(document.get("id").toString())
-                                .bitmap(bitmap[0])
+                                .uid(user_id)
+                                .user_name((String) task.getResult().get("user_name"))
+                                .acc_name((String) task.getResult().get("acc_name"))
+                                .password((String) task.getResult().get("password"))
+                                .avatar_uri(avatar_uri)
                                 .buildUser();
-                    }else{
-                        Log.d(TAG,"No such document");
                     }
-                }else{
-                    Log.d(TAG,"Get failed with", task.getException());
-                }
-            }
-        });
+                });
     }
 
     /**
@@ -116,6 +95,7 @@ public class FoodTip {
      * @param user_name user name
      */
     public void CreatNewUser(@NonNull AppCompatActivity activity, String name, String password, String user_name){
+        CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("user");
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(name,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -128,12 +108,27 @@ public class FoodTip {
                             .password(password)
                             .buildUser();
 
-                    //DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                    FirebaseFirestore.getInstance()
-                            .collection("user")
-                            .document(user.getId())
-                            .set(getDocument_User(user));
-                    //databaseReference.child("users").child(user.getId()).setValue(getDocument_User(user));
+                    StorageReference storageReference = FirebaseStorage.getInstance()
+                            .getReference("avatar")
+                            .child(user.getId());
+                    storageReference.putBytes(foodTip.BitMapToString(user.getAvatar()))
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            Map<String,Object> map = new HashMap<>();
+                                            map.put("id",user.getId());
+                                            map.put("acc_name",user.getName());
+                                            map.put("password",user.getPassword());
+                                            map.put("user_name",user.getUser_name());
+                                            map.put("avatar",uri.toString());
+                                            collectionReference.document(uid).set(map);
+                                        }
+                                    });
+                                }
+                            });
                     Toast.makeText(activity,"User Created",Toast.LENGTH_SHORT).show();
                     activity.finish();
                 }else{
@@ -152,21 +147,6 @@ public class FoodTip {
                Toast.makeText(activity,"login fail",Toast.LENGTH_SHORT).show();
            }
         });
-    }
-    private Map<String,Object> getDocument_User(User user){
-        Map<String, Object> entrada = new HashMap<>();
-        entrada.put("id",user.getId());
-        entrada.put("acc_name",user.getName());
-        entrada.put("password",user.getPassword());
-        entrada.put("user_name",user.getUser_name());
-
-        StorageReference storageReference = FirebaseStorage.getInstance()
-                .getReference("avatar")
-                .child(user.getId());
-        //storageReference.putBytes(user.BitMapToString(user.getAvatar()));
-        storageReference.putBytes(this.BitMapToString(user.getAvatar()));
-        entrada.put("avatar", storageReference.toString());
-        return entrada;
     }
     public byte[] BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
