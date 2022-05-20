@@ -1,25 +1,35 @@
 package com.example.foodtip.View;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodtip.Model.FoodTip;
 import com.example.foodtip.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class forgotPasswordActivity extends AppCompatActivity {
 
     private FoodTip foodTip;
     private EditText emailEditText;
-    private EditText checkNumberEditText;
-    private Button sendCheckNumberBtn;
-    private Button checkBtn;
+    private ProgressBar progressBar;
+    private Button resetPwdButton;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,28 +37,44 @@ public class forgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.forgotpwd);
         foodTip = FoodTip.getInstance();
         emailEditText = findViewById(R.id.EmailEditTextForgotPassword);
-        checkNumberEditText = findViewById(R.id.CheckNumberEditText);
-        this.sendCheckNumberBtn = findViewById(R.id.sendCheckNumberBtn);
-        this.checkBtn = findViewById(R.id.checkBtn);
+        this.resetPwdButton = findViewById(R.id.resetPwdBtn);
+        progressBar = findViewById(R.id.progressbarForgotPassword);
     }
 
-    public void SendCheckNumberOnClickListener(View view) {
-        String emailText = emailEditText.getText().toString();
-        /*
-        Test Version
-         */
-        String checkNumberText = "123456";
-        checkNumberEditText.setText(checkNumberText);
-        Toast.makeText(this, "Send Check Number", Toast.LENGTH_SHORT).show();
-        this.sendCheckNumberBtn.setVisibility(View.GONE);
-        this.checkBtn.setVisibility(View.VISIBLE);
+    public void resetForgotPasswordOnClickListener(View view) {
 
-    }
-
-    public void CheckButtonOnClickListener(View view) {
-        String checkNumberText = checkNumberEditText.getText().toString();
-        if (checkNumberText.equals("123456")){
-            startActivity(new Intent(this, ResetPasswordActivity.class));
+        String emailText = emailEditText.getText().toString().trim();
+        if(emailText.isEmpty()) {
+            this.emailEditText.setError("Email is required!");
+            this.emailEditText.requestFocus();
+            return;
         }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()){
+            this.emailEditText.setError("Please provide valid email!");
+            emailEditText.requestFocus();
+            return;
+        }
+        progressBar.setVisibility(View.VISIBLE);
+        FirebaseAuth.getInstance().sendPasswordResetEmail(emailText).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(forgotPasswordActivity.this, "Check your email to reset password", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(forgotPasswordActivity.this, "Email doesn't exist", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                finish();
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+            }
+        };
+        timer.schedule(task,500);
+
     }
 }
