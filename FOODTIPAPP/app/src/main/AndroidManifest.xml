@@ -30,7 +30,7 @@
         <activity android:name=".View.Home.BottomDialog" />
         <activity android:name=".View.Home.ViewRecipeActivity"/>
         <activity android:name=".View.forgotPasswordActivity" />
-        <activity android:name=".View.ResetPasswordActivity" />
+        <activity android:name=".View.ChangePasswordActivity" />
     </application>
 
 </manifest>
