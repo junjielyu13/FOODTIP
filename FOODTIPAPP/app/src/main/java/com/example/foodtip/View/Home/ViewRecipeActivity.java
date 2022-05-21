@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +41,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
     private SeeRecipeActivityViewModel seeViewModel;
     private FoodTip foodTip;
     private Intent intent;
+    private Bundle bundle;
     private final String TAG = "ViewRecipe";
     private final int MAX_IMG_UP = 10;
     private TextView title, description;
@@ -52,7 +54,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
         intent = getIntent();
         setContentView(R.layout.recepta_view);
 
-        Bundle bundle = intent.getBundleExtra("bundle");
+        bundle = intent.getBundleExtra("bundle");
         seeViewModel = new SeeRecipeActivityViewModel(this.getApplication(),(ArrayList<SliderData>) bundle.getSerializable("picture"),(ArrayList<Ingredient>) bundle.getSerializable("ingredients"),(ArrayList<Step>) bundle.getSerializable("steps"));
         initView();
     }
@@ -68,22 +70,49 @@ public class ViewRecipeActivity extends AppCompatActivity {
         title.setText(intent.getStringExtra("title"));
         description.setText(intent.getStringExtra("description"));
 
-        Bundle bundle = intent.getBundleExtra("bundle");
+        setLiveDataObservers();
+    }
 
-        SliderAdapter sliderAdapter = new SliderAdapter(seeViewModel.getmImages().getValue());
-        sliderView.setSliderAdapter(sliderAdapter);
-        sliderView.setSliderAdapter(sliderAdapter,false);
-        sliderView.setSliderAdapter(sliderAdapter);
-        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
-        sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
+    public void setLiveDataObservers(){
+        //seeViewModel = new ViewModelProvider(this).get(SeeRecipeActivityViewModel.class);
+        seeViewModel = new SeeRecipeActivityViewModel(this.getApplication(),(ArrayList<SliderData>) bundle.getSerializable("picture"),(ArrayList<Ingredient>) bundle.getSerializable("ingredients"),(ArrayList<Step>) bundle.getSerializable("steps"));
+        /*
+        seeViewModel.setmImages((ArrayList<SliderData>) bundle.getSerializable("picture"));
+        seeViewModel.setmIngredients((ArrayList<Ingredient>) bundle.getSerializable("ingredients"));
+        seeViewModel.setmSteps((ArrayList<Step>) bundle.getSerializable("steps"));*/
 
-        System.out.println(seeViewModel.getmIngredients().getValue());
-        IngredientAdapter ingredientAdapter = new IngredientAdapter(seeViewModel.getmIngredients().getValue(), null);
-        ingredients_View.setLayoutManager(new LinearLayoutManager(ViewRecipeActivity.this));
-        ingredients_View.swapAdapter(ingredientAdapter,false);
-
-        StepsAdapter stepsAdapter = new StepsAdapter(seeViewModel.getmSteps().getValue(),null);
-        steps_View.setLayoutManager(new LinearLayoutManager(ViewRecipeActivity.this));
-        steps_View.swapAdapter(stepsAdapter,false);
+        final Observer<ArrayList<SliderData>> observer_SliderData = new Observer<ArrayList<SliderData>>() {
+            @Override
+            public void onChanged(ArrayList<SliderData> sliderData) {
+                SliderAdapter sliderAdapter = new SliderAdapter(seeViewModel.getmImages().getValue());
+                sliderView.setSliderAdapter(sliderAdapter);
+                sliderView.setSliderAdapter(sliderAdapter,false);
+                sliderView.setSliderAdapter(sliderAdapter);
+                sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+                sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
+                sliderAdapter.notifyDataSetChanged();
+            }
+        };
+        final Observer<ArrayList<Ingredient>> observer_ingredeint = new Observer<ArrayList<Ingredient>>() {
+            @Override
+            public void onChanged(ArrayList<Ingredient> ingredients) {
+                IngredientAdapter ingredientAdapter = new IngredientAdapter(seeViewModel.getmIngredients().getValue(), null);
+                ingredients_View.setLayoutManager(new LinearLayoutManager(ViewRecipeActivity.this));
+                ingredients_View.swapAdapter(ingredientAdapter,false);
+                ingredientAdapter.notifyDataSetChanged();
+            }
+        };
+        final Observer<ArrayList<Step>> observer_steps = new Observer<ArrayList<Step>>() {
+            @Override
+            public void onChanged(ArrayList<Step> steps) {
+                StepsAdapter stepsAdapter = new StepsAdapter(seeViewModel.getmSteps().getValue(),null);
+                steps_View.setLayoutManager(new LinearLayoutManager(ViewRecipeActivity.this));
+                steps_View.swapAdapter(stepsAdapter,false);
+                stepsAdapter.notifyDataSetChanged();
+            }
+        };
+        seeViewModel.getmImages().observe(this,observer_SliderData);
+        seeViewModel.getmIngredients().observe(this,observer_ingredeint);
+        seeViewModel.getmSteps().observe(this,observer_steps);
     }
 }

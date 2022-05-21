@@ -50,4 +50,14 @@ public class SeeRecipeActivityViewModel extends AndroidViewModel {
     public MutableLiveData<ArrayList<Step>> getmSteps() {
         return mSteps;
     }
+
+    public void setmImages(ArrayList<SliderData> picture){
+        mImages.setValue(picture);
+    }
+    public void setmIngredients(ArrayList<Ingredient> ingredients){
+        mIngredients.setValue(ingredients);
+    }
+    public void setmSteps(ArrayList<Step> steps){
+        mSteps.setValue(steps);
+    }
 }
