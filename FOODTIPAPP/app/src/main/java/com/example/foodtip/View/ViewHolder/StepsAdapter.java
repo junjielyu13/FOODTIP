@@ -39,29 +39,35 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull StepsHolder holder, int position) {
-        if(updateCusineActivityViewModel != null){
-            Step step = steps.get(position);
-            TextView title = holder.getTitle();
-            TextView text = holder.getText();
-            ImageButton imageButton = holder.getBut();
-            ImageView imageView = holder.getFoto();
+        Step step = steps.get(position);
+        TextView title = holder.getTitle();
+        TextView text = holder.getText();
+        ImageButton imageButton = holder.getBut();
+        ImageView imageView = holder.getFoto();
 
+        if(updateCusineActivityViewModel != null){
             title.setText(step.getTitle());
             text.setText(step.getText());
-            imageView.setImageBitmap(step.getImages());
+            if(step.getImages() == null){
+                imageView.setVisibility(View.GONE);
+            }else{
+                imageView.setImageBitmap(step.getImages());
+            }
             imageButton.setOnClickListener((v)->{
                 this.updateCusineActivityViewModel.remove_steps(step);
             });
-        }else{
-            Step step = steps.get(position);
-            TextView title = holder.getTitle();
-            TextView text = holder.getText();
-            ImageButton imageButton = holder.getBut();
-            ImageView imageView = holder.getFoto();
 
+        }else{
             title.setText(step.getTitle());
             text.setText(step.getText());
-            imageView.setImageBitmap(step.getImages());
+            if(step.getImages() == null){
+                Glide.with(holder.itemView)
+                        .load(step.getUrl())
+                        .fitCenter()
+                        .into(holder.getFoto());
+            }else{
+                imageView.setImageBitmap(step.getImages());
+            }
             imageButton.setVisibility(View.GONE);
         }
     }

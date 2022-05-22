@@ -337,7 +337,9 @@ public class FoodTip {
                 bitmap = BitmapFactory.decodeStream((InputStream) new URL((String) map.get("uri")).getContent());
             } catch (Exception e){
             }
-            output.add(new Step((String) map.get("title"),(String) map.get("text"), bitmap));
+            Step step = new Step((String) map.get("title"),(String) map.get("text"), bitmap);
+            step.setUrl((String) map.get("uri"));
+            output.add(step);
         }
         return output;
     }

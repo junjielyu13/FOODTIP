@@ -43,27 +43,4 @@ public class HomePageActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.nav_menu,menu);
-        MenuItem search = menu.findItem(R.id.nav_search);
-
-        SearchView searchView = (SearchView) search.getActionView();
-        searchView.setQueryHint("Search Ingredient");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                //adapter.filter.filter(newText)
-                return false;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
-    }
-
 }

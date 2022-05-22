@@ -55,7 +55,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.recepta_view);
 
         bundle = intent.getBundleExtra("bundle");
-        seeViewModel = new SeeRecipeActivityViewModel(this.getApplication(),(ArrayList<SliderData>) bundle.getSerializable("picture"),(ArrayList<Ingredient>) bundle.getSerializable("ingredients"),(ArrayList<Step>) bundle.getSerializable("steps"));
+        //seeViewModel = new SeeRecipeActivityViewModel(this.getApplication(),(ArrayList<SliderData>) bundle.getSerializable("picture"),(ArrayList<Ingredient>) bundle.getSerializable("ingredients"),(ArrayList<Step>) bundle.getSerializable("steps"));
         initView();
     }
 

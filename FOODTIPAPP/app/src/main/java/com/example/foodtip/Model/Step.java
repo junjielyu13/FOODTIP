@@ -4,17 +4,18 @@ import android.graphics.Bitmap;
 
 import java.io.Serializable;
 
-public class Step implements Serializable {
+public class Step extends OnlineURL implements Serializable {
     private String title;
     private String text;
     private Bitmap images;
 
+
     public Step(String title, String text, Bitmap images) {
+        super(null);
         this.title = title;
         this.text = text;
         this.images = images;
     }
-
     //Setter and Getter
     public String getText() {
         return text;
