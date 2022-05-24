@@ -2,8 +2,6 @@ package com.example.foodtip.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -69,4 +67,6 @@ public class MainActivity extends AppCompatActivity {
     public void forgotPasswordButtonOnClickListener(View view) {
         startActivity(new Intent(this, forgotPasswordActivity.class));
     }
+
+
 }

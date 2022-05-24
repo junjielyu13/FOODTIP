@@ -36,8 +36,8 @@ public class HomeFragment extends Fragment {
     private Activity parent;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        HomePageViewModel homeViewModel =
+                new ViewModelProvider(this).get(HomePageViewModel.class);
 
         binding = HomePageBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -86,19 +86,27 @@ public class HomeFragment extends Fragment {
         inflater.inflate(R.menu.nav_menu,menu);
         MenuItem search = menu.findItem(R.id.nav_search);
 
+
         SearchView searchView = (SearchView) search.getActionView();
         searchView.setQueryHint("Search Ingredient");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override
             public boolean onQueryTextSubmit(String s) {
-                return false;
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
                 //adapter.filter.filter(newText)
+                System.out.println("qqqq");
                 return false;
+            }
+        });
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("111111111111111111");
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
