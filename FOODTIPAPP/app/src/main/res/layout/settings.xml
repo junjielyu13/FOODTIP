@@ -38,7 +38,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/ChangePassword"
+                android:id="@+id/changePasswordButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -61,14 +61,15 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/LogOut"
+                android:id="@+id/logOutButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Log Out"
                 android:textColor="@color/black"
                 android:backgroundTint="@color/white"
-                android:textSize="25sp"/>
+                android:textSize="25sp"
+                android:onClick="LogoutButtonOnClickListener"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

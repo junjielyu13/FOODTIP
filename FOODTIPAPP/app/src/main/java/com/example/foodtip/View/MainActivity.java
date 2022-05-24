@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
         foodTip = FoodTip.getInstance();
         userName = findViewById(R.id.UserNameEditTextLogIn);
         password = findViewById(R.id.PasswordEditTextLogIn);
-
+        userName.setText("zhihanlin29@gmail.com");
+        password.setText("123456");
     }
 
     /**
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
      * Enter HomePageActivity
      */
     public void openHomePage(){
+        finish();
         startActivity(new Intent(this, HomePageActivity.class));
     }
 

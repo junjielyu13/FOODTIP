@@ -27,7 +27,6 @@ public class forgotPasswordActivity extends AppCompatActivity {
     private FoodTip foodTip;
     private EditText emailEditText;
     private ProgressBar progressBar;
-    private Button resetPwdButton;
 
 
 
@@ -37,7 +36,6 @@ public class forgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.forgotpwd);
         foodTip = FoodTip.getInstance();
         emailEditText = findViewById(R.id.EmailEditTextForgotPassword);
-        this.resetPwdButton = findViewById(R.id.resetPwdBtn);
         progressBar = findViewById(R.id.progressbarForgotPassword);
     }
 
