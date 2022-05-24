@@ -15,4 +15,9 @@
         android:name="com.example.foodtip.View.User.UserFragment"
         android:label="@string/title_user"
         tools:layout="@layout/user" />
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.foodtip.View.Search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/searchview" />
 </navigation>

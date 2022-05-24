@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodtip.Model.FoodTip;
@@ -47,7 +48,7 @@ public class CardReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> 
 
         TextView title = holder.getTitle();
         SliderView sliderView = holder.getImage();
-
+        CardView cardView = holder.getCardView();
         title.setText(recepta.getTitle());
 
         SliderAdapter sliderAdapter = new SliderAdapter(recepta.getImages());
@@ -61,6 +62,10 @@ public class CardReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> 
         });
 
         sliderView.setOnClickListener(l->{
+            receptaView(recepta);
+        });
+
+        cardView.setOnClickListener(l->{
             receptaView(recepta);
         });
 

@@ -14,6 +14,8 @@ import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodtip.Model.Recepta;
 import com.example.foodtip.R;
+import com.example.foodtip.View.RegisterActivity;
+import com.example.foodtip.View.Search.SearchFragment;
+import com.example.foodtip.View.User.MyCousine;
 import com.example.foodtip.View.ViewHolder.CardReceptaAdapter;
 import com.example.foodtip.ViewModel.HomePageViewModel;
 import com.example.foodtip.databinding.HomePageBinding;
@@ -88,7 +93,7 @@ public class HomeFragment extends Fragment {
 
 
         SearchView searchView = (SearchView) search.getActionView();
-        searchView.setQueryHint("Search Ingredient");
+        /*searchView.setQueryHint("Search Ingredient");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override
@@ -98,17 +103,19 @@ public class HomeFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                //adapter.filter.filter(newText)
-                System.out.println("qqqq");
                 return false;
             }
-        });
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("111111111111111111");
-            }
-        });
+        });*/
+        /*searchView.setOnSearchClickListener(l->{
+            Fragment fragment = new SearchFragment();
+            FragmentManager manager = getParentFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+
+            transaction.show(fragment);
+            transaction
+                    .addToBackStack(null);
+            transaction.commit();
+        });*/
         super.onCreateOptionsMenu(menu, inflater);
     }
 }

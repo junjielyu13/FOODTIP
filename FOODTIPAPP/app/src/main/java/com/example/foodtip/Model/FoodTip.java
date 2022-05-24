@@ -60,6 +60,9 @@ public class FoodTip {
         if(user == null){
             getCurrentUser();
         }
+        else if(user.getId() != FirebaseAuth.getInstance().getUid().toString()){
+            getCurrentUser();
+        }
         return user;
     }
 
