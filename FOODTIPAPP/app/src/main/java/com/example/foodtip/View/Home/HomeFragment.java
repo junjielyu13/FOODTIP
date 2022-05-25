@@ -9,13 +9,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,9 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodtip.Model.Recepta;
 import com.example.foodtip.R;
-import com.example.foodtip.View.RegisterActivity;
-import com.example.foodtip.View.Search.SearchFragment;
-import com.example.foodtip.View.User.MyCousine;
+import com.example.foodtip.View.Search.SearchActivity;
 import com.example.foodtip.View.ViewHolder.CardReceptaAdapter;
 import com.example.foodtip.ViewModel.HomePageViewModel;
 import com.example.foodtip.databinding.HomePageBinding;
@@ -89,33 +84,18 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.nav_menu,menu);
-        MenuItem search = menu.findItem(R.id.nav_search);
-
-
-        SearchView searchView = (SearchView) search.getActionView();
-        /*searchView.setQueryHint("Search Ingredient");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });*/
-        /*searchView.setOnSearchClickListener(l->{
-            Fragment fragment = new SearchFragment();
-            FragmentManager manager = getParentFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-
-            transaction.show(fragment);
-            transaction
-                    .addToBackStack(null);
-            transaction.commit();
-        });*/
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_search:
+                this.parent.startActivity(new Intent(this.parent, SearchActivity.class));
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

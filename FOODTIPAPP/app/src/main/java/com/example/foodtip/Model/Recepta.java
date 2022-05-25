@@ -105,4 +105,11 @@ public class Recepta {
     public void addIngredient(String str){
         this.ingredients.add(new Ingredient(str));
     }
+
+    public boolean containIngredient(String input){
+        for(Ingredient ingredient : ingredients){
+            if(ingredient.getNom().equals(input)) return true;
+        }
+        return false;
+    }
 }

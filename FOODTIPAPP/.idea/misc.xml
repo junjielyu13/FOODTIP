@@ -20,6 +20,7 @@
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/forgotpwd.xml" value="0.264" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/home_page.xml" value="0.264" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/ingredient.xml" value="0.39945652173913043" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/list_view_item.xml" value="0.21510416666666668" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/my_favorite_view.xml" value="0.27808988764044945" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/my_history_view.xml" value="0.5536458333333333" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/my_recipe_view.xml" value="0.5192629815745393" />
@@ -29,7 +30,7 @@
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/recepta_view.xml" value="0.25" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/recepta_view_item.xml" value="0.4" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/search_view.xml" value="0.3925925925925926" />
-        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/searchview.xml" value="0.338768115942029" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/searchview.xml" value="0.12295081967213115" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/serching_tags_view.xml" value="0.264" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/set_new_pwd.xml" value="0.16" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/settings.xml" value="0.12335359675785208" />
