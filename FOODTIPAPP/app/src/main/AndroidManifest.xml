@@ -31,6 +31,7 @@
         <activity android:name=".View.Home.ViewRecipeActivity"/>
         <activity android:name=".View.forgotPasswordActivity" />
         <activity android:name=".View.ChangePasswordActivity" />
+        <activity android:name=".View.Search.SearchActivity" />
     </application>
 
 </manifest>

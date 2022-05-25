@@ -9,12 +9,14 @@ import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodtip.View.MainActivity;
 import com.example.foodtip.ViewModel.HomePageViewModel;
+import com.example.foodtip.ViewModel.SearchViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,6 +30,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -58,6 +61,9 @@ public class FoodTip {
 
     public User getUser() {
         if(user == null){
+            getCurrentUser();
+        }
+        else if(user.getId() != FirebaseAuth.getInstance().getUid().toString()){
             getCurrentUser();
         }
         return user;
@@ -262,31 +268,6 @@ public class FoodTip {
         }
     }
 
-    /**
-     * .addOnSuccessListener(documentSnapshot -> {
-     *                                 documentSnapshot.get("bitmaps")
-     *                                 for(String str:(ArrayList<String>)documentSnapshot.get("bitmaps")){
-     *                                     StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(str);
-     *                                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-     *                                         @Override
-     *                                         public void onSuccess(Uri uri) {
-     *                                             viewModel.save_uri(uri);
-     *                                         }
-     *                                     });
-     *                                 }
-     *                                 System.out.println("creat");
-     *                                 Recepta recepta = new ReceptaBuilder().id(document.getId())
-     *                                         .description((String)documentSnapshot.get("description"))
-     *                                         .title((String) documentSnapshot.get("title"))
-     *                                         .images(viewModel.getSliderData().getValue())
-     *                                         .buildRecepta();
-     *                                 if(recepta.getImages() == null){
-     *                                     System.out.println("error");
-     *                                 }
-     *                                 viewModel.add_recepta(recepta);
-     * });
-     * @param viewModel
-     */
     public void getReceptaInformation(HomePageViewModel viewModel){
         CollectionReference db = FirebaseFirestore.getInstance().collection("recepta");
         db.get().addOnCompleteListener(task->{
@@ -312,6 +293,31 @@ public class FoodTip {
             }
         });
 
+    }
+    public void getAllRecepta(SearchViewModel searchViewModel){
+        CollectionReference db = FirebaseFirestore.getInstance().collection("recepta");
+        db.get().addOnCompleteListener(task->{
+            if (task.isSuccessful()){
+                for(QueryDocumentSnapshot document : task.getResult()){
+                    db.document(document.getId())
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    Recepta recepta = new ReceptaBuilder()
+                                            .id(document.getId())
+                                            .description((String)task.getResult().get("description"))
+                                            .title((String)task.getResult().getString("title"))
+                                            .ingredients(foodTip.StringArray_To_IngredientArray((ArrayList<String>) task.getResult().get("ingredient")))
+                                            .steps(foodTip.MapsArray_To_StepsArray((ArrayList<HashMap<String, Object>>) task.getResult().get("steps")))
+                                            .images(foodTip.StringArray_To_SliderDataArray((ArrayList<String>) task.getResult().get("bitmaps")))
+                                            .buildRecepta();
+                                    searchViewModel.addRecepta(recepta);
+                                }
+                            });
+                }
+            }
+        });
     }
     private ArrayList<SliderData> StringArray_To_SliderDataArray(ArrayList<String> input){
         ArrayList<SliderData> output = new ArrayList<>();
@@ -343,4 +349,25 @@ public class FoodTip {
         }
         return output;
     }
+
+    public ArrayList<Recepta> getReceptaByTag(ArrayList<String> tags){
+        return  null;
+    }
+
+    public ArrayList<String> getValidIngredient(SearchViewModel viewModel){
+        CollectionReference ref = FirebaseFirestore.getInstance().collection("ingredient");
+        ref.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        //task.getResult().getDocuments().stream().map(DocumentSnapshot::getId).forEach(viewModel::setIngredient);
+                        for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                            viewModel.setIngredient(documentSnapshot.getId());
+                            System.out.println(documentSnapshot.getId());
+                        }
+                    }
+                });
+        return null;
+    }
+
 }

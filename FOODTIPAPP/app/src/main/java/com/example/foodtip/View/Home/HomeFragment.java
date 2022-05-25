@@ -9,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodtip.Model.Recepta;
 import com.example.foodtip.R;
+import com.example.foodtip.View.Search.SearchActivity;
 import com.example.foodtip.View.ViewHolder.CardReceptaAdapter;
 import com.example.foodtip.ViewModel.HomePageViewModel;
 import com.example.foodtip.databinding.HomePageBinding;
@@ -36,8 +36,8 @@ public class HomeFragment extends Fragment {
     private Activity parent;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        HomePageViewModel homeViewModel =
+                new ViewModelProvider(this).get(HomePageViewModel.class);
 
         binding = HomePageBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -84,23 +84,18 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.nav_menu,menu);
-        MenuItem search = menu.findItem(R.id.nav_search);
-
-        SearchView searchView = (SearchView) search.getActionView();
-        searchView.setQueryHint("Search Ingredient");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                //adapter.filter.filter(newText)
-                return false;
-            }
-        });
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_search:
+                this.parent.startActivity(new Intent(this.parent, SearchActivity.class));
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

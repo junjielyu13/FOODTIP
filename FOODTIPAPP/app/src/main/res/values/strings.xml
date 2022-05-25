@@ -21,6 +21,7 @@
     <string name="RepeatPassword">REPEAT PASSWORD</string>
     <string name="title_home">Home</string>
     <string name="title_user">User</string>
+    <string name="title_search">Search</string>
     <!--register Interface-->
     <string name="RegisterTextView">REGISTER</string>
 
