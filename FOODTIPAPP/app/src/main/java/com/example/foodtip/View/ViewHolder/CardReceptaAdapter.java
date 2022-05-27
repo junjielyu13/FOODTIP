@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import com.example.foodtip.Model.Ingredient;
 import com.example.foodtip.Model.Recepta;
 import com.example.foodtip.R;
 import com.example.foodtip.View.Home.ViewRecipeActivity;
+import com.example.foodtip.View.ViewHolder.OptionInterface.CMD;
 import com.example.foodtip.ViewModel.HomePageViewModel;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -46,9 +49,11 @@ public class CardReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> 
     public void onBindViewHolder(@NonNull CardReceptaHolder holder, int position) {
         Recepta recepta = receptas.get(position);
 
+
         TextView title = holder.getTitle();
         SliderView sliderView = holder.getImage();
         CardView cardView = holder.getCardView();
+        ImageButton imageButton = holder.getLike();
         title.setText(recepta.getTitle());
 
         SliderAdapter sliderAdapter = new SliderAdapter(recepta.getImages());
@@ -56,7 +61,11 @@ public class CardReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> 
         sliderView.setSliderAdapter(sliderAdapter);
         sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
         sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
-
+        if(recepta.getLikes().contains(FoodTip.getInstance().getUser().getId())){
+            imageButton.setImageResource(R.mipmap.heart2);
+        }else{
+            imageButton.setImageResource(R.mipmap.heart1);
+        }
         title.setOnClickListener(l ->{
             receptaView(recepta);
         });
@@ -67,6 +76,16 @@ public class CardReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> 
 
         cardView.setOnClickListener(l->{
             receptaView(recepta);
+        });
+
+        imageButton.setOnClickListener(l->{
+            if(recepta.getLikes().contains(FoodTip.getInstance().getUser().getId())){
+                FoodTip.getInstance().click_like(recepta,CMD.DELETE);
+                imageButton.setImageResource(R.mipmap.heart1);
+            }else{
+                FoodTip.getInstance().click_like(recepta, CMD.ADD);
+                imageButton.setImageResource(R.mipmap.heart2);
+            }
         });
 
     }

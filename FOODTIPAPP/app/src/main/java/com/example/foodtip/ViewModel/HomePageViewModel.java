@@ -44,5 +44,9 @@ public class HomePageViewModel extends AndroidViewModel {
         receptas.getValue().add(recepta);
         receptas.setValue(receptas.getValue());
     }
-
+    public void refresh(){
+        receptas.getValue().clear();
+        receptas.setValue(receptas.getValue());
+        foodTip.getReceptaInformation(this);
+    }
 }

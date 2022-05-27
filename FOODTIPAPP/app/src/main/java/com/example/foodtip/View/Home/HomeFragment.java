@@ -13,10 +13,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.foodtip.Model.Recepta;
 import com.example.foodtip.R;
@@ -34,6 +38,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private FloatingActionButton floatingActionButton;
     private Activity parent;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private CardReceptaAdapter receptaAdapter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomePageViewModel homeViewModel =
@@ -48,11 +54,21 @@ public class HomeFragment extends Fragment {
     private void setting(){
         this.recyclerView = binding.getRoot().findViewById(R.id.recy_home_page);
         this.floatingActionButton = binding.getRoot().findViewById(R.id.floating_but);
+        this.swipeRefreshLayout = binding.getRoot().findViewById(R.id.swipe_layout);
         recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
         floatingActionButton.setOnClickListener((v)->{
             startActivity(new Intent(binding.getRoot().getContext(), UpdateCusineActivity.class));
         });
         setLiveDataObservers();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                viewModel.refresh();
+                receptaAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
     }
 
     public void setLiveDataObservers(){
@@ -60,7 +76,7 @@ public class HomeFragment extends Fragment {
         final Observer<ArrayList<Recepta>> observer_recepta = new Observer<ArrayList<Recepta>>() {
             @Override
             public void onChanged(ArrayList<Recepta> receptas) {
-                CardReceptaAdapter receptaAdapter = new CardReceptaAdapter(receptas,parent);
+                receptaAdapter = new CardReceptaAdapter(receptas,parent);
                 recyclerView.swapAdapter(receptaAdapter,false);
                 receptaAdapter.notifyDataSetChanged();
 

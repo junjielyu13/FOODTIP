@@ -17,7 +17,6 @@ public class Recepta {
     private ArrayList<String> likes;
     private ArrayList<Comentari> comentaris;
 
-
     public Recepta(String description, String title, ArrayList<SliderData> images, ArrayList<Ingredient> ingredients, ArrayList<Step> steps, ArrayList<String> likes, ArrayList<Comentari> comentaris) {
         UUID uuid = UUID.randomUUID();
         this.id = uuid.toString();

@@ -139,6 +139,7 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
         map.put("bitmaps",new ArrayList<>());
         map.put("ingredient",ingredient_id);
         map.put("steps",new ArrayList<>());
+        map.put("likes",new ArrayList<>());
 
         String firestoreRef = foodTip.GuardarRecepta(recepta,map);
         foodTip.UpdatePictures(activity,recepta, firestoreRef);

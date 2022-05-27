@@ -14,7 +14,7 @@ public class ReceptaBuilder {
     private ArrayList<Step> steps;
     private ArrayList<String> likes;
     private ArrayList<Comentari> comentaris;
-
+    private boolean liked;
     public ReceptaBuilder(){
         id = null;
         likes = null;
@@ -24,6 +24,7 @@ public class ReceptaBuilder {
         images = null;
         ingredients = null;
         steps = null;
+        liked = false;
     }
     public Recepta buildRecepta(){
         if(id != null){
@@ -57,4 +58,9 @@ public class ReceptaBuilder {
         this.id = id;
         return this;
     }
+    public ReceptaBuilder likes(ArrayList<String> likes){
+        this.likes = likes;
+        return this;
+    }
+
 }
