@@ -74,12 +74,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
     }
 
     public void setLiveDataObservers(){
-        //seeViewModel = new ViewModelProvider(this).get(SeeRecipeActivityViewModel.class);
         seeViewModel = new SeeRecipeActivityViewModel(this.getApplication(),(ArrayList<SliderData>) bundle.getSerializable("picture"),(ArrayList<Ingredient>) bundle.getSerializable("ingredients"),(ArrayList<Step>) bundle.getSerializable("steps"));
-        /*
-        seeViewModel.setmImages((ArrayList<SliderData>) bundle.getSerializable("picture"));
-        seeViewModel.setmIngredients((ArrayList<Ingredient>) bundle.getSerializable("ingredients"));
-        seeViewModel.setmSteps((ArrayList<Step>) bundle.getSerializable("steps"));*/
 
         final Observer<ArrayList<SliderData>> observer_SliderData = new Observer<ArrayList<SliderData>>() {
             @Override

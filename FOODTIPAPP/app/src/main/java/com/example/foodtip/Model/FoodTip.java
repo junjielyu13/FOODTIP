@@ -5,12 +5,10 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
-import android.media.Image;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,13 +23,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -41,7 +38,6 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,8 +49,6 @@ public class FoodTip {
     private User user;
     private final static String TAG = "FOODTIP";
     final static long ONE_MEGABYTE = 1024 * 1024;
-    public static vmInterface listener;
-
     public static FoodTip getInstance(){
         if(foodTip == null){
             foodTip = new FoodTip();
@@ -271,33 +265,51 @@ public class FoodTip {
         }
     }
 
-    public void getReceptaInformation(HomePageViewModel viewModel){
+    public void getReceptaInformation(HomePageViewModel viewModel, @CMD int cmd) {
         CollectionReference db = FirebaseFirestore.getInstance().collection("recepta");
-        db.get().addOnCompleteListener(task->{
-            if (task.isSuccessful()){
-                for(QueryDocumentSnapshot document : task.getResult()){
-                    db.document(document.getId())
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    Recepta recepta = new ReceptaBuilder()
-                                            .id(document.getId())
-                                            .description((String)task.getResult().get("description"))
-                                            .title((String)task.getResult().getString("title"))
-                                            .ingredients(foodTip.StringArray_To_IngredientArray((ArrayList<String>) task.getResult().get("ingredient")))
-                                            .steps(foodTip.MapsArray_To_StepsArray((ArrayList<HashMap<String, Object>>) task.getResult().get("steps")))
-                                            .images(foodTip.StringArray_To_SliderDataArray((ArrayList<String>) task.getResult().get("bitmaps")))
-                                            .likes((ArrayList<String>) task.getResult().get("likes"))
-                                            .buildRecepta();
-
-                                    viewModel.add_recepta(recepta);
-                                }
-                            });
-                }
+        Query query = FirebaseFirestore.getInstance().collection("recepta");
+        /**
+         * CMD.ADD-> Add more Recepta in list
+         * CMD.DELETE-> Refresh List
+         */
+        switch (cmd){
+            case CMD.ADD:
+                query.orderBy("likesNum", Query.Direction.DESCENDING).startAfter(viewModel.getSTART()).limit(10).get().addOnCompleteListener(task -> {
+                    getRecepta(db,task,viewModel);
+                });
+                break;
+            case CMD.REFRESH:
+                query.orderBy("likesNum", Query.Direction.DESCENDING).limit(10).get().addOnCompleteListener(task -> {
+                    getRecepta(db,task,viewModel);
+                });
+                break;
+            default:
+                break;
+        }
+    }
+    private void getRecepta(CollectionReference db, Task<QuerySnapshot> task, HomePageViewModel viewModel){
+        if (task.isSuccessful()) {
+            for (QueryDocumentSnapshot document : task.getResult()) {
+                db.document(document.getId())
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                Recepta recepta = new ReceptaBuilder()
+                                        .id(document.getId())
+                                        .description((String) task.getResult().get("description"))
+                                        .title((String) task.getResult().getString("title"))
+                                        .ingredients(foodTip.StringArray_To_IngredientArray((ArrayList<String>) task.getResult().get("ingredient")))
+                                        .steps(foodTip.MapsArray_To_StepsArray((ArrayList<HashMap<String, Object>>) task.getResult().get("steps")))
+                                        .images(foodTip.StringArray_To_SliderDataArray((ArrayList<String>) task.getResult().get("bitmaps")))
+                                        .likes((ArrayList<String>) task.getResult().get("likes"))
+                                        .buildRecepta();
+                                viewModel.add_recepta(recepta);
+                            }
+                        });
+                viewModel.setSTART(document);
             }
-        });
-
+        }
     }
     public void getAllRecepta(SearchViewModel searchViewModel){
         CollectionReference db = FirebaseFirestore.getInstance().collection("recepta");
@@ -382,6 +394,7 @@ public class FoodTip {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     ref1.update("likes",FieldValue.arrayUnion(user.getId()));
+                    ref1.update("likesNum",FieldValue.increment(1));
                 }
             });
             DocumentReference ref2 = FirebaseFirestore.getInstance().collection("user").document(user.getId());
@@ -400,6 +413,7 @@ public class FoodTip {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     ref1.update("likes",FieldValue.arrayRemove(user.getId()));
+                    ref1.update("likesNum",FieldValue.increment(-1));
                 }
             });
             DocumentReference ref2 = FirebaseFirestore.getInstance().collection("user").document(user.getId());

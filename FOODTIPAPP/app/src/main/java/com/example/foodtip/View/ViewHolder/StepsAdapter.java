@@ -45,9 +45,10 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsHolder> {
         ImageButton imageButton = holder.getBut();
         ImageView imageView = holder.getFoto();
 
+        title.setText(step.getTitle());
+        text.setText(step.getText());
+
         if(updateCusineActivityViewModel != null){
-            title.setText(step.getTitle());
-            text.setText(step.getText());
             if(step.getImages() == null){
                 imageView.setVisibility(View.GONE);
             }else{
@@ -58,17 +59,16 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsHolder> {
             });
 
         }else{
-            title.setText(step.getTitle());
-            text.setText(step.getText());
-            if(step.getImages() == null){
+            imageButton.setVisibility(View.INVISIBLE);
+
+            if(step.getUrl() == null){
+                imageView.setVisibility(View.GONE);
+            }else{
                 Glide.with(holder.itemView)
                         .load(step.getUrl())
                         .fitCenter()
                         .into(holder.getFoto());
-            }else{
-                imageView.setImageBitmap(step.getImages());
             }
-            imageButton.setVisibility(View.GONE);
         }
     }
 

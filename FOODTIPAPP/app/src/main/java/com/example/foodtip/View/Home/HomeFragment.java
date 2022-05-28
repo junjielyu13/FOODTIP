@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,10 +23,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.foodtip.Model.FoodTip;
 import com.example.foodtip.Model.Recepta;
 import com.example.foodtip.R;
 import com.example.foodtip.View.Search.SearchActivity;
 import com.example.foodtip.View.ViewHolder.CardReceptaAdapter;
+import com.example.foodtip.View.ViewHolder.OptionInterface.CMD;
 import com.example.foodtip.ViewModel.HomePageViewModel;
 import com.example.foodtip.databinding.HomePageBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -40,6 +43,7 @@ public class HomeFragment extends Fragment {
     private Activity parent;
     private SwipeRefreshLayout swipeRefreshLayout;
     private CardReceptaAdapter receptaAdapter;
+    private ImageButton imageButton;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomePageViewModel homeViewModel =
@@ -55,6 +59,7 @@ public class HomeFragment extends Fragment {
         this.recyclerView = binding.getRoot().findViewById(R.id.recy_home_page);
         this.floatingActionButton = binding.getRoot().findViewById(R.id.floating_but);
         this.swipeRefreshLayout = binding.getRoot().findViewById(R.id.swipe_layout);
+        this.imageButton = binding.getRoot().findViewById(R.id.home_but);
         recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
         floatingActionButton.setOnClickListener((v)->{
             startActivity(new Intent(binding.getRoot().getContext(), UpdateCusineActivity.class));
@@ -67,6 +72,9 @@ public class HomeFragment extends Fragment {
                 receptaAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
+        });
+        imageButton.setOnClickListener(l->{
+            FoodTip.getInstance().getReceptaInformation(viewModel, CMD.ADD);
         });
 
     }
