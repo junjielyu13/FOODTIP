@@ -16,6 +16,7 @@
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/bottom_dialog.xml" value="0.33695652173913043" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/comentaris_layout.xml" value="0.25364583333333335" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/cousinenew.xml" value="0.25364583333333335" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/forgotpwd.xml" value="0.264" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/home_page.xml" value="0.264" />
@@ -27,7 +28,7 @@
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/popup_view_ingredient.xml" value="0.5536458333333333" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/popup_view_steps.xml" value="0.5536458333333333" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/popuptest.xml" value="0.2692502532928065" />
-        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/recepta_view.xml" value="0.25" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/recepta_view.xml" value="0.4" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/recepta_view_item.xml" value="0.4" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/search_view.xml" value="0.3925925925925926" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/searchview.xml" value="0.12295081967213115" />

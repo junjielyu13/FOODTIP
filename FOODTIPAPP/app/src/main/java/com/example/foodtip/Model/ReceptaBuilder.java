@@ -63,4 +63,9 @@ public class ReceptaBuilder {
         return this;
     }
 
+    public ReceptaBuilder comentaris(ArrayList<Comentari> comentaris){
+        this.comentaris = comentaris;
+        return this;
+    }
+
 }

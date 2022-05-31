@@ -111,4 +111,11 @@ public class Recepta {
         }
         return false;
     }
+
+    public boolean containUser(String input){
+        for(Comentari comentari: comentaris){
+            if(comentari.getLiked().contains(input)) return true;
+        }
+        return false;
+    }
 }

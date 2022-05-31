@@ -9,6 +9,7 @@ import androidx.annotation.PluralsRes;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.foodtip.Model.Comentari;
 import com.example.foodtip.Model.FoodTip;
 import com.example.foodtip.Model.Ingredient;
 import com.example.foodtip.Model.Recepta;
@@ -27,8 +28,9 @@ public class SeeRecipeActivityViewModel extends AndroidViewModel {
     private final MutableLiveData<ArrayList<SliderData>> mImages;
     private final MutableLiveData<ArrayList<Ingredient>> mIngredients;
     private final MutableLiveData<ArrayList<Step>> mSteps;
+    private final MutableLiveData<ArrayList<Comentari>> mComentaris;
     private FoodTip foodTip;
-    public SeeRecipeActivityViewModel(@NonNull Application application, ArrayList<SliderData> images, ArrayList<Ingredient> ingredients, ArrayList<Step> steps) {
+    public SeeRecipeActivityViewModel(@NonNull Application application, ArrayList<SliderData> images, ArrayList<Ingredient> ingredients, ArrayList<Step> steps, ArrayList<Comentari> comentaris) {
         super(application);
         foodTip = FoodTip.getInstance();
         mImages = new MutableLiveData<>();
@@ -37,6 +39,8 @@ public class SeeRecipeActivityViewModel extends AndroidViewModel {
         mIngredients.setValue(ingredients);
         mSteps = new MutableLiveData<>();
         mSteps.setValue(steps);
+        mComentaris = new MutableLiveData<>();
+        mComentaris.setValue(comentaris);
     }
 
     public MutableLiveData<ArrayList<SliderData>> getmImages() {
@@ -51,6 +55,10 @@ public class SeeRecipeActivityViewModel extends AndroidViewModel {
         return mSteps;
     }
 
+    public MutableLiveData<ArrayList<Comentari>> getmComentaris(){
+        return mComentaris;
+    }
+
     public void setmImages(ArrayList<SliderData> picture){
         mImages.setValue(picture);
     }
@@ -60,4 +68,5 @@ public class SeeRecipeActivityViewModel extends AndroidViewModel {
     public void setmSteps(ArrayList<Step> steps){
         mSteps.setValue(steps);
     }
+
 }

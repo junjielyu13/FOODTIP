@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -21,11 +22,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodtip.Model.Comentari;
 import com.example.foodtip.Model.FoodTip;
 import com.example.foodtip.Model.Ingredient;
 import com.example.foodtip.Model.SliderData;
 import com.example.foodtip.Model.Step;
 import com.example.foodtip.R;
+import com.example.foodtip.View.ViewHolder.ComentarisAdapter;
 import com.example.foodtip.View.ViewHolder.IngredientAdapter;
 import com.example.foodtip.View.ViewHolder.SliderAdapter;
 import com.example.foodtip.View.ViewHolder.StepsAdapter;
@@ -47,6 +50,8 @@ public class ViewRecipeActivity extends AppCompatActivity {
     private TextView title, description;
     private SliderView sliderView;
     private RecyclerView ingredients_View, steps_View, comentarisView;
+    private Button publicar_but;
+    private EditText input_txt;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,15 +71,28 @@ public class ViewRecipeActivity extends AppCompatActivity {
         ingredients_View = findViewById(R.id.recepta_view_recycle_ingredient);
         steps_View = findViewById(R.id.recepta_view_recycle_steps);
         comentarisView = findViewById(R.id.recepta_view_recycle_comentaris);
+        publicar_but = findViewById(R.id.comentaris_publicar);
+        input_txt = findViewById(R.id.comentaris_input);
 
         title.setText(intent.getStringExtra("title"));
         description.setText(intent.getStringExtra("description"));
+
+        publicar_but.setOnClickListener(l->{
+            Comentari comentari = new Comentari(FoodTip.getInstance().getUser().getId(),intent.getStringExtra("id"),input_txt.getText().toString());
+            FoodTip.getInstance().publicar_comentaris(comentari);
+            input_txt.setText("");
+            Toast.makeText(this,"Comentaris publicada",Toast.LENGTH_SHORT).show();
+        });
 
         setLiveDataObservers();
     }
 
     public void setLiveDataObservers(){
-        seeViewModel = new SeeRecipeActivityViewModel(this.getApplication(),(ArrayList<SliderData>) bundle.getSerializable("picture"),(ArrayList<Ingredient>) bundle.getSerializable("ingredients"),(ArrayList<Step>) bundle.getSerializable("steps"));
+        seeViewModel = new SeeRecipeActivityViewModel(this.getApplication(),
+                (ArrayList<SliderData>) bundle.getSerializable("picture"),
+                (ArrayList<Ingredient>) bundle.getSerializable("ingredients"),
+                (ArrayList<Step>) bundle.getSerializable("steps"),
+                (ArrayList<Comentari>) bundle.getSerializable("comentaris"));
 
         final Observer<ArrayList<SliderData>> observer_SliderData = new Observer<ArrayList<SliderData>>() {
             @Override
@@ -106,8 +124,19 @@ public class ViewRecipeActivity extends AppCompatActivity {
                 stepsAdapter.notifyDataSetChanged();
             }
         };
+
+        final Observer<ArrayList<Comentari>> observer_comentaris = new Observer<ArrayList<Comentari>>() {
+            @Override
+            public void onChanged(ArrayList<Comentari> comentaris) {
+                ComentarisAdapter comentarisAdapter = new ComentarisAdapter(comentaris);
+                comentarisView.setLayoutManager(new LinearLayoutManager(ViewRecipeActivity.this));
+                comentarisView.swapAdapter(comentarisAdapter,false);
+                comentarisAdapter.notifyDataSetChanged();
+            }
+        };
         seeViewModel.getmImages().observe(this,observer_SliderData);
         seeViewModel.getmIngredients().observe(this,observer_ingredeint);
         seeViewModel.getmSteps().observe(this,observer_steps);
+        seeViewModel.getmComentaris().observe(this,observer_comentaris);
     }
 }

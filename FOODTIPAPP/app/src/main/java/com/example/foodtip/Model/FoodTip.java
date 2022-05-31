@@ -7,16 +7,19 @@ import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodtip.View.MainActivity;
+import com.example.foodtip.View.ViewHolder.ComentarisAdapter;
 import com.example.foodtip.View.ViewHolder.OptionInterface.CMD;
 import com.example.foodtip.ViewModel.FavoritesViewModel;
 import com.example.foodtip.ViewModel.HomePageViewModel;
 import com.example.foodtip.ViewModel.SearchViewModel;
+import com.example.foodtip.ViewModel.SeeRecipeActivityViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -303,6 +306,7 @@ public class FoodTip {
                                         .steps(foodTip.MapsArray_To_StepsArray((ArrayList<HashMap<String, Object>>) task.getResult().get("steps")))
                                         .images(foodTip.StringArray_To_SliderDataArray((ArrayList<String>) task.getResult().get("bitmaps")))
                                         .likes((ArrayList<String>) task.getResult().get("likes"))
+                                        .comentaris(foodTip.MapArray_To_CometariArray((ArrayList<HashMap<String, Object>>) task.getResult().get("comentaris")))
                                         .buildRecepta();
                                 viewModel.add_recepta(recepta);
                             }
@@ -329,6 +333,7 @@ public class FoodTip {
                                             .steps(foodTip.MapsArray_To_StepsArray((ArrayList<HashMap<String, Object>>) task.getResult().get("steps")))
                                             .images(foodTip.StringArray_To_SliderDataArray((ArrayList<String>) task.getResult().get("bitmaps")))
                                             .likes((ArrayList<String>) task.getResult().get("likes"))
+                                            .comentaris(foodTip.MapArray_To_CometariArray((ArrayList<HashMap<String, Object>>) task.getResult().get("comentaris")))
                                             .buildRecepta();
                                     searchViewModel.addRecepta(recepta);
                                 }
@@ -349,6 +354,21 @@ public class FoodTip {
         ArrayList<Ingredient> output = new ArrayList<>();
         for(String str:input){
             output.add(new Ingredient(str));
+        }
+        return output;
+    }
+
+    private ArrayList<Comentari> MapArray_To_CometariArray(ArrayList<HashMap<String,Object>> input){
+        ArrayList<Comentari> output = new ArrayList<>();
+        if(input != null) {
+            for (Map<String,Object> map:input){
+                String id = (String) map.get("id");
+                String autor = (String) map.get("autor");
+                String recepta = (String) map.get("recepta");
+                String comentari = (String) map.get("comentari");
+                ArrayList<String> liked = map.get("liked") == null?new ArrayList<>():(ArrayList<String>) map.get("liked");
+                output.add(new Comentari(id,autor,recepta,comentari,liked));
+            }
         }
         return output;
     }
@@ -386,7 +406,7 @@ public class FoodTip {
         return null;
     }
 
-    public void click_like(Recepta recepta, @CMD int mode){
+    public void click_like_recepta(Recepta recepta, @CMD int mode){
         if(mode == CMD.ADD){
             recepta.getLikes().add(user.getId());
             DocumentReference ref1 = FirebaseFirestore.getInstance().collection("recepta").document(recepta.getId());
@@ -457,5 +477,16 @@ public class FoodTip {
             }
         });
 
+    }
+
+    public void publicar_comentaris(Comentari comentari){
+        DocumentReference ref = FirebaseFirestore.getInstance().collection("recepta").document(comentari.getRecepta());
+        Map<String,Object> map = new HashMap<>();
+        map.put("autor",comentari.getAutor());
+        map.put("comentari",comentari.getComment());
+        map.put("recepta",comentari.getRecepta());
+        map.put("id",comentari.getID());
+        ref.update("comentaris",FieldValue.arrayUnion(map));
+        ref.update("CommentNum",FieldValue.increment(1));
     }
 }
