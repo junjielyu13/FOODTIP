@@ -145,6 +145,7 @@ public class UpdateCusineActivityViewModel extends AndroidViewModel {
         String firestoreRef = foodTip.GuardarRecepta(recepta,map);
         foodTip.UpdatePictures(activity,recepta, firestoreRef);
         foodTip.UpdateSteps(recepta, firestoreRef);
+        foodTip.AddMisRecepta(recepta.getId());
     }
 
 

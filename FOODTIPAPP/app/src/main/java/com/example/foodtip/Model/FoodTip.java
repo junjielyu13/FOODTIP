@@ -17,7 +17,9 @@ import com.example.foodtip.View.MainActivity;
 import com.example.foodtip.View.ViewHolder.ComentarisAdapter;
 import com.example.foodtip.View.ViewHolder.OptionInterface.CMD;
 import com.example.foodtip.ViewModel.FavoritesViewModel;
+import com.example.foodtip.ViewModel.HistoryViewModel;
 import com.example.foodtip.ViewModel.HomePageViewModel;
+import com.example.foodtip.ViewModel.ReceptaViewModel;
 import com.example.foodtip.ViewModel.SearchViewModel;
 import com.example.foodtip.ViewModel.SeeRecipeActivityViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -488,5 +490,113 @@ public class FoodTip {
         map.put("id",comentari.getID());
         ref.update("comentaris",FieldValue.arrayUnion(map));
         ref.update("CommentNum",FieldValue.increment(1));
+    }
+
+    public void getValidHistory(SearchViewModel viewModel) {
+        DocumentReference ref = FirebaseFirestore.getInstance().collection("user").document(user.getId());
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                ArrayList<String> history = (ArrayList<String>) task.getResult().get("history");
+                viewModel.setHistory(history);
+            }
+        });
+    }
+
+    public void addSearchHistory(ArrayList<String> input){
+        DocumentReference ref = FirebaseFirestore.getInstance().collection("user").document(user.getId());
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                ref.update("history",FieldValue.delete());
+                for(String s:input){
+                    ref.update("history",FieldValue.arrayUnion(s));
+                }
+            }
+        });
+    }
+
+    public void getMisHistorys(HistoryViewModel viewModel) {
+        DocumentReference ref = FirebaseFirestore.getInstance().collection("user").document(user.getId());
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                ArrayList<String> receptas = (ArrayList<String>) task.getResult().get("visited");
+                CollectionReference db = FirebaseFirestore.getInstance().collection("recepta");
+                for(String str:receptas){
+                    db.document(str)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    Recepta recepta = new ReceptaBuilder()
+                                            .id(str)
+                                            .description((String)task.getResult().get("description"))
+                                            .title((String)task.getResult().getString("title"))
+                                            .ingredients(foodTip.StringArray_To_IngredientArray((ArrayList<String>) task.getResult().get("ingredient")))
+                                            .steps(foodTip.MapsArray_To_StepsArray((ArrayList<HashMap<String, Object>>) task.getResult().get("steps")))
+                                            .images(foodTip.StringArray_To_SliderDataArray((ArrayList<String>) task.getResult().get("bitmaps")))
+                                            .likes((ArrayList<String>) task.getResult().get("likes"))
+                                            .buildRecepta();
+
+                                    viewModel.add_recepta(recepta);
+                                }
+                            });
+                }
+            }
+        });
+    }
+
+    public void AddMistHistory(String input){
+        DocumentReference ref = FirebaseFirestore.getInstance().collection("user").document(user.getId());
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                ref.update("visited",FieldValue.arrayUnion(input));
+            }
+        });
+
+    }
+
+    public void getMisRecepta(ReceptaViewModel viewModel) {
+        DocumentReference ref = FirebaseFirestore.getInstance().collection("user").document(user.getId());
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                ArrayList<String> receptas = (ArrayList<String>) task.getResult().get("receptas");
+                CollectionReference db = FirebaseFirestore.getInstance().collection("recepta");
+                for(String str:receptas){
+                    db.document(str)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    Recepta recepta = new ReceptaBuilder()
+                                            .id(str)
+                                            .description((String)task.getResult().get("description"))
+                                            .title((String)task.getResult().getString("title"))
+                                            .ingredients(foodTip.StringArray_To_IngredientArray((ArrayList<String>) task.getResult().get("ingredient")))
+                                            .steps(foodTip.MapsArray_To_StepsArray((ArrayList<HashMap<String, Object>>) task.getResult().get("steps")))
+                                            .images(foodTip.StringArray_To_SliderDataArray((ArrayList<String>) task.getResult().get("bitmaps")))
+                                            .likes((ArrayList<String>) task.getResult().get("likes"))
+                                            .buildRecepta();
+
+                                    viewModel.add_recepta(recepta);
+                                }
+                            });
+                }
+            }
+        });
+    }
+
+    public void AddMisRecepta(String input){
+        DocumentReference ref = FirebaseFirestore.getInstance().collection("user").document(user.getId());
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                ref.update("receptas",FieldValue.arrayUnion(input));
+            }
+        });
+
     }
 }

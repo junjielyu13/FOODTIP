@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class SearchViewModel extends AndroidViewModel {
+    private final int MAX_SIZE = 5;
     private final MutableLiveData<ArrayList<String>> ingredient;
     private final MutableLiveData<ArrayList<String>> history;
     private final MutableLiveData<ArrayList<String>> searching;
@@ -31,6 +32,7 @@ public class SearchViewModel extends AndroidViewModel {
         result = new MutableLiveData<>();
         FoodTip.getInstance().getValidIngredient(this);
         FoodTip.getInstance().getAllRecepta(this);
+        FoodTip.getInstance().getValidHistory(this);
     }
 
     public MutableLiveData<ArrayList<String>> getIngredient() {
@@ -97,4 +99,25 @@ public class SearchViewModel extends AndroidViewModel {
         this.ingredient.setValue(this.ingredient.getValue());
     }
 
+    public void setHistory(ArrayList<String> history) {
+        if(history == null){
+            this.history.setValue(new ArrayList<>());
+        }else{
+            this.history.setValue(history);
+        }
+    }
+
+    public void updateHistory(String input){
+        if(!history.getValue().contains(input)){
+            if(history.getValue().size() == MAX_SIZE){
+                history.getValue().remove(0);
+            }
+            history.getValue().add(input);
+            history.setValue(history.getValue());
+            for (String s : history.getValue()){
+                System.out.println(s);
+            }
+            FoodTip.getInstance().addSearchHistory(history.getValue());
+        }
+    }
 }

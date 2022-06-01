@@ -102,9 +102,18 @@ public class SearchActivity extends AppCompatActivity {
 
             }
         };
+        final Observer<ArrayList<String>> history_observer = new Observer<ArrayList<String>>() {
+            @Override
+            public void onChanged(ArrayList<String> strings) {
+                TagAdapter tagAdapter = new TagAdapter(strings,TAG.HISTORY,viewModel);
+                history.swapAdapter(tagAdapter,false);
+                tagAdapter.notifyDataSetChanged();
+            }
+        };
         viewModel.getSearching().observe(this,searching_observer);
         viewModel.getIngredient().observe(this,ingredient_observer);
         viewModel.getResult().observe(this,recepta_observer);
+        viewModel.getHistory().observe(this,history_observer);
     }
 
     private void setSearchViewAction(){
@@ -134,9 +143,13 @@ public class SearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Object str = adapter.getItem(i);
                 viewModel.addTag(str.toString());
+                viewModel.updateHistory(str.toString());
                 searchView.clearFocus();
                 listView.setVisibility(View.GONE);
             }
         });
+    }
+    private void setHistoryOnClick(){
+
     }
 }

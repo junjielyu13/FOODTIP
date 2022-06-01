@@ -43,6 +43,9 @@ public class TagAdapter extends RecyclerView.Adapter<TagHolder> {
                 break;
             case HISTORY:
                 holder.getTextView().setText(tags.get(position));
+                holder.getTextView().setOnClickListener(l->{
+                    viewModel.addTag(tags.get(position));
+                });
                 holder.getDelete_but().setVisibility(View.GONE);
                 break;
             default:

@@ -58,7 +58,7 @@ public class CardReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> 
         sliderView.setSliderAdapter(sliderAdapter);
         sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
         sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
-        if(recepta.containUser(FoodTip.getInstance().getUser().getId())){
+        if(recepta.getLikes().contains(FoodTip.getInstance().getUser().getId())){
             imageButton.setImageResource(R.mipmap.heart2);
         }else{
             imageButton.setImageResource(R.mipmap.heart1);
@@ -76,7 +76,7 @@ public class CardReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> 
         });
 
         imageButton.setOnClickListener(l->{
-            if(recepta.containUser(FoodTip.getInstance().getUser().getId())){
+            if(recepta.getLikes().contains(FoodTip.getInstance().getUser().getId())){
                 FoodTip.getInstance().click_like_recepta(recepta,CMD.DELETE);
                 imageButton.setImageResource(R.mipmap.heart1);
             }else{
@@ -105,6 +105,7 @@ public class CardReceptaAdapter extends RecyclerView.Adapter<CardReceptaHolder> 
         bundle.putSerializable("steps",recepta.getSteps());
         bundle.putSerializable("comentaris",recepta.getComentaris());
         intent.putExtra("bundle",bundle);
+        FoodTip.getInstance().AddMistHistory(recepta.getId());
         activity.startActivity(intent);
     }
 }
