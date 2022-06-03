@@ -3,33 +3,22 @@ package com.example.foodtip.ViewModel;
 import android.app.Activity;
 import android.app.Application;
 import android.graphics.Bitmap;
-import android.graphics.ImageDecoder;
 import android.net.Uri;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.foodtip.Model.DadaBaseAdpter;
 import com.example.foodtip.Model.FoodTip;
 import com.example.foodtip.Model.Ingredient;
 import com.example.foodtip.Model.Recepta;
-import com.example.foodtip.Model.ReceptaBuilder;
 import com.example.foodtip.Model.Step;
 import com.example.foodtip.Model.SliderData;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class UpdateCusineActivityViewModel extends AndroidViewModel {
     private final MutableLiveData<ArrayList<SliderData>> mImages;
