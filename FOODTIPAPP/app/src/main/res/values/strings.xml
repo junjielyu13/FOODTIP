@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">FOODTIP</string>
+    <string name="recepta_enter_button">Recepta enter button</string>
+    <string name="recepta_title">Recepta Title</string>
+    <string name="like_button">like_button</string>
+    <string name="comment_button">comment_button</string>
+    <string name="mis_favoritos">Mis Favoritos</string>
+    <!-- Test -->
+    <string name="add_description_msg">Note description</string>
+    <string name="save_note">Save note</string>
+    <string name="new_note">New note</string>
+    <string name="new_note_description">Add new note</string>
+    <!-- Test -->
     <string name="user_login_DescriptionContent">User Log in</string>
     <string name="Username">USERNAME</string>
     <string name="Password">PASSWORD</string>
@@ -7,4 +18,16 @@
     <string name="noRegisterTextView">No register yet?</string>
     <string name="RegisterButtonText">REGISTER</string>
     <string name="forgotPassword">FORGOT PASSWORD</string>
+    <string name="RepeatPassword">REPEAT PASSWORD</string>
+    <string name="title_home">Home</string>
+    <string name="title_user">User</string>
+    <string name="title_search">Search</string>
+    <!--register Interface-->
+    <string name="RegisterTextView">REGISTER</string>
+
+    <!--forgot Password interface-->
+    <string name="EmailEditTextView">Email</string>
+    <string name="CheckNumberEditView">Check Number</string>
+
+    <string name="MostPopularDishesTextView"><u>Most Popular</u></string>
 </resources>

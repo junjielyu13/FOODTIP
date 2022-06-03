@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_background">
-
     <LinearLayout
         android:id="@+id/LinearLayout"
         android:layout_width="match_parent"
@@ -32,7 +31,7 @@
             app:srcCompat="@drawable/user_login" />
 
         <EditText
-            android:id="@+id/UserName"
+            android:id="@+id/UserNameEditTextLogIn"
             android:layout_width="264dp"
             android:layout_height="50dp"
             android:layout_marginStart="80dp"
@@ -40,6 +39,7 @@
             android:ems="12"
             android:hint="@string/Username"
             android:inputType="text"
+            android:text=""
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
             tools:ignore="MissingConstraints"
@@ -47,13 +47,14 @@
 
 
         <EditText
-            android:id="@+id/Password"
+            android:id="@+id/PasswordEditTextLogIn"
             android:layout_width="264dp"
             android:layout_height="50dp"
             android:layout_marginStart="80dp"
             android:layout_marginTop="40dp"
             android:ems="16"
             android:hint="@string/Password"
+            android:text=""
             android:inputType="textPassword"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
@@ -65,8 +66,8 @@
             android:layout_marginStart="195dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/button_login_style"
-            android:onClick="ForgotPassword"
             android:text="@string/forgotPassword"
+            android:onClick="forgotPasswordButtonOnClickListener"
             android:textColor="@android:color/holo_purple" />
         <Button
             android:id="@+id/loginButton"
@@ -75,8 +76,8 @@
             android:layout_marginStart="100dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/button_login_style"
-            android:onClick="Login"
             android:text="@string/Login"
+            android:onClick="LogInButtonOnClickListener"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -98,8 +99,8 @@
             android:layout_marginStart="150dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/button_login_style"
-            android:onClick="Register"
             android:text="@string/RegisterButtonText"
+            android:onClick="RegisterButtonOnClickListener"
             android:textColor="@android:color/white" />
 
     </LinearLayout>

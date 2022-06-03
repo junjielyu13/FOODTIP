@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/setPwdTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="60dp"
+        android:text="Set Password"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/newPasswordEditText"
+        android:layout_width="264dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/setPwdTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="100dp"
+        android:hint="@string/Password"
+        android:inputType="textPassword"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black" />
+
+    <EditText
+        android:id="@+id/confirmPasswordEditText"
+        android:layout_width="264dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/newPasswordEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="10dp"
+        android:hint="@string/RepeatPassword"
+        android:inputType="textPassword"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black" />
+
+    <Button
+        android:id="@+id/setNewPwdButton"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/confirmPasswordEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="100dp"
+        android:layout_marginLeft="100dp"
+        android:onClick="resetPasswordButtonOnClick"
+        android:text="Reset Password" />
+
+</RelativeLayout>

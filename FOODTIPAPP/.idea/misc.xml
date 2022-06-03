@@ -3,8 +3,50 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/button_login_style.xml" value="0.2265" />
-        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_login.xml" value="0.2819843342036554" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.39" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/button_homepage_selector.xml" value="0.327" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/button_login_style.xml" value="0.39" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.225" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/ic_baseline_cancel_presentation_24.xml" value="0.5035" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/ic_baseline_post_add_24.xml" value="0.39" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1365" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/layout_bg.xml" value="0.216" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/bottom_dialog.xml" value="0.33695652173913043" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/comentaris_layout.xml" value="0.25364583333333335" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/cousinenew.xml" value="0.25364583333333335" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/forgotpwd.xml" value="0.264" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/home_page.xml" value="0.264" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/ingredient.xml" value="0.39945652173913043" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/list_view_item.xml" value="0.21510416666666668" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/my_favorite_view.xml" value="0.27808988764044945" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/my_history_view.xml" value="0.5536458333333333" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/my_recipe_view.xml" value="0.5192629815745393" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/popup_view_ingredient.xml" value="0.5536458333333333" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/popup_view_steps.xml" value="0.5536458333333333" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/popuptest.xml" value="0.2692502532928065" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/recepta_view.xml" value="0.4" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/recepta_view_item.xml" value="0.4" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/search_view.xml" value="0.3925925925925926" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/searchview.xml" value="0.12295081967213115" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/serching_tags_view.xml" value="0.264" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/set_new_pwd.xml" value="0.16" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/settings.xml" value="0.12335359675785208" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/slider_item.xml" value="0.5536458333333333" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/sloder_item.xml" value="0.33695652173913043" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/steps.xml" value="0.5536458333333333" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/tag.xml" value="0.338768115942029" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/tag_textview.xml" value="0.338768115942029" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/upload_new_cousine.xml" value="0.264" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/user.xml" value="0.264" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25364583333333335" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/menu/nav_menu.xml" value="0.25364583333333335" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.379" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.379" />
+        <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/xml/file_path.xml" value="0.33695652173913043" />
       </map>
     </option>
   </component>
