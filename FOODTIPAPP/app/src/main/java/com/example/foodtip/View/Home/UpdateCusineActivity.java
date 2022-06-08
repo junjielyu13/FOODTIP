@@ -204,13 +204,13 @@ public class UpdateCusineActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.bottom_dialog);
         Button mCancel = (Button) dialog.findViewById(R.id.cancel);
         Button mAlbum = (Button) dialog.findViewById(R.id.album);
-        Button mCamera = (Button) dialog.findViewById(R.id.camera);
+        //Button mCamera = (Button) dialog.findViewById(R.id.camera);
         mAlbum.setOnClickListener(view -> {
             openAlbum();
         });
-        mCamera.setOnClickListener(view -> {
+        /*mCamera.setOnClickListener(view -> {
             openCamera();
-        });
+        });*/
         mCancel.setOnClickListener((v)->{
             dialog.dismiss();
         });
@@ -224,8 +224,8 @@ public class UpdateCusineActivity extends AppCompatActivity {
         else getImg_food_img.launch("image/*");
     }
 
-    private void openCamera() {
-    }
+    /*private void openCamera() {
+    }*/
 
     public void setLiveDataObservers(){
         viewModel = new ViewModelProvider(this).get(UpdateCusineActivityViewModel.class);

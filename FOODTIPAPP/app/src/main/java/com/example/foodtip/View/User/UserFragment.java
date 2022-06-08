@@ -1,14 +1,21 @@
 package com.example.foodtip.View.User;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,11 +27,13 @@ import com.example.foodtip.databinding.UserBinding;
 public class UserFragment extends Fragment {
     private UserBinding binding;
     private TextView user_name, user_id;
-    private ImageView avatar;
+    private ImageButton avatar;
+    private ActivityResultLauncher<String> get_img;
 
     private Button my_cousine_but, my_favorite_but, my_history_but, setting_but;
 
     private User user;
+    private Activity activity;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         UserViewModel userViewModel =
@@ -32,7 +41,9 @@ public class UserFragment extends Fragment {
 
         binding = UserBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        this.activity = this.getActivity();
         user = FoodTip.getInstance().getUser();
+
         setting();
         return root;
     }
@@ -45,10 +56,31 @@ public class UserFragment extends Fragment {
 
         user_name.setText(user.getUser_name());
         user_id.setText(user.getId());
+        System.out.println(user.getAvatar_uri());
         Glide.with(binding.getRoot())
                 .load(user.getAvatar_uri())
                 .fitCenter()
                 .into(avatar);
+
+        get_img = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                new ActivityResultCallback<Uri>() {
+                    @Override
+                    public void onActivityResult(Uri result) {
+                        if(result != null){
+                            Glide.with(binding.getRoot())
+                                    .load(result)
+                                    .fitCenter()
+                                    .into(avatar);
+                            FoodTip.getInstance().changeAvatar(activity,result);
+                        }
+                    }
+                }
+        );
+        avatar.setOnClickListener(l->{
+            get_img.launch("image/*");
+        });
+
         my_cousine_but.setOnClickListener((v)->{
             open_my_cousine();
         });

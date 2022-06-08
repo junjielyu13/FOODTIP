@@ -145,6 +145,17 @@ public class FoodTip {
             }
         });
     }
+    public void changeAvatar(Activity activity, Uri uri){
+        StorageReference storageReference = FirebaseStorage.getInstance()
+                .getReference("avatar")
+                .child(user.getId());
+        ImageDecoder.Source source = ImageDecoder.createSource(activity.getContentResolver(),Uri.parse(uri.toString()));
+        user.setAvatar_uri(uri.toString());
+        try{
+            storageReference.putBytes(this.BitMapToString(ImageDecoder.decodeBitmap(source)));
+        }catch (Exception e){}
+        Toast.makeText(activity.getApplicationContext(),"Avatar Changed",Toast.LENGTH_SHORT).show();
+    }
     public void login_event(@NonNull MainActivity activity, String email, String password){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener((task)->{
@@ -448,6 +459,7 @@ public class FoodTip {
         }
 
     }
+
 
     public void getMisFavoritos(FavoritesViewModel viewModel){
         DocumentReference ref = FirebaseFirestore.getInstance().collection("user").document(user.getId());

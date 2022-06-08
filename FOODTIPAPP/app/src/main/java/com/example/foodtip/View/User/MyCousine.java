@@ -23,6 +23,7 @@ public class MyCousine extends AppCompatActivity {
     private ReceptaViewModel viewModel;
     private RecyclerView recyclerView;
     private Activity activity;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
