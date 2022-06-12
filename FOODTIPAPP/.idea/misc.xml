@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/2/Primavera/ProjecteIntegratDeSoftware/Project/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/my_history_view.xml" value="0.1875" />
+        <entry key="..\:/2/Primavera/ProjecteIntegratDeSoftware/Project/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/recepta_view.xml" value="0.1875" />
+        <entry key="..\:/2/Primavera/ProjecteIntegratDeSoftware/Project/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/recepta_view_item.xml" value="0.1875" />
+        <entry key="..\:/2/Primavera/ProjecteIntegratDeSoftware/Project/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/search_view.xml" value="0.1875" />
+        <entry key="..\:/2/Primavera/ProjecteIntegratDeSoftware/Project/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/searchview.xml" value="0.358695652173913" />
+        <entry key="..\:/2/Primavera/ProjecteIntegratDeSoftware/Project/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/upload_new_cousine.xml" value="0.1875" />
+        <entry key="..\:/2/Primavera/ProjecteIntegratDeSoftware/Project/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/layout/user.xml" value="0.1875" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.39" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/button_homepage_selector.xml" value="0.327" />
         <entry key="..\:/PIS/PIS_FOODTIP/FOODTIPAPP/app/src/main/res/drawable/button_login_style.xml" value="0.39" />
@@ -50,7 +57,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
