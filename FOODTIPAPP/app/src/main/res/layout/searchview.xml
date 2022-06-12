@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
         android:queryHint="Ingredients"/>
-        />
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"

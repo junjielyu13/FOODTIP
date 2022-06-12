@@ -18,7 +18,7 @@ import com.example.foodtip.databinding.MyHistoryViewBinding;
 
 import java.util.ArrayList;
 
-public class MyHistory extends AppCompatActivity {
+public class MyHistoryActivity extends AppCompatActivity {
     private MyHistoryViewBinding binding;
     private HistoryViewModel viewModel;
     private RecyclerView recyclerView;

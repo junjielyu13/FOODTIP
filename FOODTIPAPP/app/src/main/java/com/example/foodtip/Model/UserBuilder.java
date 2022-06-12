@@ -3,8 +3,14 @@ package com.example.foodtip.Model;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.MediaStore;
+
 import androidx.annotation.NonNull;
 import com.example.foodtip.R;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class UserBuilder {
     private Bitmap bitmap;

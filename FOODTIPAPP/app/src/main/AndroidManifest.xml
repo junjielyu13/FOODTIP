@@ -19,10 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.User.MyCousine" />
-        <activity android:name=".View.User.MyFavorite" />
-        <activity android:name=".View.User.MyHistory" />
-        <activity android:name=".View.User.MySetting" />
+        <activity android:name=".View.User.MyCousineActivity" />
+        <activity android:name=".View.User.MyFavoriteActivity" />
+        <activity android:name=".View.User.MyHistoryActivity" />
+        <activity android:name=".View.User.MySettingActivity" />
         <activity android:name=".View.Search_View" />
         <activity android:name=".View.RegisterActivity" />
         <activity android:name=".View.HomePageActivity" />

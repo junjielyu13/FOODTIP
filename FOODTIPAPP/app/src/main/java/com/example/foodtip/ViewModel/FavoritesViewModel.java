@@ -8,12 +8,15 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.foodtip.Model.FoodTip;
 import com.example.foodtip.Model.Recepta;
+import com.example.foodtip.View.ViewHolder.OptionInterface.CMD;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 
 public class FavoritesViewModel extends AndroidViewModel {
     private final MutableLiveData<ArrayList<Recepta>> receptas;
     private FoodTip foodTip;
+
     public FavoritesViewModel(@NonNull Application application) {
         super(application);
         receptas = new MutableLiveData<>();
@@ -31,4 +34,5 @@ public class FavoritesViewModel extends AndroidViewModel {
         receptas.getValue().add(recepta);
         receptas.setValue(receptas.getValue());
     }
+
 }
