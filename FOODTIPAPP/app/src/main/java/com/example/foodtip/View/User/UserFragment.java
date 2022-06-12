@@ -9,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -102,22 +100,22 @@ public class UserFragment extends Fragment {
     }
 
     private void open_my_setting() {
-        Intent intent = new Intent(this.getContext(),MySetting.class);
+        Intent intent = new Intent(this.getContext(), MySettingActivity.class);
         startActivity(intent);
     }
 
     private void open_my_history() {
-        Intent intent = new Intent(this.getContext(),MyHistory.class);
+        Intent intent = new Intent(this.getContext(), MyHistoryActivity.class);
         startActivity(intent);
     }
 
     private void open_my_favorite() {
-        Intent intent = new Intent(this.getContext(),MyFavorite.class);
+        Intent intent = new Intent(this.getContext(), MyFavoriteActivity.class);
         startActivity(intent);
     }
 
     private void open_my_cousine() {
-        Intent intent = new Intent(this.getContext(),MyCousine.class);
+        Intent intent = new Intent(this.getContext(), MyCousineActivity.class);
         startActivity(intent);
     }
 

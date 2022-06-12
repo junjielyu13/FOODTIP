@@ -15,7 +15,7 @@ import com.example.foodtip.View.MainActivity;
 import com.example.foodtip.databinding.SettingsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MySetting extends AppCompatActivity {
+public class MySettingActivity extends AppCompatActivity {
 
 
     @Override

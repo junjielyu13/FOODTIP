@@ -18,7 +18,7 @@ import com.example.foodtip.databinding.MyRecipeViewBinding;
 
 import java.util.ArrayList;
 
-public class MyCousine extends AppCompatActivity {
+public class MyCousineActivity extends AppCompatActivity {
     private MyRecipeViewBinding binding;
     private ReceptaViewModel viewModel;
     private RecyclerView recyclerView;

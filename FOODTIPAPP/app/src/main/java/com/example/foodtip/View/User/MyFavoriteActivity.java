@@ -16,7 +16,7 @@ import com.example.foodtip.databinding.MyFavoriteViewBinding;
 
 import java.util.ArrayList;
 
-public class MyFavorite extends AppCompatActivity {
+public class MyFavoriteActivity extends AppCompatActivity {
     private MyFavoriteViewBinding binding;
     private FavoritesViewModel viewModel;
     private RecyclerView recyclerView;
